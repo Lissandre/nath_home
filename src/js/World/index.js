@@ -2,7 +2,9 @@ import * as THREE from 'three'
 
 import AmbientLight from './AmbientLight.js'
 import PointLight from './PointLight.js'
-import Human from './Human.js'
+import DesktopPlace from './Desktop/index.js'
+import Floor from './Floor.js'
+import Walls from './Walls.js'
 
 export default class World {
   constructor(options) {
@@ -21,6 +23,13 @@ export default class World {
 
     this.getLoaders()
   }
+  init(){
+    this.setAmbientLight()
+    this.setPointLight()
+    this.setFloor()
+    this.setWalls()
+    this.setDesktopPlace()
+  }
   getLoaders() {
     if (this.models.modelsList.length != 0) {
       this.loadDiv = document.createElement('div')
@@ -34,9 +43,7 @@ export default class World {
 
       this.models.on('modelsReady', () => {
         this.loadDiv.style.opacity = 0
-        this.setAmbientLight()
-        this.setPointLight()
-        this.setHuman()
+        this.init()
         setTimeout(() => {
           this.loadDiv.remove()
         }, 320)
@@ -55,11 +62,22 @@ export default class World {
     })
     this.container.add(this.light.container)
   }
-  setHuman() {
-    this.human = new Human({
-      time: this.time,
+  setFloor(){
+    this.floor = new Floor({
+      models: this.models,
+    })
+    this.container.add(this.floor.container)
+  }
+  setWalls(){
+    this.walls = new Walls({
       models: this.models
     })
-    this.container.add(this.human.container)
+    this.container.add(this.walls.container)
+  }
+  setDesktopPlace(){
+    this.desktopPlace = new DesktopPlace({
+      models: this.models
+    })
+    this.container.add(this.desktopPlace.container)
   }
 }

@@ -36,6 +36,10 @@ export default class App {
     this.renderer.setClearColor(0x212121, 1)
     // Set renderer pixel ratio & sizes
     this.renderer.setPixelRatio(window.devicePixelRatio)
+    // Set shadow
+    this.renderer.shadowMap.Type = THREE.PCFSoftShadowMap
+    this.renderer.shadowMap.enabled = true
+
     this.renderer.setSize(this.sizes.viewport.width, this.sizes.viewport.height)
     // Resize renderer on resize event
     this.sizes.on('resize', () => {

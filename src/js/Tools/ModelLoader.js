@@ -13,7 +13,7 @@ export default class ModelLoader extends EventEmitter {
     // Set up
     this.modelsList = modelsList
 
-    this.remaining = 0
+    this.remaining = this.modelsList.length
     this.done = 0
     this.models = {}
 
@@ -22,7 +22,7 @@ export default class ModelLoader extends EventEmitter {
   }
   setLoaders() {
     const dracoLoader = new DRACOLoader()
-    dracoLoader.setDecoderPath('./draco')
+    dracoLoader.setDecoderPath('./draco/')
     dracoLoader.setDecoderConfig({ type: 'js' })
 
     const gltfLoader = new GLTFLoader()
@@ -51,7 +51,6 @@ export default class ModelLoader extends EventEmitter {
   }
   loadModels(models) {
     models.forEach(model => {
-      this.remaining ++
       const modelExtension = model.src.substring(model.src.lastIndexOf('.')+1, model.src.length) || model.src
       if(modelExtension) {
         const loader = this.loaders.find( $loader => $loader.filetype.find( $filetype => $filetype === modelExtension ) )
@@ -68,7 +67,6 @@ export default class ModelLoader extends EventEmitter {
   loadComplete(model, loaded) {
     this.done ++
     this.models[model.name] = loaded
-    this.trigger('modelLoad', [model, loaded])
     if(this.remaining === this.done){
         this.trigger('endModel')
     }
