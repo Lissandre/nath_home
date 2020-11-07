@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import { FrontSide } from 'three'
 
 export default class Walls {
   constructor(options) {
@@ -13,13 +12,12 @@ export default class Walls {
   }
   createWalls() {
     this.walls = this.models.models.walls.scene
-    this.walls.traverse(child => {
-      if(child.isMesh){
+    this.walls.traverse((child) => {
+      if (child.isMesh) {
         child.castShadow = false
         child.receiveShadow = true
       }
     })
-    console.log(this.walls);
     this.container.add(this.walls)
   }
 }

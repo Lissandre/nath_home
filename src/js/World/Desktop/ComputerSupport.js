@@ -13,8 +13,8 @@ export default class ComputerSupport {
   }
   createComputerSupport() {
     this.computerSupport = this.models.models.computerSupport.scene
-    this.computerSupport.traverse(child => {
-      if(child.isMesh){
+    this.computerSupport.traverse((child) => {
+      if (child.isMesh) {
         child.castShadow = true
         child.receiveShadow = true
       }

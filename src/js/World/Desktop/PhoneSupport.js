@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 
 export default class PhoneSupport {
-  constructor(options){
+  constructor(options) {
     // Set options
     this.models = options.models
 
@@ -12,8 +12,8 @@ export default class PhoneSupport {
   }
   setPhoneSupport() {
     this.phoneSupport = this.models.models.phoneSupport.scene
-    this.phoneSupport.traverse(child => {
-      if(child.isMesh){
+    this.phoneSupport.traverse((child) => {
+      if (child.isMesh) {
         child.castShadow = true
         child.receiveShadow = true
       }

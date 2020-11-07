@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 
 export default class RubiksCube {
-  constructor(options){
+  constructor(options) {
     // Set options
     this.models = options.models
 
@@ -12,8 +12,8 @@ export default class RubiksCube {
   }
   setRubiksCube() {
     this.rubiksCube = this.models.models.rubiksCube.scene
-    this.rubiksCube.traverse(child => {
-      if(child.isMesh){
+    this.rubiksCube.traverse((child) => {
+      if (child.isMesh) {
         child.castShadow = true
         child.receiveShadow = true
       }

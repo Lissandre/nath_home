@@ -33,28 +33,32 @@ export default class ModelLoader extends EventEmitter {
     this.loaders = [
       {
         filetype: ['gltf', 'glb'],
-        action: model => {
-          gltfLoader.load(model.src, loaded => {
+        action: (model) => {
+          gltfLoader.load(model.src, (loaded) => {
             this.loadComplete(model, loaded)
           })
-        }
+        },
       },
       {
         filetype: ['fbx'],
-        action: model => {
-          fbxLoader.load(model.src, loaded => {
+        action: (model) => {
+          fbxLoader.load(model.src, (loaded) => {
             this.loadComplete(model, loaded)
           })
-        }
-      }
+        },
+      },
     ]
   }
   loadModels(models) {
-    models.forEach(model => {
-      const modelExtension = model.src.substring(model.src.lastIndexOf('.')+1, model.src.length) || model.src
-      if(modelExtension) {
-        const loader = this.loaders.find( $loader => $loader.filetype.find( $filetype => $filetype === modelExtension ) )
-        if(loader) {
+    models.forEach((model) => {
+      const modelExtension =
+        model.src.substring(model.src.lastIndexOf('.') + 1, model.src.length) ||
+        model.src
+      if (modelExtension) {
+        const loader = this.loaders.find(($loader) =>
+          $loader.filetype.find(($filetype) => $filetype === modelExtension)
+        )
+        if (loader) {
           loader.action(model)
         } else {
           console.error(`No loader is set for ${modelExtension}`)
@@ -65,10 +69,10 @@ export default class ModelLoader extends EventEmitter {
     })
   }
   loadComplete(model, loaded) {
-    this.done ++
+    this.done++
     this.models[model.name] = loaded
-    if(this.remaining === this.done){
-        this.trigger('endModel')
+    if (this.remaining === this.done) {
+      this.trigger('endModel')
     }
   }
   startLoad() {

@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 
 export default class Speakers {
-  constructor(options){
+  constructor(options) {
     // Set options
     this.models = options.models
 
@@ -13,8 +13,8 @@ export default class Speakers {
   }
   setSpeakers() {
     this.speakers = this.models.models.speakers.scene
-    this.speakers.traverse(child => {
-      if(child.isMesh){
+    this.speakers.traverse((child) => {
+      if (child.isMesh) {
         child.castShadow = true
         child.receiveShadow = true
       }

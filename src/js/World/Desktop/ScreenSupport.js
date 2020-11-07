@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 
 export default class ScreenSupport {
-  constructor(options){
+  constructor(options) {
     // Set options
     this.models = options.models
 
@@ -12,8 +12,8 @@ export default class ScreenSupport {
   }
   setScreenSupport() {
     this.screenSupport = this.models.models.screenSupport.scene
-    this.screenSupport.traverse(child => {
-      if(child.isMesh){
+    this.screenSupport.traverse((child) => {
+      if (child.isMesh) {
         child.castShadow = true
         child.receiveShadow = true
       }

@@ -23,7 +23,7 @@ export default class World {
 
     this.getLoaders()
   }
-  init(){
+  init() {
     this.setAmbientLight()
     this.setPointLight()
     this.setFloor()
@@ -62,21 +62,21 @@ export default class World {
     })
     this.container.add(this.light.container)
   }
-  setFloor(){
+  setFloor() {
     this.floor = new Floor({
       models: this.models,
     })
     this.container.add(this.floor.container)
   }
-  setWalls(){
+  setWalls() {
     this.walls = new Walls({
-      models: this.models
+      models: this.models,
     })
     this.container.add(this.walls.container)
   }
-  setDesktopPlace(){
+  setDesktopPlace() {
     this.desktopPlace = new DesktopPlace({
-      models: this.models
+      models: this.models,
     })
     this.container.add(this.desktopPlace.container)
   }

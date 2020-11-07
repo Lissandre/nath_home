@@ -13,8 +13,8 @@ export default class Computer {
   }
   createComputer() {
     this.computer = this.models.models.computer.scene
-    this.computer.traverse(child => {
-      if(child.isMesh){
+    this.computer.traverse((child) => {
+      if (child.isMesh) {
         child.castShadow = true
         child.receiveShadow = true
       }

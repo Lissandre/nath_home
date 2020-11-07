@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 
 export default class Mouse {
-  constructor(options){
+  constructor(options) {
     // Set options
     this.models = options.models
 
@@ -12,8 +12,8 @@ export default class Mouse {
   }
   setMouse() {
     this.mouse = this.models.models.mouse.scene
-    this.mouse.traverse(child => {
-      if(child.isMesh){
+    this.mouse.traverse((child) => {
+      if (child.isMesh) {
         child.castShadow = true
         child.receiveShadow = true
       }

@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 
-export default class Floor{
-  constructor(options){
+export default class Floor {
+  constructor(options) {
     // Set options
     this.models = options.models
 
@@ -10,10 +10,10 @@ export default class Floor{
 
     this.setFloor()
   }
-  setFloor(){
+  setFloor() {
     this.floor = this.models.models.floor.scene
-    this.floor.traverse(child => {
-      if(child.isMesh){
+    this.floor.traverse((child) => {
+      if (child.isMesh) {
         child.receiveShadow = true
       }
     })

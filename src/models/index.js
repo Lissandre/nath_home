@@ -19,22 +19,22 @@ import walls from './Walls.glb'
 import floor from './Floor.glb'
 
 const modelsList = [
-  { name: 'computer', src: computer},
-  { name: 'computerSupport', src: computerSupport},
-  { name: 'desktop', src: desktop},
-  { name: 'keyboard', src: keyboard},
-  { name: 'mouse', src: mouse},
-  { name: 'mousePad', src: mousePad},
-  { name: 'phone', src: phone},
-  { name: 'phoneSupport', src: phoneSupport},
-  { name: 'rubiksCube', src: rubiksCube},
-  { name: 'screenLeft', src: screenLeft},
-  { name: 'screenRight', src: screenRight},
-  { name: 'screenSupport', src: screenSupport},
-  { name: 'speakers', src: speakers},
-  { name: 'subwooferSpeaker', src: subwooferSpeaker},
-  { name: 'walls', src: walls},
-  { name: 'floor', src: floor},
+  { name: 'computer', src: computer },
+  { name: 'computerSupport', src: computerSupport },
+  { name: 'desktop', src: desktop },
+  { name: 'keyboard', src: keyboard },
+  { name: 'mouse', src: mouse },
+  { name: 'mousePad', src: mousePad },
+  { name: 'phone', src: phone },
+  { name: 'phoneSupport', src: phoneSupport },
+  { name: 'rubiksCube', src: rubiksCube },
+  { name: 'screenLeft', src: screenLeft },
+  { name: 'screenRight', src: screenRight },
+  { name: 'screenSupport', src: screenSupport },
+  { name: 'speakers', src: speakers },
+  { name: 'subwooferSpeaker', src: subwooferSpeaker },
+  { name: 'walls', src: walls },
+  { name: 'floor', src: floor },
 ]
 
 /**
