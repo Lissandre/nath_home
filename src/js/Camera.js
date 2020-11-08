@@ -16,7 +16,7 @@ export default class Camera {
 
     this.setCamera()
     this.setPosition()
-    this.setPerso()
+    // this.setPerso()
     this.setOrbitControls()
   }
   setCamera() {

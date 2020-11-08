@@ -18,6 +18,9 @@ export default class Time extends EventEmitter {
   // on('tick')
   tick() {
     // Call tick method on each frame
+    setTimeout(()=>{
+      this.trigger('tick')
+    }, 16)
     window.requestAnimationFrame(this.tick)
 
     // Get current time
