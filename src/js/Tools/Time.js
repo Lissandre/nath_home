@@ -21,7 +21,7 @@ export default class Time extends EventEmitter {
     setTimeout(()=>{
       window.requestAnimationFrame(this.tick)
       this.trigger('tick')
-    }, 10)
+    }, 1000/60)
 
     // Get current time
     const current = Date.now()
