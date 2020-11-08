@@ -55,10 +55,10 @@ export default class Controls{
         case 'KeyD': // d
           this.moveRight = true
           break
-        case 'Space': // space
-          if ( this.canJump === true ) this.velocity.y += 2
-          this.canJump = false
-          break
+        // case 'Space': // space
+        //   if ( this.canJump === true ) this.velocity.y += 2
+        //   this.canJump = false
+        //   break
       }
     }, false)
     document.addEventListener('keyup', (event)=>{
@@ -84,11 +84,11 @@ export default class Controls{
   }
   setMovement(){
     this.time.on('tick', () => {
-      this.raycaster.ray.origin.copy( this.camera.mesh.position )
-      this.intersections = this.raycaster.intersectObjects( this.objects )
-      if(this.intersections.length > 0){
-        this.canJump = true
-      }
+      // this.raycaster.ray.origin.copy( this.camera.mesh.position )
+      // this.intersections = this.raycaster.intersectObjects( this.objects )
+      // if(this.intersections.length > 0){
+      //   this.canJump = true
+      // }
       if( this.moveForward){
         this.controls.moveForward(0.06)
       }
