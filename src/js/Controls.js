@@ -18,27 +18,32 @@ export default class Controls{
 		this.moveLeft = false
 		this.moveRight = false
     this.canJump = false
+    this.canMove = false
     this.raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 )
 
     if(!this.debug){
       this.init()
+      this.setListener()
+      this.setMovement()
     }
   }
   init(){
     this.instructions = document.createElement('div')
     this.instructions.classList.add('instructions')
     document.body.append(this.instructions)
+    this.title = document.createElement('h1')
+    this.title.innerHTML = 'Click to control'
+    this.instructions.append(this.title)
     this.instructions.addEventListener( 'click', () => {
       this.controls.lock()
-      this.setListener()
-      this.controls.connect()
-      this.setMovement()
     }, false )
     this.controls.addEventListener( 'lock', () => {
       this.instructions.style.display = 'none'
+      this.canMove = true
     } )
     this.controls.addEventListener( 'unlock', () => {
       this.instructions.style.display = ''
+      this.canMove = false
     } )
   }
   setListener(){
@@ -89,22 +94,24 @@ export default class Controls{
   }
   setMovement(){
     this.time.on('tick', () => {
-      // this.raycaster.ray.origin.copy( this.camera.mesh.position )
-      // this.intersections = this.raycaster.intersectObjects( this.objects )
-      // if(this.intersections.length > 0){
-      //   this.canJump = true
-      // }
-      if( this.moveForward){
-        this.controls.moveForward(0.06)
-      }
-      if( this.moveBackward){
-        this.controls.moveForward(-0.06)
-      }
-      if( this.moveLeft){
-        this.controls.moveRight(-0.04)
-      }
-      if( this.moveRight){
-        this.controls.moveRight(0.04)
+      if(this.canMove){
+        // this.raycaster.ray.origin.copy( this.camera.mesh.position )
+        // this.intersections = this.raycaster.intersectObjects( this.objects )
+        // if(this.intersections.length > 0){
+        //   this.canJump = true
+        // }
+        if( this.moveForward){
+          this.controls.moveForward(0.06)
+        }
+        if( this.moveBackward){
+          this.controls.moveForward(-0.06)
+        }
+        if( this.moveLeft){
+          this.controls.moveRight(-0.04)
+        }
+        if( this.moveRight){
+          this.controls.moveRight(0.04)
+        }
       }
     })
   }
