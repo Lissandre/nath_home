@@ -6,6 +6,7 @@ import Time from '@tools/Time.js'
 import Models from '@tools/ModelLoader.js'
 
 import Camera from './Camera.js'
+import Controls from './Controls.js'
 import World from '@world/index.js'
 
 export default class App {
@@ -17,10 +18,12 @@ export default class App {
     this.time = new Time()
     this.sizes = new Sizes()
     this.models = new Models()
+    this.objects = []
 
     this.setConfig()
     this.setRenderer()
     this.setCamera()
+    this.setControls()
     this.setWorld()
   }
   setRenderer() {
@@ -59,9 +62,19 @@ export default class App {
       sizes: this.sizes,
       renderer: this.renderer,
       debug: this.debug,
+      time: this.time,
     })
     // Add camera to scene
     this.scene.add(this.camera.container)
+  }
+  setControls() {
+    this.fpscontrols = new Controls({
+      sizes: this.sizes,
+      renderer: this.renderer,
+      time: this.time,
+      camera: this.camera,
+      objects: this.objects,
+    })
   }
   setWorld() {
     // Create world instance
@@ -69,6 +82,7 @@ export default class App {
       time: this.time,
       debug: this.debug,
       models: this.models,
+      objects: this.objects,
     })
     // Add world to scene
     this.scene.add(this.world.container)

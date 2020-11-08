@@ -7,22 +7,22 @@ export default class Camera {
     this.sizes = options.sizes
     this.renderer = options.renderer
     this.debug = options.debug
+    this.time = options.time
 
     // Set up
     this.container = new THREE.Object3D()
 
     this.setCamera()
     this.setPosition()
-    this.setControls()
     this.setOrbitControls()
   }
   setCamera() {
     // Create camera
     this.camera = new THREE.PerspectiveCamera(
-      75,
+      58,
       this.sizes.viewport.width / this.sizes.viewport.height,
       0.1,
-      1000
+      100
     )
     this.container.add(this.camera)
     // Change camera aspect on resize
@@ -39,18 +39,17 @@ export default class Camera {
     this.camera.position.y = 1.5
     this.camera.position.z = 1.7
   }
-  setControls() {}
   setOrbitControls() {
-    // Set orbit control
-    this.orbitControls = new OrbitControls(
-      this.camera,
-      this.renderer.domElement
-    )
-    this.orbitControls.enabled = false
-    this.orbitControls.enableKeys = true
-    this.orbitControls.zoomSpeed = 1
-
     if (this.debug) {
+      // Set orbit control
+      this.orbitControls = new OrbitControls(
+        this.camera,
+        this.renderer.domElement
+      )
+      this.orbitControls.enabled = false
+      this.orbitControls.enableKeys = true
+      this.orbitControls.zoomSpeed = 1
+
       this.debugFolder = this.debug.addFolder('Camera')
       this.debugFolder.open()
       this.debugFolder

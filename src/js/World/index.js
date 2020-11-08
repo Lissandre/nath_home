@@ -12,6 +12,7 @@ export default class World {
     this.time = options.time
     this.debug = options.debug
     this.models = options.models
+    this.objects = options.objects
 
     // Set up
     this.container = new THREE.Object3D()
@@ -65,6 +66,7 @@ export default class World {
   setFloor() {
     this.floor = new Floor({
       models: this.models,
+      objects: this.objects,
     })
     this.container.add(this.floor.container)
   }

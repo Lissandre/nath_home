@@ -4,6 +4,7 @@ export default class Floor {
   constructor(options) {
     // Set options
     this.models = options.models
+    this.objects = options.objects
 
     // Set up
     this.container = new THREE.Object3D()
@@ -15,6 +16,7 @@ export default class Floor {
     this.floor.traverse((child) => {
       if (child.isMesh) {
         child.receiveShadow = true
+        this.objects.push(child)
       }
     })
     this.container.add(this.floor)
