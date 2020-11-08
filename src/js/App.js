@@ -75,6 +75,7 @@ export default class App {
       time: this.time,
       camera: this.camera,
       objects: this.objects,
+      debug: this.debug,
     })
   }
   setWorld() {

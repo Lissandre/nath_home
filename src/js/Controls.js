@@ -9,6 +9,7 @@ export default class Controls{
     this.time = options.time
     this.camera = options.camera
     this.objects = options.objects
+    this.debug = options.debug
 
     // Set up
     this.controls = new PointerLockControls(this.camera.camera, this.renderer.domElement)
@@ -19,21 +20,25 @@ export default class Controls{
     this.canJump = false
     this.raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 )
 
-    this.init()
+    if(!this.debug){
+      this.init()
+    }
   }
   init(){
-    const instructions = document.getElementById( 'instructions' );
-    instructions.addEventListener( 'click', () => {
+    this.instructions = document.createElement('div')
+    this.instructions.classList.add('instructions')
+    document.body.append(this.instructions)
+    this.instructions.addEventListener( 'click', () => {
       this.controls.lock()
       this.setListener()
       this.controls.connect()
       this.setMovement()
     }, false )
     this.controls.addEventListener( 'lock', () => {
-      instructions.style.display = 'none'
+      this.instructions.style.display = 'none'
     } )
     this.controls.addEventListener( 'unlock', () => {
-      instructions.style.display = ''
+      this.instructions.style.display = ''
     } )
   }
   setListener(){
