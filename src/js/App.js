@@ -34,6 +34,7 @@ export default class App {
       canvas: this.canvas,
       alpha: true,
       antialias: true,
+      physicallyCorrectLights: true,
     })
     // Set background color
     this.renderer.setClearColor(0x212121, 1)

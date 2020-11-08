@@ -3,12 +3,14 @@ import * as THREE from 'three'
 import Computer from './Computer.js'
 import ComputerSupport from './ComputerSupport.js'
 import Desktop from './Desktop.js'
+import Headset from './Headset.js'
 import Keyboard from './Keyboard.js'
 import Mouse from './Mouse.js'
 import MousePad from './MousePad.js'
 import Phone from './Phone.js'
 import PhoneSupport from './PhoneSupport.js'
 import RubiksCube from './RubiksCube.js'
+import Seat from './Seat.js'
 import ScreenLeft from './ScreenLeft.js'
 import ScreenRight from './ScreenRight.js'
 import ScreenSupport from './ScreenSupport.js'
@@ -26,12 +28,14 @@ export default class DesktopPlace {
     this.setComputer()
     this.setComputerSupport()
     this.setDesktop()
+    this.setHeadset()
     this.setKeyboard()
     this.setMouse()
     this.setMousePad()
     this.setPhone()
     this.setPhoneSupport()
     this.setRubiksCube()
+    this.setSeat()
     this.setScreenLeft()
     this.setScreenRight()
     this.setScreenSupport()
@@ -55,6 +59,12 @@ export default class DesktopPlace {
       models: this.models,
     })
     this.container.add(this.desktop.container)
+  }
+  setHeadset() {
+    this.headset = new Headset({
+      models: this.models,
+    })
+    this.container.add(this.headset.container)
   }
   setKeyboard() {
     this.keyboard = new Keyboard({
@@ -91,6 +101,12 @@ export default class DesktopPlace {
       models: this.models,
     })
     this.container.add(this.rubiksCube.container)
+  }
+  setSeat() {
+    this.seat = new Seat({
+      models: this.models,
+    })
+    this.container.add(this.seat.container)
   }
   setScreenLeft() {
     this.screenLeft = new ScreenLeft({

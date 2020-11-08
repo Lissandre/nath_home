@@ -16,23 +16,23 @@ export default class Computer {
     this.computer = this.models.models.computer.scene
     this.computer.traverse((child) => {
       if (child.isMesh) {
-        child.castShadow = true
+        if(child.name === 'Cube.012_2'){
+          child.castShadow = true
+        }
         child.receiveShadow = true
       }
     })
     this.container.add(this.computer)
   }
   createComputerLight() {
-    this.light = new THREE.PointLight(0xff0000, 0.1, 0, 2)
-    // this.light = new THREE.Mesh(
-    //   new THREE.SphereBufferGeometry(0.01, 30, 30, 0, Math.PI*2),
-    //   new THREE.MeshBasicMaterial({
-    //     color: 0xff0000,
-    //   })
-    // )
-    this.light.castShadow = true
-    this.light.shadow.camera.near = 0.01
-    this.light.position.set(0.9, 1.37, -0.15)
-    this.container.add(this.light)
+    this.topLight = new THREE.PointLight(0xca8fff, 10, 0.2, 2)
+    this.topLight.shadow.camera.near = 0.01
+    this.topLight.position.set(0.9, 1.34, -0.16)
+    this.container.add(this.topLight)
+
+    this.bottomLight = new THREE.PointLight(0xca8fff, 10, 0.2, 2)
+    this.bottomLight.shadow.camera.near = 0.01
+    this.bottomLight.position.set(0.9, 1.1, 0.12)
+    this.container.add(this.bottomLight)
   }
 }
