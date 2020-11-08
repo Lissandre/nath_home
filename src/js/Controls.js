@@ -17,6 +17,7 @@ export default class Controls{
 		this.moveLeft = false
 		this.moveRight = false
     this.canJump = false
+    this.raycaster = new THREE.Raycaster( new THREE.Vector3(), new THREE.Vector3( 0, - 1, 0 ), 0, 10 )
 
     this.init()
   }
@@ -55,7 +56,7 @@ export default class Controls{
           this.moveRight = true
           break
         case 'Space': // space
-          if ( this.canJump === true ) this.velocity.y += 350
+          if ( this.canJump === true ) this.velocity.y += 2
           this.canJump = false
           break
       }
@@ -83,17 +84,22 @@ export default class Controls{
   }
   setMovement(){
     this.time.on('tick', () => {
+      this.raycaster.ray.origin.copy( this.camera.mesh.position )
+      this.intersections = this.raycaster.intersectObjects( this.objects )
+      if(this.intersections.length > 0){
+        this.canJump = true
+      }
       if( this.moveForward){
-        this.controls.moveForward(0.05)
+        this.controls.moveForward(0.06)
       }
       if( this.moveBackward){
-        this.controls.moveForward(-0.05)
+        this.controls.moveForward(-0.06)
       }
       if( this.moveLeft){
-        this.controls.moveRight(-0.05)
+        this.controls.moveRight(-0.04)
       }
       if( this.moveRight){
-        this.controls.moveRight(0.05)
+        this.controls.moveRight(0.04)
       }
     })
   }

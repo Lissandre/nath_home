@@ -8,12 +8,15 @@ export default class Camera {
     this.renderer = options.renderer
     this.debug = options.debug
     this.time = options.time
+    this.objects = options.objects
 
     // Set up
     this.container = new THREE.Object3D()
+    this.objects.push(this.container)
 
     this.setCamera()
     this.setPosition()
+    this.setPerso()
     this.setOrbitControls()
   }
   setCamera() {
@@ -32,6 +35,18 @@ export default class Camera {
       // Call this method because of the above change
       this.camera.updateProjectionMatrix()
     })
+  }
+  setPerso(){
+    this.mesh = new THREE.Mesh(
+      new THREE.BoxGeometry(0.4, 1.6, 0.2),
+      new THREE.MeshBasicMaterial({
+        color: 0xffffff
+      })
+    )
+    this.time.on('tick', ()=>{
+      this.mesh.position.set(this.camera.position.x, 0.8, this.camera.position.z)
+    })
+    this.container.add(this.mesh)
   }
   setPosition() {
     // Set camera position

@@ -73,12 +73,14 @@ export default class World {
   setWalls() {
     this.walls = new Walls({
       models: this.models,
+      objects: this.objects,
     })
     this.container.add(this.walls.container)
   }
   setDesktopPlace() {
     this.desktopPlace = new DesktopPlace({
       models: this.models,
+      objects: this.objects,
     })
     this.container.add(this.desktopPlace.container)
   }
