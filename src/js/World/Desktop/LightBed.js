@@ -10,16 +10,32 @@ export default class LightBed {
     this.container = new THREE.Object3D()
 
     this.createLightBed()
+    this.setLight()
   }
   createLightBed() {
     this.lightBed = this.models.models.lightBed.scene
+    console.log(this.lightBed);
     this.lightBed.traverse((child) => {
       if (child.isMesh) {
         child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
+        if (child.name === 'Cylinder_1') {
+          child.material.emissive = new THREE.Color(0xeaeaea)
+        }
       }
     })
     this.container.add(this.lightBed)
+  }
+  setLight() {
+    this.light = new THREE.PointLight(0xffaf88, 0.1, 0, 2)
+    this.light.shadow.camera.near = 0.2
+    this.light.castShadow = true
+    this.light.position.set(
+      1.01,
+      1.72,
+      2.80
+    )
+    this.container.add(this.light)
   }
 }
