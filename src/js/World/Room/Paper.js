@@ -18,9 +18,6 @@ export default class Paper {
         child.material.side = THREE.DoubleSide
         child.castShadow = true
         child.receiveShadow = true
-        if(child.name === 'Cylinder.004_4'){
-          child.material.visible = false
-        }
       }
     })
     this.container.add(this.paper)
