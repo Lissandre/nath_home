@@ -14,7 +14,7 @@ export default class LightBed {
   }
   createLightBed() {
     this.lightBed = this.models.models.lightBed.scene
-    console.log(this.lightBed);
+    console.log(this.lightBed)
     this.lightBed.traverse((child) => {
       if (child.isMesh) {
         child.material.side = THREE.FrontSide
@@ -31,11 +31,7 @@ export default class LightBed {
     this.light = new THREE.PointLight(0xffaf88, 0.1, 0, 2)
     this.light.shadow.camera.near = 0.2
     this.light.castShadow = true
-    this.light.position.set(
-      1.01,
-      1.72,
-      2.80
-    )
+    this.light.position.set(1.01, 1.72, 2.8)
     this.container.add(this.light)
   }
 }

@@ -23,6 +23,7 @@ export default class DesktopPlace {
   constructor(options) {
     // Set options
     this.models = options.models
+    this.camera = options.camera
 
     // Set up
     this.container = new THREE.Object3D()
@@ -145,6 +146,7 @@ export default class DesktopPlace {
   setSpeakers() {
     this.speakers = new Speakers({
       models: this.models,
+      camera: this.camera,
     })
     this.container.add(this.speakers.container)
   }

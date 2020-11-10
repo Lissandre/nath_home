@@ -15,6 +15,7 @@ export default class World {
     this.debug = options.debug
     this.models = options.models
     this.objects = options.objects
+    this.camera = options.camera
 
     // Set up
     this.container = new THREE.Object3D()
@@ -85,6 +86,7 @@ export default class World {
     this.desktopPlace = new DesktopPlace({
       models: this.models,
       objects: this.objects,
+      camera: this.camera,
     })
     this.container.add(this.desktopPlace.container)
   }

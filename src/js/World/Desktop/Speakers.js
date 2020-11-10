@@ -1,15 +1,18 @@
 import * as THREE from 'three'
+import music from '@sounds/music.mp3'
 
 export default class Speakers {
   constructor(options) {
     // Set options
     this.models = options.models
+    this.camera = options.camera
 
     // Set up
     this.container = new THREE.Object3D()
 
     this.setSpeakers()
     this.setLightSpeakers()
+    this.setMusic()
   }
   setSpeakers() {
     this.speakers = this.models.models.speakers.scene
@@ -42,5 +45,22 @@ export default class Speakers {
     this.rightLight.shadow.camera.near = 0.01
     this.container.add(this.rightLight)
     this.rightLight.target = this.rightLightTarget
+  }
+  setMusic() {
+    this.listener = new THREE.AudioListener()
+    this.camera.camera.add( this.listener )
+    this.sound = new THREE.PositionalAudio( this.listener )
+    // load a sound and set it as the PositionalAudio object's buffer
+    this.audioLoader = new THREE.AudioLoader()
+    this.audioLoader.load( music, (buffer) => {
+      this.sound.setBuffer( buffer )
+      this.sound.setRefDistance( 0.25 )
+      this.sound.play()
+    })
+    this.speakers.traverse((child) => {
+      if (child.isMesh) {
+        child.add(this.sound)
+      }
+    })
   }
 }

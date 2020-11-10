@@ -36,15 +36,19 @@ export default class Camera {
       this.camera.updateProjectionMatrix()
     })
   }
-  setPerso(){
+  setPerso() {
     this.mesh = new THREE.Mesh(
       new THREE.BoxGeometry(0.4, 1.6, 0.2),
       new THREE.MeshBasicMaterial({
-        color: 0xffffff
+        color: 0xffffff,
       })
     )
-    this.time.on('tick', ()=>{
-      this.mesh.position.set(this.camera.position.x, 0.8, this.camera.position.z)
+    this.time.on('tick', () => {
+      this.mesh.position.set(
+        this.camera.position.x,
+        0.8,
+        this.camera.position.z
+      )
     })
     this.container.add(this.mesh)
   }
