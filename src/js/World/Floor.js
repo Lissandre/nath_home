@@ -15,7 +15,7 @@ export default class Floor {
     this.floor = this.models.models.floor.scene
     this.floor.traverse((child) => {
       if (child.isMesh) {
-        child.material.side = THREE.FrontSide
+        child.material.side = THREE.BackSide
         child.receiveShadow = true
         this.objects.push(child)
       }
