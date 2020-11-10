@@ -15,9 +15,12 @@ export default class Paper {
     this.paper = this.models.models.paper.scene
     this.paper.traverse((child) => {
       if (child.isMesh) {
-        child.material.side = THREE.FrontSide
+        child.material.side = THREE.DoubleSide
         child.castShadow = true
         child.receiveShadow = true
+        if(child.name === 'Cylinder.004_4'){
+          child.material.visible = false
+        }
       }
     })
     this.container.add(this.paper)
