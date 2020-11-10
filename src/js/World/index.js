@@ -3,6 +3,8 @@ import * as THREE from 'three'
 import AmbientLight from './AmbientLight.js'
 import PointLight from './PointLight.js'
 import DesktopPlace from './Desktop/index.js'
+import Kitchen from './Kitchen/index.js'
+import Room from './Room/index.js'
 import Floor from './Floor.js'
 import Walls from './Walls.js'
 
@@ -30,6 +32,8 @@ export default class World {
     this.setFloor()
     this.setWalls()
     this.setDesktopPlace()
+    this.setKitchen()
+    this.setRoom()
   }
   getLoaders() {
     if (this.models.modelsList.length != 0) {
@@ -83,5 +87,19 @@ export default class World {
       objects: this.objects,
     })
     this.container.add(this.desktopPlace.container)
+  }
+  setKitchen() {
+    this.kitchen = new Kitchen({
+      models: this.models,
+      objects: this.objects,
+    })
+    this.container.add(this.kitchen.container)
+  }
+  setRoom() {
+    this.room = new Room({
+      models: this.models,
+      objects: this.objects,
+    })
+    this.container.add(this.room.container)
   }
 }

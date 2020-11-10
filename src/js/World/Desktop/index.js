@@ -1,28 +1,21 @@
 import * as THREE from 'three'
 
-import Bed from './Bed.js'
 import Computer from './Computer.js'
 import ComputerSupport from './ComputerSupport.js'
 import Desktop from './Desktop.js'
 import Headset from './Headset.js'
 import Keyboard from './Keyboard.js'
-import LightBed from './LightBed.js'
-import Microwave from './Microwave.js'
 import Mouse from './Mouse.js'
 import MousePad from './MousePad.js'
 import Phone from './Phone.js'
 import PhoneSupport from './PhoneSupport.js'
-import Radiator from './Radiator.js'
 import RubiksCube from './RubiksCube.js'
 import Seat from './Seat.js'
-import Sink from './Sink.js'
 import ScreenLeft from './ScreenLeft.js'
 import ScreenRight from './ScreenRight.js'
 import ScreenSupport from './ScreenSupport.js'
 import Speakers from './Speakers.js'
 import SubwooferSpeaker from './SubwooferSpeaker.js'
-import Table from './Table.js'
-import WorkSurface from './WorkSurface.js'
 
 export default class DesktopPlace {
   constructor(options) {
@@ -32,35 +25,22 @@ export default class DesktopPlace {
     // Set up
     this.container = new THREE.Object3D()
 
-    this.setBed()
     this.setComputer()
     this.setComputerSupport()
     this.setDesktop()
     this.setHeadset()
     this.setKeyboard()
-    this.setLightBed()
-    this.setMicrowave()
     this.setMouse()
     this.setMousePad()
     this.setPhone()
     this.setPhoneSupport()
-    this.setRadiator()
     this.setRubiksCube()
     this.setSeat()
-    this.setSink()
     this.setScreenLeft()
     this.setScreenRight()
     this.setScreenSupport()
     this.setSpeakers()
     this.setSubwooferSpeaker()
-    this.setTable()
-    this.setWorkSurface()
-  }
-  setBed() {
-    this.bed = new Bed({
-      models: this.models,
-    })
-    this.container.add(this.bed.container)
   }
   setComputer() {
     this.computer = new Computer({
@@ -92,18 +72,6 @@ export default class DesktopPlace {
     })
     this.container.add(this.keyboard.container)
   }
-  setLightBed() {
-    this.lightBed = new LightBed({
-      models: this.models,
-    })
-    this.container.add(this.lightBed.container)
-  }
-  setMicrowave() {
-    this.microwave = new Microwave({
-      models: this.models,
-    })
-    this.container.add(this.microwave.container)
-  }
   setMouse() {
     this.mouse = new Mouse({
       models: this.models,
@@ -128,12 +96,6 @@ export default class DesktopPlace {
     })
     this.container.add(this.phoneSupport.container)
   }
-  setRadiator() {
-    this.radiator = new Radiator({
-      models: this.models,
-    })
-    this.container.add(this.radiator.container)
-  }
   setRubiksCube() {
     this.rubiksCube = new RubiksCube({
       models: this.models,
@@ -145,12 +107,6 @@ export default class DesktopPlace {
       models: this.models,
     })
     this.container.add(this.seat.container)
-  }
-  setSink() {
-    this.sink = new Sink({
-      models: this.models,
-    })
-    this.container.add(this.sink.container)
   }
   setScreenLeft() {
     this.screenLeft = new ScreenLeft({
@@ -181,17 +137,5 @@ export default class DesktopPlace {
       models: this.models,
     })
     this.container.add(this.subwooferSpeaker.container)
-  }
-  setTable() {
-    this.table = new Table({
-      models: this.models,
-    })
-    this.container.add(this.table.container)
-  }
-  setWorkSurface() {
-    this.workSurface = new WorkSurface({
-      models: this.models,
-    })
-    this.container.add(this.workSurface.container)
   }
 }
