@@ -14,6 +14,8 @@ import Seat from './Seat.js'
 import ScreenLeft from './ScreenLeft.js'
 import ScreenRight from './ScreenRight.js'
 import ScreenSupport from './ScreenSupport.js'
+import ShelfDesktop from './ShelfDesktop.js'
+import ShelfWall from './ShelfWall.js'
 import Speakers from './Speakers.js'
 import SubwooferSpeaker from './SubwooferSpeaker.js'
 
@@ -39,6 +41,8 @@ export default class DesktopPlace {
     this.setScreenLeft()
     this.setScreenRight()
     this.setScreenSupport()
+    this.setShelfDesktop()
+    this.setShelfWall()
     this.setSpeakers()
     this.setSubwooferSpeaker()
   }
@@ -125,6 +129,18 @@ export default class DesktopPlace {
       models: this.models,
     })
     this.container.add(this.screenSupport.container)
+  }
+  setShelfDesktop() {
+    this.shelfDesktop = new ShelfDesktop({
+      models: this.models,
+    })
+    this.container.add(this.shelfDesktop.container)
+  }
+  setShelfWall() {
+    this.shelfWall = new ShelfWall({
+      models: this.models,
+    })
+    this.container.add(this.shelfWall.container)
   }
   setSpeakers() {
     this.speakers = new Speakers({
