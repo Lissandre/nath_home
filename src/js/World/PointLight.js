@@ -29,7 +29,7 @@ export default class PointLight {
       this.params.positionY,
       this.params.positionZ
     )
-    this.light.shadow.bias = - 0.001
+    this.light.shadow.bias -= 0.00002
     this.light.shadow.mapSize.width = 2048
     this.light.shadow.mapSize.height = 2048
 
