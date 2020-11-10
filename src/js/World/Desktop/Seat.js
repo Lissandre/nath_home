@@ -14,6 +14,7 @@ export default class Seat {
     this.seat = this.models.models.seat.scene
     this.seat.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

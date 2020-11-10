@@ -15,6 +15,7 @@ export default class WorkSurface {
     this.workSurface = this.models.models.workSurface.scene
     this.workSurface.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

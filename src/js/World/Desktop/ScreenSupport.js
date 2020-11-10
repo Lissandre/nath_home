@@ -14,6 +14,7 @@ export default class ScreenSupport {
     this.screenSupport = this.models.models.screenSupport.scene
     this.screenSupport.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

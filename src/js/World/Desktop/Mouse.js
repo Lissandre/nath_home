@@ -14,6 +14,7 @@ export default class Mouse {
     this.mouse = this.models.models.mouse.scene
     this.mouse.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

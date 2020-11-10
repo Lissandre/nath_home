@@ -15,6 +15,7 @@ export default class Microwave {
     this.microwave = this.models.models.microwave.scene
     this.microwave.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

@@ -14,6 +14,7 @@ export default class SubwooferSpeaker {
     this.subwooferSpeaker = this.models.models.subwooferSpeaker.scene
     this.subwooferSpeaker.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

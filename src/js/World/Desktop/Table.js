@@ -15,6 +15,7 @@ export default class Table {
     this.table = this.models.models.table.scene
     this.table.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

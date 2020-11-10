@@ -34,10 +34,11 @@ export default class App {
       canvas: this.canvas,
       alpha: true,
       antialias: true,
-      physicallyCorrectLights: true,
     })
+    this.renderer.physicallyCorrectLights = true
+    this.renderer.outputEncoding = THREE.sRGBEncoding
     // Set background color
-    this.renderer.setClearColor(0x212121, 1)
+    this.renderer.setClearColor(0x000000, 1)
     // Set renderer pixel ratio & sizes
     this.renderer.setPixelRatio(window.devicePixelRatio)
     // Set shadow

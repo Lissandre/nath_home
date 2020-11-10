@@ -14,6 +14,7 @@ export default class RubiksCube {
     this.rubiksCube = this.models.models.rubiksCube.scene
     this.rubiksCube.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

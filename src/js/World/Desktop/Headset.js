@@ -15,6 +15,7 @@ export default class Headset {
     this.headset = this.models.models.headset.scene
     this.headset.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

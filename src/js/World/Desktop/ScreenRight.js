@@ -14,6 +14,7 @@ export default class ScreenRight {
     this.screenRight = this.models.models.screenRight.scene
     this.screenRight.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

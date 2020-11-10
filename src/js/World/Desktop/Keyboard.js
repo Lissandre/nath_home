@@ -15,6 +15,7 @@ export default class Keyboard {
     this.keyboard = this.models.models.keyboard.scene
     this.keyboard.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

@@ -15,6 +15,7 @@ export default class Desktop {
     this.desktop = this.models.models.desktop.scene
     this.desktop.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

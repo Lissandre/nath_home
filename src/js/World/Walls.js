@@ -15,7 +15,7 @@ export default class Walls {
     this.walls = this.models.models.walls.scene
     this.walls.traverse((child) => {
       if (child.isMesh) {
-        child.castShadow = false
+        child.material.side = THREE.FrontSide
         child.receiveShadow = true
         this.objects.push(child)
       }

@@ -15,6 +15,7 @@ export default class Bed {
     this.bed = this.models.models.bed.scene
     this.bed.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

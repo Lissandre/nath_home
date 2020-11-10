@@ -14,6 +14,7 @@ export default class PhoneSupport {
     this.phoneSupport = this.models.models.phoneSupport.scene
     this.phoneSupport.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

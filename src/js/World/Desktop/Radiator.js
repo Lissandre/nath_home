@@ -15,6 +15,7 @@ export default class Radiator {
     this.radiator = this.models.models.radiator.scene
     this.radiator.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

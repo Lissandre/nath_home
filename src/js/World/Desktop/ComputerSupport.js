@@ -15,6 +15,7 @@ export default class ComputerSupport {
     this.computerSupport = this.models.models.computerSupport.scene
     this.computerSupport.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

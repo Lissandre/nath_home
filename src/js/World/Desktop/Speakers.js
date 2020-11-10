@@ -15,6 +15,7 @@ export default class Speakers {
     this.speakers = this.models.models.speakers.scene
     this.speakers.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }
@@ -22,7 +23,7 @@ export default class Speakers {
     this.container.add(this.speakers)
   }
   setLightSpeakers() {
-    this.leftLight = new THREE.SpotLight(0x8b58ff, 0.8, 2000, 0.8, 0.25, 2)
+    this.leftLight = new THREE.SpotLight(0x8b58ff, 0.3, 2000, 0.8, 0.25, 2)
     this.leftLight.position.set(-0.6, 0.89, -0.26)
     this.leftLight.castShadow = true
     this.leftLightTarget = new THREE.Object3D()
@@ -32,7 +33,7 @@ export default class Speakers {
     this.container.add(this.leftLight)
     this.leftLight.target = this.leftLightTarget
 
-    this.rightLight = new THREE.SpotLight(0x8b58ff, 0.8, 2000, 0.8, 0.25, 2)
+    this.rightLight = new THREE.SpotLight(0x8b58ff, 0.3, 2000, 0.8, 0.25, 2)
     this.rightLight.position.set(0.6, 0.89, -0.27)
     this.rightLight.castShadow = true
     this.rightLightTarget = new THREE.Object3D()

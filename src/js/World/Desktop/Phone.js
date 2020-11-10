@@ -14,6 +14,7 @@ export default class Phone {
     this.phone = this.models.models.phone.scene
     this.phone.traverse((child) => {
       if (child.isMesh) {
+        child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }
