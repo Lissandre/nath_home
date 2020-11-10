@@ -2,6 +2,7 @@ import * as THREE from 'three'
 
 import AmbientLight from './AmbientLight.js'
 import PointLight from './PointLight.js'
+import Bathroom from './Bathroom/index.js'
 import DesktopPlace from './Desktop/index.js'
 import Kitchen from './Kitchen/index.js'
 import Room from './Room/index.js'
@@ -32,6 +33,7 @@ export default class World {
     this.setPointLight()
     this.setFloor()
     this.setWalls()
+    this.setBathroom()
     this.setDesktopPlace()
     this.setKitchen()
     this.setRoom()
@@ -81,6 +83,14 @@ export default class World {
       objects: this.objects,
     })
     this.container.add(this.walls.container)
+  }
+  setBathroom() {
+    this.bathroom = new Bathroom({
+      models: this.models,
+      objects: this.objects,
+      camera: this.camera,
+    })
+    this.container.add(this.bathroom.container)
   }
   setDesktopPlace() {
     this.desktopPlace = new DesktopPlace({
