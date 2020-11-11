@@ -29,10 +29,10 @@ export default class Sink {
     this.container.add(this.sink)
   }
   addLight() {
-    this.light = new THREE.PointLight(0xffffff, 0.3, 0, 2)
+    this.light = new THREE.PointLight(0xffffff, 0.2, 0, 2)
     this.light.castShadow = true
     this.light.shadow.camera.near = 0.1
-    this.light.position.set(-2.65, 1.44, 2.2)
+    this.light.position.set(-2.7, 1.41, 2.2)
     this.container.add(this.light)
   }
 }
