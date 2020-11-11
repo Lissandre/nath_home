@@ -8,6 +8,7 @@ import Kitchen from './Kitchen/index.js'
 import Room from './Room/index.js'
 import Floor from './Floor.js'
 import Walls from './Walls.js'
+import Outside from './Outside.js'
 
 export default class World {
   constructor(options) {
@@ -33,6 +34,7 @@ export default class World {
     this.setPointLight()
     this.setFloor()
     this.setWalls()
+    this.setOutside()
     this.setBathroom()
     this.setDesktopPlace()
     this.setKitchen()
@@ -83,6 +85,10 @@ export default class World {
       objects: this.objects,
     })
     this.container.add(this.walls.container)
+  }
+  setOutside() {
+    this.outside = new Outside()
+    this.container.add(this.outside.container)
   }
   setBathroom() {
     this.bathroom = new Bathroom({
