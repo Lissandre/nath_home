@@ -17,6 +17,7 @@ import paper from './Paper.glb'
 import phone from './Phone.glb'
 import phoneSupport from './PhoneSupport.glb'
 import radiator from './Radiator.glb'
+import radiatorBathroom from './RadiatorBathroom.glb'
 import rubiksCube from './RubiksCube.glb'
 import seat from './Seat.glb'
 import shelfBed from './ShelfBed.glb'
@@ -52,6 +53,7 @@ const modelsList = [
   { name: 'phone', src: phone },
   { name: 'phoneSupport', src: phoneSupport },
   { name: 'radiator', src: radiator },
+  { name: 'radiatorBathroom', src: radiatorBathroom },
   { name: 'rubiksCube', src: rubiksCube },
   { name: 'seat', src: seat },
   { name: 'shelfBed', src: shelfBed },
