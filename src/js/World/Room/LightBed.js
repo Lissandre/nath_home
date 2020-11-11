@@ -14,7 +14,6 @@ export default class LightBed {
   }
   createLightBed() {
     this.lightBed = this.models.models.lightBed.scene
-    console.log(this.lightBed)
     this.lightBed.traverse((child) => {
       if (child.isMesh) {
         child.material.side = THREE.FrontSide

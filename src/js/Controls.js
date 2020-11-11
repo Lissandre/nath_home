@@ -10,6 +10,7 @@ export default class Controls {
     this.camera = options.camera
     this.objects = options.objects
     this.debug = options.debug
+    this.world = options.world
 
     // Set up
     this.controls = new PointerLockControls(
@@ -39,9 +40,15 @@ export default class Controls {
     this.instructions = document.createElement('div')
     this.instructions.classList.add('instructions')
     document.body.append(this.instructions)
+
     this.title = document.createElement('h1')
     this.title.innerHTML = 'Click to control'
     this.instructions.append(this.title)
+
+    this.commands = document.createElement('p')
+    this.commands.innerHTML = 'L: Toggle lights'
+    this.instructions.append(this.commands)
+
     this.instructions.addEventListener(
       'click',
       () => {
@@ -56,6 +63,8 @@ export default class Controls {
     this.controls.addEventListener('unlock', () => {
       this.instructions.style.display = ''
       this.canMove = false
+      this.world.desktopPlace.speakers.sound.pause()
+      this.world.desktopPlace.speakers.playing = false
     })
   }
   setListener() {

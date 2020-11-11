@@ -24,6 +24,7 @@ export default class DesktopPlace {
     // Set options
     this.models = options.models
     this.camera = options.camera
+    this.time = options.time
 
     // Set up
     this.container = new THREE.Object3D()
@@ -147,6 +148,7 @@ export default class DesktopPlace {
     this.speakers = new Speakers({
       models: this.models,
       camera: this.camera,
+      time: this.time,
     })
     this.container.add(this.speakers.container)
   }

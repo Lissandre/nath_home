@@ -87,6 +87,7 @@ export default class World {
       models: this.models,
       objects: this.objects,
       camera: this.camera,
+      time: this.time,
     })
     this.container.add(this.desktopPlace.container)
   }

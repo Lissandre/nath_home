@@ -23,8 +23,8 @@ export default class App {
     this.setConfig()
     this.setRenderer()
     this.setCamera()
-    this.setControls()
     this.setWorld()
+    this.setControls()
   }
   setRenderer() {
     // Set scene
@@ -78,6 +78,7 @@ export default class App {
       camera: this.camera,
       objects: this.objects,
       debug: this.debug,
+      world: this.world,
     })
   }
   setWorld() {

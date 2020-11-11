@@ -16,6 +16,7 @@ export default class PointLight {
     }
 
     this.createPointLight()
+    this.createControl()
 
     if (this.debug) {
       this.setDebug()
@@ -34,6 +35,16 @@ export default class PointLight {
     this.light.shadow.mapSize.height = 2048
 
     this.container.add(this.light)
+  }
+  createControl() {
+    document.addEventListener(
+      'keypress',
+      (event) => {
+        if (event.code === 'KeyL') {
+          this.light.intensity === 5 ? this.light.intensity = 0 : this.light.intensity = 5
+        }
+      }
+    )
   }
   setDebug() {
     // Color debug
