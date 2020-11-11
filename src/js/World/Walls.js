@@ -17,6 +17,7 @@ export default class Walls {
       if (child.isMesh) {
         child.material.side = THREE.FrontSide
         child.receiveShadow = true
+        child.castShadow = true
         if (child.name === 'Cube.002_1') {
           child.material.visible = false
         }
