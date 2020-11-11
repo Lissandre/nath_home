@@ -25,6 +25,11 @@ export default class Speakers {
         child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
+        if(child.name === 'Cylinder.002_1'){
+          this.colorSpeaker = child.material
+          this.colorSpeaker.emissive = this.colorSpeaker.color
+          this.colorSpeaker.emissiveIntensity = 0.2
+        }
       }
     })
     this.container.add(this.speakers)
@@ -93,6 +98,20 @@ export default class Speakers {
         })
 
         TweenMax.to(this.rightLight.color, {
+          duration: 0.2,
+          r: this.r / 255,
+          g: this.g / 255,
+          b: this.b / 255,
+        })
+
+        TweenMax.to(this.colorSpeaker.color, {
+          duration: 0.2,
+          r: this.r / 255,
+          g: this.g / 255,
+          b: this.b / 255,
+        })
+
+        TweenMax.to(this.colorSpeaker.emissive, {
           duration: 0.2,
           r: this.r / 255,
           g: this.g / 255,
