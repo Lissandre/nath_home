@@ -9,7 +9,6 @@ import Room from './Room/index.js'
 import Floor from './Floor.js'
 import Walls from './Walls.js'
 import Outside from './Outside.js'
-import Physics from './Physics.js'
 
 export default class World {
   constructor(options) {
@@ -19,6 +18,7 @@ export default class World {
     this.models = options.models
     this.objects = options.objects
     this.camera = options.camera
+    this.physics = options.physics
 
     // Set up
     this.container = new THREE.Object3D()
@@ -33,7 +33,6 @@ export default class World {
   init() {
     this.setAmbientLight()
     this.setPointLight()
-    this.setPhysics()
     this.setFloor()
     this.setWalls()
     this.setOutside()
@@ -125,10 +124,5 @@ export default class World {
       objects: this.objects,
     })
     this.container.add(this.room.container)
-  }
-  setPhysics() {
-    this.physics = new Physics({
-      time: this.time,
-    })
   }
 }

@@ -8,6 +8,7 @@ import Time from '@tools/Time.js'
 import Models from '@tools/ModelLoader.js'
 
 import Camera from './Camera.js'
+import Physics from './Physics.js'
 import Controls from './Controls.js'
 import World from '@world/index.js'
 import { doc } from 'prettier'
@@ -26,6 +27,7 @@ export default class App {
     this.setConfig()
     this.setRenderer()
     this.setCamera()
+    this.setPhysics()
     this.setWorld()
     this.setControls()
     this.setCDebug()
@@ -69,10 +71,23 @@ export default class App {
       renderer: this.renderer,
       debug: this.debug,
       time: this.time,
-      objects: this.objects,
+      objects: this.objects
     })
     // Add camera to scene
     this.scene.add(this.camera.container)
+  }
+  setWorld() {
+    // Create world instance
+    this.world = new World({
+      time: this.time,
+      debug: this.debug,
+      models: this.models,
+      objects: this.objects,
+      camera: this.camera,
+      physics: this.physics,
+    })
+    // Add world to scene
+    this.scene.add(this.world.container)
   }
   setControls() {
     this.fpscontrols = new Controls({
@@ -85,17 +100,11 @@ export default class App {
       world: this.world,
     })
   }
-  setWorld() {
-    // Create world instance
-    this.world = new World({
+  setPhysics() {
+    this.physics = new Physics({
       time: this.time,
-      debug: this.debug,
-      models: this.models,
       objects: this.objects,
-      camera: this.camera,
     })
-    // Add world to scene
-    this.scene.add(this.world.container)
   }
   setConfig() {
     if (window.location.hash === '#debug') {

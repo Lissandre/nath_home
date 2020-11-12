@@ -23,6 +23,7 @@ export default class ComputerSupport {
         child.receiveShadow = true
       }
     })
+    this.computerSupport.children[0].applyMatrix4(this.computerSupport.matrixWorld)
     this.container.add(this.computerSupport)
   }
   setPhysics() {
@@ -38,16 +39,20 @@ export default class ComputerSupport {
 
     this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
     this.computerSupport.body = new CANNON.Body({
-      mass: 13,
-      // position: this.center
+      mass: 0.1,
+      position: this.center
     })
 
-    this.computerSupport.body.addShape(this.box, new CANNON.Vec3(this.center.x, this.center.y, this.center.z))
+    this.computerSupport.body.addShape(this.box)
     this.physics.world.addBody(this.computerSupport.body)
 
     this.time.on('tick', () => {
       this.computerSupport.quaternion.copy(this.computerSupport.body.quaternion)
-      this.computerSupport.position.copy(this.computerSupport.body.position)
+      this.computerSupport.position.set(
+        this.computerSupport.body.position.x - this.center.x,
+        this.computerSupport.body.position.y - this.center.y,
+        this.computerSupport.body.position.z - this.center.z,
+        )
     })
   }
 }

@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import * as CANNON from 'cannon-es'
 import { TweenMax } from 'gsap'
 
 import music from '@sounds/music.mp3'
@@ -8,6 +9,7 @@ export default class Speakers {
     // Set options
     this.models = options.models
     this.time = options.time
+    this.physics = options.physics
     this.camera = options.camera
 
     // Set up
@@ -17,6 +19,7 @@ export default class Speakers {
     this.setSpeakers()
     this.setLightSpeakers()
     this.setMusic()
+    this.setPhysics()
   }
   setSpeakers() {
     this.speakers = this.models.models.speakers.scene
@@ -145,5 +148,35 @@ export default class Speakers {
       this.g = '0x' + h[3] + h[4]
       this.b = '0x' + h[5] + h[6]
     }
+  }
+  setPhysics() {
+    console.log(this.speakers);
+    this.size = new THREE.Vector3()
+    this.center = new THREE.Vector3()
+    this.calcBox = new THREE.Box3().setFromObject( this.speakers )
+
+    this.calcBox.getSize(this.size)
+    this.size.x *= 0.5
+    this.size.y *= 0.5
+    this.size.z *= 0.5
+    this.calcBox.getCenter(this.center)
+
+    this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
+    this.speakers.body = new CANNON.Body({
+      mass: 0.1,
+      position: this.center
+    })
+
+    this.speakers.body.addShape(this.box)
+    this.physics.world.addBody(this.speakers.body)
+
+    this.time.on('tick', () => {
+      this.speakers.quaternion.copy(this.speakers.body.quaternion)
+      this.speakers.position.set(
+        this.speakers.body.position.x - this.center.x,
+        this.speakers.body.position.y - this.center.y,
+        this.speakers.body.position.z - this.center.z,
+        )
+    })
   }
 }

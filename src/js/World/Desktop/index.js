@@ -30,7 +30,7 @@ export default class DesktopPlace {
     // Set up
     this.container = new THREE.Object3D()
 
-    // this.setComputer()
+    this.setComputer()
     this.setComputerSupport()
     this.setDesktop()
     this.setHeadset()

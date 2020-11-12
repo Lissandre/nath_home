@@ -12,11 +12,10 @@ export default class Camera {
 
     // Set up
     this.container = new THREE.Object3D()
-    this.objects.push(this.container)
 
     this.setCamera()
+    this.setPerso()
     this.setPosition()
-    // this.setPerso()
     this.setOrbitControls()
   }
   setCamera() {
@@ -37,26 +36,28 @@ export default class Camera {
     })
   }
   setPerso() {
-    this.mesh = new THREE.Mesh(
-      new THREE.BoxGeometry(0.4, 1.6, 0.2),
+    this.head = new THREE.Mesh(
+      new THREE.BoxGeometry(0.2, 0.2, 0.2),
       new THREE.MeshBasicMaterial({
         color: 0xffffff,
       })
     )
-    this.time.on('tick', () => {
-      this.mesh.position.set(
-        this.camera.position.x,
-        0.8,
-        this.camera.position.z
+    // this.time.on('tick', () => {
+      this.head.position.set(
+        0,
+        1.5,
+        1.7
       )
-    })
-    this.container.add(this.mesh)
+    // })
+    // this.objects.push(this.container)
   }
   setPosition() {
     // Set camera position
-    this.camera.position.x = 0
-    this.camera.position.y = 1.5
-    this.camera.position.z = 1.7
+    this.camera.position.set(
+      0,
+      1.5,
+      1.7
+    )
   }
   setOrbitControls() {
     if (this.debug) {

@@ -38,24 +38,19 @@ export default class Headset {
 
     this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
     this.headset.body = new CANNON.Body({
-      mass: 0.7,
-      // position: this.center
+      mass: 0.1,
+      position: this.center
     })
 
-    this.headset.body.addShape(this.box, new CANNON.Vec3(this.center.x, this.center.y, this.center.z))
+    this.headset.body.addShape(this.box)
     this.physics.world.addBody(this.headset.body)
 
     this.time.on('tick', () => {
-      this.headset.quaternion.set(
-        this.headset.body.quaternion.x,
-        this.headset.body.quaternion.y,
-        this.headset.body.quaternion.z,
-        this.headset.body.quaternion.w
-      )
+      this.headset.quaternion.copy(this.headset.body.quaternion)
       this.headset.position.set(
-        this.headset.body.position.x,
-        this.headset.body.position.y,
-        this.headset.body.position.z,
+        this.headset.body.position.x - this.center.x,
+        this.headset.body.position.y - this.center.y,
+        this.headset.body.position.z - this.center.z,
         )
     })
   }

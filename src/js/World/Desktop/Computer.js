@@ -48,24 +48,19 @@ export default class Computer {
 
     this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
     this.computer.body = new CANNON.Body({
-      mass: 13,
-      // position: this.center
+      mass: 0.1,
+      position: this.center
     })
 
-    this.computer.body.addShape(this.box, new CANNON.Vec3(this.center.x, this.center.y, this.center.z))
+    this.computer.body.addShape(this.box)
     this.physics.world.addBody(this.computer.body)
 
     this.time.on('tick', () => {
-      this.computer.quaternion.set(
-        this.computer.body.quaternion.x,
-        this.computer.body.quaternion.y,
-        this.computer.body.quaternion.z,
-        this.computer.body.quaternion.w
-      )
+      this.computer.quaternion.copy(this.computer.body.quaternion)
       this.computer.position.set(
-        this.computer.body.position.x,
-        this.computer.body.position.y,
-        this.computer.body.position.z,
+        this.computer.body.position.x - this.center.x,
+        this.computer.body.position.y - this.center.y,
+        this.computer.body.position.z - this.center.z,
         )
     })
   }

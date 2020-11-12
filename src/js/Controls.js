@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import * as CANNON from 'cannon-es'
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js'
 
 export default class Controls {
