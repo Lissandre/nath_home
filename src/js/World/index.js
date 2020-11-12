@@ -9,6 +9,7 @@ import Room from './Room/index.js'
 import Floor from './Floor.js'
 import Walls from './Walls.js'
 import Outside from './Outside.js'
+import Physics from './Physics.js'
 
 export default class World {
   constructor(options) {
@@ -32,6 +33,7 @@ export default class World {
   init() {
     this.setAmbientLight()
     this.setPointLight()
+    this.setPhysics()
     this.setFloor()
     this.setWalls()
     this.setOutside()
@@ -76,6 +78,7 @@ export default class World {
     this.floor = new Floor({
       models: this.models,
       objects: this.objects,
+      physics: this.physics,
     })
     this.container.add(this.floor.container)
   }
@@ -83,6 +86,7 @@ export default class World {
     this.walls = new Walls({
       models: this.models,
       objects: this.objects,
+      physics: this.physics,
     })
     this.container.add(this.walls.container)
   }
@@ -104,6 +108,7 @@ export default class World {
       objects: this.objects,
       camera: this.camera,
       time: this.time,
+      physics: this.physics
     })
     this.container.add(this.desktopPlace.container)
   }
@@ -120,5 +125,10 @@ export default class World {
       objects: this.objects,
     })
     this.container.add(this.room.container)
+  }
+  setPhysics() {
+    this.physics = new Physics({
+      time: this.time,
+    })
   }
 }

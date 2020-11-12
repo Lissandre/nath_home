@@ -16,7 +16,6 @@ export default class Sink {
     this.sink = this.models.models.sink.scene
     this.sink.traverse((child) => {
       if (child.isMesh) {
-        console.log(child);
         child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true

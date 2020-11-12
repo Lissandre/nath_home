@@ -1,5 +1,7 @@
 import * as THREE from 'three'
 import * as dat from 'dat.gui'
+import cannonDebugger from 'cannon-es-debugger'
+
 
 import Sizes from '@tools/Sizes.js'
 import Time from '@tools/Time.js'
@@ -8,6 +10,7 @@ import Models from '@tools/ModelLoader.js'
 import Camera from './Camera.js'
 import Controls from './Controls.js'
 import World from '@world/index.js'
+import { doc } from 'prettier'
 
 export default class App {
   constructor(options) {
@@ -25,6 +28,7 @@ export default class App {
     this.setCamera()
     this.setWorld()
     this.setControls()
+    this.setCDebug()
   }
   setRenderer() {
     // Set scene
@@ -97,5 +101,10 @@ export default class App {
     if (window.location.hash === '#debug') {
       this.debug = new dat.GUI({ width: 420 })
     }
+  }
+  setCDebug(){
+    document.addEventListener('click', ()=>{
+      cannonDebugger(this.scene, this.world.physics.world.bodies)
+    })
   }
 }
