@@ -6,6 +6,8 @@ import computer from './Computer.glb'
 import computerSupport from './ComputerSupport.glb'
 import cuttingBoard from './CuttingBoard.glb'
 import desktop from './Desktop.glb'
+import desktopLeft from './DesktopLeft.glb'
+import desktopRight from './DesktopRight.glb'
 import headset from './Headset.glb'
 import keyboard from './Keyboard.glb'
 import lightBed from './LightBed.glb'
@@ -29,7 +31,8 @@ import soHetic from './SoHetic.glb'
 import screenLeft from './ScreenLeft.glb'
 import screenRight from './ScreenRight.glb'
 import screenSupport from './ScreenSupport.glb'
-import speakers from './Speakers.glb'
+import speakerLeft from './SpeakerLeft.glb'
+import speakerRight from './SpeakerRight.glb'
 import subwooferSpeaker from './SubwooferSpeaker.glb'
 import table from './Table.glb'
 import walls from './Walls.glb'
@@ -42,6 +45,8 @@ const modelsList = [
   { name: 'computerSupport', src: computerSupport },
   { name: 'cuttingBoard', src: cuttingBoard },
   { name: 'desktop', src: desktop },
+  { name: 'desktopLeft', src: desktopLeft },
+  { name: 'desktopRight', src: desktopRight },
   { name: 'headset', src: headset },
   { name: 'keyboard', src: keyboard },
   { name: 'lightBed', src: lightBed },
@@ -65,7 +70,8 @@ const modelsList = [
   { name: 'screenLeft', src: screenLeft },
   { name: 'screenRight', src: screenRight },
   { name: 'screenSupport', src: screenSupport },
-  { name: 'speakers', src: speakers },
+  { name: 'speakerLeft', src: speakerLeft },
+  { name: 'speakerRight', src: speakerRight },
   { name: 'subwooferSpeaker', src: subwooferSpeaker },
   { name: 'table', src: table },
   { name: 'walls', src: walls },

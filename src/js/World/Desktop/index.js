@@ -3,6 +3,8 @@ import * as THREE from 'three'
 import Computer from './Computer.js'
 import ComputerSupport from './ComputerSupport.js'
 import Desktop from './Desktop.js'
+import DesktopLeft from './DesktopLeft.js'
+import DesktopRight from './DesktopRight.js'
 import Headset from './Headset.js'
 import Keyboard from './Keyboard.js'
 import Mouse from './Mouse.js'
@@ -16,7 +18,8 @@ import ScreenRight from './ScreenRight.js'
 import ScreenSupport from './ScreenSupport.js'
 import ShelfDesktop from './ShelfDesktop.js'
 import ShelfWall from './ShelfWall.js'
-import Speakers from './Speakers.js'
+import SpeakerLeft from './SpeakerLeft.js'
+import SpeakerRight from './SpeakerRight.js'
 import SubwooferSpeaker from './SubwooferSpeaker.js'
 
 export default class DesktopPlace {
@@ -33,6 +36,8 @@ export default class DesktopPlace {
     this.setComputer()
     this.setComputerSupport()
     this.setDesktop()
+    this.setDesktopLeft()
+    this.setDesktopRight()
     this.setHeadset()
     this.setKeyboard()
     this.setMouse()
@@ -46,7 +51,8 @@ export default class DesktopPlace {
     this.setScreenSupport()
     this.setShelfDesktop()
     this.setShelfWall()
-    this.setSpeakers()
+    this.setSpeakerLeft()
+    this.setSpeakerRight()
     // this.setSubwooferSpeaker()
   }
   setComputer() {
@@ -72,6 +78,22 @@ export default class DesktopPlace {
       physics: this.physics,
     })
     this.container.add(this.desktop.container)
+  }
+  setDesktopLeft() {
+    this.desktopLeft = new DesktopLeft({
+      models: this.models,
+      time: this.time,
+      physics: this.physics,
+    })
+    this.container.add(this.desktopLeft.container)
+  }
+  setDesktopRight() {
+    this.desktopRight = new DesktopRight({
+      models: this.models,
+      time: this.time,
+      physics: this.physics,
+    })
+    this.container.add(this.desktopRight.container)
   }
   setHeadset() {
     this.headset = new Headset({
@@ -186,6 +208,26 @@ export default class DesktopPlace {
       physics: this.physics,
     })
     this.container.add(this.speakers.container)
+  }
+  setSpeakerLeft() {
+    this.speakerLeft = new SpeakerLeft({
+      models: this.models,
+      time: this.time,
+      camera: this.camera,
+      time: this.time,
+      physics: this.physics,
+    })
+    this.container.add(this.speakerLeft.container)
+  }
+  setSpeakerRight() {
+    this.speakerRight = new SpeakerRight({
+      models: this.models,
+      time: this.time,
+      camera: this.camera,
+      time: this.time,
+      physics: this.physics,
+    })
+    this.container.add(this.speakerRight.container)
   }
   setSubwooferSpeaker() {
     this.subwooferSpeaker = new SubwooferSpeaker({

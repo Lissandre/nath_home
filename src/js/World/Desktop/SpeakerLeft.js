@@ -4,7 +4,7 @@ import { TweenMax } from 'gsap'
 
 import music from '@sounds/music.mp3'
 
-export default class Speakers {
+export default class SpeakerLeft {
   constructor(options) {
     // Set options
     this.models = options.models
@@ -16,14 +16,14 @@ export default class Speakers {
     this.container = new THREE.Object3D()
     this.colors = ['#8B58FF', '#FE3ACC', '#FF5392', '#FF8E63', '#FFC751', '#F9F871']
 
-    this.setSpeakers()
-    this.setLightSpeakers()
+    this.setSpeakerLeft()
+    this.setLightSpeakerLeft()
     this.setMusic()
     this.setPhysics()
   }
-  setSpeakers() {
-    this.speakers = this.models.models.speakers.scene
-    this.speakers.traverse((child) => {
+  setSpeakerLeft() {
+    this.speakerLeft = this.models.models.speakerLeft.scene
+    this.speakerLeft.traverse((child) => {
       if (child.isMesh) {
         child.material.side = THREE.FrontSide
         child.castShadow = true
@@ -35,9 +35,9 @@ export default class Speakers {
         }
       }
     })
-    this.container.add(this.speakers)
+    this.container.add(this.speakerLeft)
   }
-  setLightSpeakers() {
+  setLightSpeakerLeft() {
     this.leftLight = new THREE.SpotLight(0x8b58ff, 0.3, 2000, 0.8, 0.25, 2)
     this.leftLight.position.set(-0.6, 0.89, -0.26)
     this.leftLight.castShadow = true
