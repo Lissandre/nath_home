@@ -39,7 +39,7 @@ export default class ComputerSupport {
 
     this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
     this.computerSupport.body = new CANNON.Body({
-      mass: 0.1,
+      mass: 22,
       position: this.center
     })
 

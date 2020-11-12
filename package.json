@@ -7,7 +7,8 @@
     "cannon": "^0.6.2",
     "cannon-es": "^0.15.1",
     "cannon-es-debugger": "0.0.4",
-    "gsap": "^3.5.1"
+    "gsap": "^3.5.1",
+    "three-to-cannon": "^3.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",

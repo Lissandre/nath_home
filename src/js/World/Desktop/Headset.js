@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import * as CANNON from 'cannon-es'
+import { threeToCannon } from 'three-to-cannon'
 
 export default class Headset {
   constructor(options) {
@@ -36,13 +37,14 @@ export default class Headset {
     this.size.z *= 0.5
     this.calcBox.getCenter(this.center)
 
-    this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
+    this.shape = threeToCannon(this.headset, {type: threeToCannon.Type.CYLINDER})
+
+    // this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
     this.headset.body = new CANNON.Body({
-      mass: 0.1,
+      mass: 0.3,
+      shape: this.shape,
       position: this.center
     })
-
-    this.headset.body.addShape(this.box)
     this.physics.world.addBody(this.headset.body)
 
     this.time.on('tick', () => {

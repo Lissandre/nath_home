@@ -37,17 +37,17 @@ export default class DesktopPlace {
     this.setKeyboard()
     this.setMouse()
     this.setMousePad()
-    this.setPhone()
+    // this.setPhone()
     this.setPhoneSupport()
-    this.setRubiksCube()
-    this.setSeat()
+    // this.setRubiksCube()
+    // this.setSeat()
     this.setScreenLeft()
     this.setScreenRight()
     this.setScreenSupport()
     this.setShelfDesktop()
     this.setShelfWall()
     this.setSpeakers()
-    this.setSubwooferSpeaker()
+    // this.setSubwooferSpeaker()
   }
   setComputer() {
     this.computer = new Computer({

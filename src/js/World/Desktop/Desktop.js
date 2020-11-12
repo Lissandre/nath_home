@@ -38,7 +38,7 @@ export default class Desktop {
 
     this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
     this.desktop.body = new CANNON.Body({
-      mass: 0.1,
+      mass: 10,
       position: this.center
     })
 

@@ -38,7 +38,7 @@ export default class Computer {
   setPhysics() {
     this.size = new THREE.Vector3()
     this.center = new THREE.Vector3()
-    this.calcBox = new THREE.Box3().setFromObject( this.computer )
+    this.calcBox = new THREE.Box3().setFromObject( this.container )
 
     this.calcBox.getSize(this.size)
     this.size.x *= 0.5
@@ -47,20 +47,20 @@ export default class Computer {
     this.calcBox.getCenter(this.center)
 
     this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
-    this.computer.body = new CANNON.Body({
-      mass: 0.1,
+    this.container.body = new CANNON.Body({
+      mass: 15,
       position: this.center
     })
 
-    this.computer.body.addShape(this.box)
-    this.physics.world.addBody(this.computer.body)
+    this.container.body.addShape(this.box)
+    this.physics.world.addBody(this.container.body)
 
     this.time.on('tick', () => {
-      this.computer.quaternion.copy(this.computer.body.quaternion)
-      this.computer.position.set(
-        this.computer.body.position.x - this.center.x,
-        this.computer.body.position.y - this.center.y,
-        this.computer.body.position.z - this.center.z,
+      this.container.quaternion.copy(this.container.body.quaternion)
+      this.container.position.set(
+        this.container.body.position.x - this.center.x,
+        this.container.body.position.y - this.center.y,
+        this.container.body.position.z - this.center.z,
         )
     })
   }

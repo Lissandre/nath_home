@@ -38,7 +38,7 @@ export default class MousePad {
 
     this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
     this.mousePad.body = new CANNON.Body({
-      mass: 0.1,
+      mass: 0.15,
       position: this.center
     })
 
