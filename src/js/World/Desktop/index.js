@@ -9,6 +9,7 @@ import Headset from './Headset.js'
 import Keyboard from './Keyboard.js'
 import Mouse from './Mouse.js'
 import MousePad from './MousePad.js'
+import Music from './SetMusic.js'
 import Phone from './Phone.js'
 import PhoneSupport from './PhoneSupport.js'
 import RubiksCube from './RubiksCube.js'
@@ -53,7 +54,8 @@ export default class DesktopPlace {
     this.setShelfWall()
     this.setSpeakerLeft()
     this.setSpeakerRight()
-    // this.setSubwooferSpeaker()
+    this.setMusic()
+    this.setSubwooferSpeaker()
   }
   setComputer() {
     this.computer = new Computer({
@@ -199,21 +201,9 @@ export default class DesktopPlace {
     })
     this.container.add(this.shelfWall.container)
   }
-  setSpeakers() {
-    this.speakers = new Speakers({
-      models: this.models,
-      time: this.time,
-      camera: this.camera,
-      time: this.time,
-      physics: this.physics,
-    })
-    this.container.add(this.speakers.container)
-  }
   setSpeakerLeft() {
     this.speakerLeft = new SpeakerLeft({
       models: this.models,
-      time: this.time,
-      camera: this.camera,
       time: this.time,
       physics: this.physics,
     })
@@ -223,11 +213,17 @@ export default class DesktopPlace {
     this.speakerRight = new SpeakerRight({
       models: this.models,
       time: this.time,
-      camera: this.camera,
-      time: this.time,
       physics: this.physics,
     })
     this.container.add(this.speakerRight.container)
+  }
+  setMusic() {
+    this.music = new Music({
+      time: this.time,
+      camera: this.camera,
+      speakerRight: this.speakerRight,
+      speakerLeft: this.speakerLeft
+    })
   }
   setSubwooferSpeaker() {
     this.subwooferSpeaker = new SubwooferSpeaker({
