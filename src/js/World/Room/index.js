@@ -12,6 +12,8 @@ export default class Room {
   constructor(options) {
     // Set options
     this.models = options.models
+    this.time = options.time
+    this.physics = options.physics
 
     // Set up
     this.container = new THREE.Object3D()
@@ -27,42 +29,56 @@ export default class Room {
   setBed() {
     this.bed = new Bed({
       models: this.models,
+      time: this.time,
+      physics: this.physics,
     })
     this.container.add(this.bed.container)
   }
   setLightBed() {
     this.lightBed = new LightBed({
       models: this.models,
+      time: this.time,
+      physics: this.physics,
     })
     this.container.add(this.lightBed.container)
   }
   setNightTable() {
     this.nightTable = new NightTable({
       models: this.models,
+      time: this.time,
+      physics: this.physics,
     })
     this.container.add(this.nightTable.container)
   }
   setPaper() {
     this.paper = new Paper({
       models: this.models,
+      time: this.time,
+      physics: this.physics,
     })
     this.container.add(this.paper.container)
   }
   setRadiator() {
     this.radiator = new Radiator({
       models: this.models,
+      time: this.time,
+      physics: this.physics,
     })
     this.container.add(this.radiator.container)
   }
   setShelfBed() {
     this.shelfBed = new ShelfBed({
       models: this.models,
+      time: this.time,
+      physics: this.physics,
     })
     this.container.add(this.shelfBed.container)
   }
   setTable() {
     this.table = new Table({
       models: this.models,
+      time: this.time,
+      physics: this.physics,
     })
     this.container.add(this.table.container)
   }

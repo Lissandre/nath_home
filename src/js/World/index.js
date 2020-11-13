@@ -76,7 +76,6 @@ export default class World {
   setFloor() {
     this.floor = new Floor({
       models: this.models,
-      objects: this.objects,
       physics: this.physics,
     })
     this.container.add(this.floor.container)
@@ -84,7 +83,6 @@ export default class World {
   setWalls() {
     this.walls = new Walls({
       models: this.models,
-      objects: this.objects,
       physics: this.physics,
     })
     this.container.add(this.walls.container)
@@ -96,15 +94,14 @@ export default class World {
   setBathroom() {
     this.bathroom = new Bathroom({
       models: this.models,
-      objects: this.objects,
-      camera: this.camera,
+      time: this.time,
+      physics: this.physics
     })
     this.container.add(this.bathroom.container)
   }
   setDesktopPlace() {
     this.desktopPlace = new DesktopPlace({
       models: this.models,
-      objects: this.objects,
       camera: this.camera,
       time: this.time,
       physics: this.physics
@@ -114,14 +111,16 @@ export default class World {
   setKitchen() {
     this.kitchen = new Kitchen({
       models: this.models,
-      objects: this.objects,
+      time: this.time,
+      physics: this.physics,
     })
     this.container.add(this.kitchen.container)
   }
   setRoom() {
     this.room = new Room({
       models: this.models,
-      objects: this.objects,
+      time: this.time,
+      physics: this.physics,
     })
     this.container.add(this.room.container)
   }

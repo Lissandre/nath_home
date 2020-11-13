@@ -11,6 +11,8 @@ export default class Kitchen {
   constructor(options) {
     // Set options
     this.models = options.models
+    this.time = options.time
+    this.physics = options.physics
 
     // Set up
     this.container = new THREE.Object3D()
@@ -25,36 +27,48 @@ export default class Kitchen {
   setCuttingBoard() {
     this.cuttingBoard = new CuttingBoard({
       models: this.models,
+      time: this.time,
+      physics: this.physics,
     })
     this.container.add(this.cuttingBoard.container)
   }
   setMicrowave() {
     this.microwave = new Microwave({
       models: this.models,
+      time: this.time,
+      physics: this.physics,
     })
     this.container.add(this.microwave.container)
   }
   setShelfKitchen() {
     this.shelfKitchen = new ShelfKitchen({
       models: this.models,
+      time: this.time,
+      physics: this.physics,
     })
     this.container.add(this.shelfKitchen.container)
   }
   setSink() {
     this.sink = new Sink({
       models: this.models,
+      time: this.time,
+      physics: this.physics,
     })
     this.container.add(this.sink.container)
   }
   setSoHetic() {
     this.soHetic = new SoHetic({
       models: this.models,
+      time: this.time,
+      physics: this.physics,
     })
     this.container.add(this.soHetic.container)
   }
   setWorkSurface() {
     this.workSurface = new WorkSurface({
       models: this.models,
+      time: this.time,
+      physics: this.physics,
     })
     this.container.add(this.workSurface.container)
   }

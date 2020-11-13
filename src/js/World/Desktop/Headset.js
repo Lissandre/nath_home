@@ -37,7 +37,7 @@ export default class Headset {
     this.size.z *= 0.5
     this.calcBox.getCenter(this.center)
 
-    this.shape = threeToCannon(this.headset, {type: threeToCannon.Type.MESH})
+    this.shape = threeToCannon(this.headset, {type: threeToCannon.Type.CYLINDER})
 
     // this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
     this.headset.body = new CANNON.Body({
@@ -46,8 +46,6 @@ export default class Headset {
       position: this.center
     })
     this.physics.world.addBody(this.headset.body)
-
-    console.log(this.shape);
 
     this.time.on('tick', () => {
       this.headset.quaternion.copy(this.headset.body.quaternion)

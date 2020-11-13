@@ -45,7 +45,7 @@ export default class DesktopPlace {
     this.setMousePad()
     // this.setPhone()
     this.setPhoneSupport()
-    // this.setRubiksCube()
+    this.setRubiksCube()
     // this.setSeat()
     this.setScreenLeft()
     this.setScreenRight()

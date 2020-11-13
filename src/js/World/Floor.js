@@ -21,7 +21,6 @@ export default class Floor {
       if (child.isMesh) {
         child.material.side = THREE.BackSide
         child.receiveShadow = true
-        this.objects.push(child)
       }
     })
     this.container.add(this.floor)
