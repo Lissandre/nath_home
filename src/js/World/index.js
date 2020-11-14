@@ -95,7 +95,8 @@ export default class World {
     this.bathroom = new Bathroom({
       models: this.models,
       time: this.time,
-      physics: this.physics
+      physics: this.physics,
+      objects: this.objects,
     })
     this.container.add(this.bathroom.container)
   }
@@ -104,7 +105,8 @@ export default class World {
       models: this.models,
       camera: this.camera,
       time: this.time,
-      physics: this.physics
+      physics: this.physics,
+      objects: this.objects,
     })
     this.container.add(this.desktopPlace.container)
   }
@@ -113,6 +115,7 @@ export default class World {
       models: this.models,
       time: this.time,
       physics: this.physics,
+      objects: this.objects,
     })
     this.container.add(this.kitchen.container)
   }
@@ -121,6 +124,7 @@ export default class World {
       models: this.models,
       time: this.time,
       physics: this.physics,
+      objects: this.objects,
     })
     this.container.add(this.room.container)
   }

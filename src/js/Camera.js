@@ -8,7 +8,6 @@ export default class Camera {
     this.renderer = options.renderer
     this.debug = options.debug
     this.time = options.time
-    this.objects = options.objects
 
     // Set up
     this.container = new THREE.Object3D()
@@ -42,14 +41,11 @@ export default class Camera {
         color: 0xffffff,
       })
     )
-    // this.time.on('tick', () => {
-      this.head.position.set(
-        0,
-        1.5,
-        1.7
-      )
-    // })
-    // this.objects.push(this.container)
+    this.head.position.set(
+      0,
+      1.5,
+      1.7
+    )
   }
   setPosition() {
     // Set camera position

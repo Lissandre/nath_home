@@ -18,6 +18,7 @@ export default class DesktopPlace {
     this.camera = options.camera
     this.time = options.time
     this.physics = options.physics
+    this.objects = options.objects
 
     // Set up
     this.container = new THREE.Object3D()
@@ -38,6 +39,7 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
+      objects: this.objects
     })
     this.container.add(this.computer.container)
   }
@@ -46,6 +48,7 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
+      objects: this.objects
     })
     this.basicObjects.objects.forEach(object => {
       this.container.add(object.container)
@@ -56,6 +59,7 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
+      objects: this.objects
     })
     this.container.add(this.headset.container)
   }
@@ -64,6 +68,7 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
+      objects: this.objects
     })
     this.container.add(this.phone.container)
   }
@@ -72,6 +77,7 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
+      objects: this.objects
     })
     this.container.add(this.screenLeft.container)
   }
@@ -80,6 +86,7 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
+      objects: this.objects
     })
     this.container.add(this.screenRight.container)
   }
@@ -88,6 +95,7 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
+      objects: this.objects
     })
     this.container.add(this.screenSupport.container)
   }
@@ -96,6 +104,7 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
+      objects: this.objects
     })
     this.container.add(this.speakerLeft.container)
   }
@@ -104,6 +113,7 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
+      objects: this.objects
     })
     this.container.add(this.speakerRight.container)
   }

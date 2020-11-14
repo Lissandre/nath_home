@@ -10,6 +10,7 @@ export default class Kitchen {
     this.models = options.models
     this.time = options.time
     this.physics = options.physics
+    this.objects = options.objects
 
     // Set up
     this.container = new THREE.Object3D()
@@ -23,6 +24,7 @@ export default class Kitchen {
       models: this.models,
       time: this.time,
       physics: this.physics,
+      objects: this.objects,
     })
     this.basicObjects.objects.forEach(object => {
       this.container.add(object.container)
@@ -33,6 +35,7 @@ export default class Kitchen {
       models: this.models,
       time: this.time,
       physics: this.physics,
+      objects: this.objects,
     })
     this.container.add(this.soHetic.container)
   }
@@ -41,6 +44,7 @@ export default class Kitchen {
       models: this.models,
       time: this.time,
       physics: this.physics,
+      objects: this.objects,
     })
     this.container.add(this.workSurface.container)
   }

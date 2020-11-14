@@ -8,6 +8,7 @@ export default class Headset {
     this.time = options.time
     this.models = options.models
     this.physics = options.physics
+    this.pObjects = options.objects
 
     // Set up
     this.container = new THREE.Object3D()
@@ -29,7 +30,7 @@ export default class Headset {
   setPhysics() {
     this.size = new THREE.Vector3()
     this.center = new THREE.Vector3()
-    this.calcBox = new THREE.Box3().setFromObject( this.headset )
+    this.calcBox = new THREE.Box3().setFromObject( this.container )
 
     this.calcBox.getSize(this.size)
     this.size.x *= 0.5
@@ -37,23 +38,18 @@ export default class Headset {
     this.size.z *= 0.5
     this.calcBox.getCenter(this.center)
 
-    this.shape = threeToCannon(this.headset, {type: threeToCannon.Type.CYLINDER})
+    this.shape = threeToCannon(this.container, {type: threeToCannon.Type.CYLINDER})
 
     // this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
-    this.headset.body = new CANNON.Body({
+    this.container.body = new CANNON.Body({
       mass: 0.3,
       shape: this.shape,
       position: this.center
     })
-    this.physics.world.addBody(this.headset.body)
-
-    this.time.on('tick', () => {
-      this.headset.quaternion.copy(this.headset.body.quaternion)
-      this.headset.position.set(
-        this.headset.body.position.x - this.center.x,
-        this.headset.body.position.y - this.center.y,
-        this.headset.body.position.z - this.center.z,
-        )
+    this.physics.world.addBody(this.container.body)
+    this.pObjects.push({
+      container: this.container,
+      center: this.center,
     })
   }
 }

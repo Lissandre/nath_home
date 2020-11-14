@@ -7,6 +7,7 @@ export default class Computer {
     this.time = options.time
     this.models = options.models
     this.physics = options.physics
+    this.pObjects = options.objects
 
     // Set up
     this.container = new THREE.Object3D()
@@ -54,14 +55,9 @@ export default class Computer {
 
     this.container.body.addShape(this.box)
     this.physics.world.addBody(this.container.body)
-
-    this.time.on('tick', () => {
-      this.container.quaternion.copy(this.container.body.quaternion)
-      this.container.position.set(
-        this.container.body.position.x - this.center.x,
-        this.container.body.position.y - this.center.y,
-        this.container.body.position.z - this.center.z,
-        )
+    this.pObjects.push({
+      container: this.container,
+      center: this.center,
     })
   }
 }

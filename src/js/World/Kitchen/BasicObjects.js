@@ -7,6 +7,7 @@ export default class BasicObjects {
     this.time = options.time
     this.models = options.models.models
     this.physics = options.physics
+    this.pObjects = options.objects
 
     // Set up
     this.objects = [
@@ -52,14 +53,9 @@ export default class BasicObjects {
 
       object.container.body.addShape(box)
       this.physics.world.addBody(object.container.body)
-
-      this.time.on('tick', () => {
-        object.container.quaternion.copy(object.container.body.quaternion)
-        object.container.position.set(
-          object.container.body.position.x - center.x,
-          object.container.body.position.y - center.y,
-          object.container.body.position.z - center.z,
-          )
+      this.pObjects.push({
+        container: object.container,
+        center: center,
       })
     })
   }

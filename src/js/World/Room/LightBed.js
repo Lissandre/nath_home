@@ -57,14 +57,5 @@ export default class LightBed {
     })
 
     this.physics.world.addBody(this.lightBed.body)
-
-    this.time.on('tick', () => {
-      this.lightBed.quaternion.copy(this.lightBed.body.quaternion)
-      this.lightBed.position.set(
-        this.lightBed.body.position.x - this.center.x,
-        this.lightBed.body.position.y - this.center.y,
-        this.lightBed.body.position.z - this.center.z,
-        )
-    })
   }
 }

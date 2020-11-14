@@ -7,6 +7,7 @@ export default class Paper {
     this.time = options.time
     this.models = options.models
     this.physics = options.physics
+    this.pObjects = options.objects
 
     // Set up
     this.container = new THREE.Object3D()
@@ -28,7 +29,7 @@ export default class Paper {
   setPhysics() {
     this.size = new THREE.Vector3()
     this.center = new THREE.Vector3()
-    this.calcBox = new THREE.Box3().setFromObject( this.paper )
+    this.calcBox = new THREE.Box3().setFromObject( this.container )
 
     this.calcBox.getSize(this.size)
     this.size.x *= 0.5
@@ -37,21 +38,16 @@ export default class Paper {
     this.calcBox.getCenter(this.center)
 
     this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
-    this.paper.body = new CANNON.Body({
+    this.container.body = new CANNON.Body({
       mass: 4,
       position: this.center
     })
 
-    this.paper.body.addShape(this.box)
-    this.physics.world.addBody(this.paper.body)
-
-    this.time.on('tick', () => {
-      this.paper.quaternion.copy(this.paper.body.quaternion)
-      this.paper.position.set(
-        this.paper.body.position.x - this.center.x,
-        this.paper.body.position.y - this.center.y,
-        this.paper.body.position.z - this.center.z,
-        )
+    this.container.body.addShape(this.box)
+    this.physics.world.addBody(this.container.body)
+    this.pObjects.push({
+      container: this.container,
+      center: this.center,
     })
   }
 }

@@ -9,7 +9,6 @@ export default class Controls {
     this.renderer = options.renderer
     this.time = options.time
     this.camera = options.camera
-    this.objects = options.objects
     this.debug = options.debug
     this.world = options.world
 

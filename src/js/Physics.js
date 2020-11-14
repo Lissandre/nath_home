@@ -4,6 +4,7 @@ export default class Physics{
   constructor(options){
     // Set options
     this.time = options.time
+    this.objects = options.objects
 
     // Set up
     this.setWorld()
@@ -16,10 +17,18 @@ export default class Physics{
 		this.world.solver.iterations = 10
     this.world.allowSleep = true
     this.world.quatNormalizeFast = true
-    // this.world.bodies.forEach(body => {body.sleepSpeedLimit = .1})
+    this.world.bodies.forEach(body => {body.sleepSpeedLimit = .1})
   }
   setTime() {
     this.time.on('tick', () => {
+      this.objects.forEach(object => {
+        object.container.quaternion.copy(object.container.body.quaternion)
+        object.container.position.set(
+          object.container.body.position.x - object.center.x,
+          object.container.body.position.y - object.center.y,
+          object.container.body.position.z - object.center.z,
+        )
+      })
       this.world.step(1 / 60, this.time.delta, 3)
     })
   }
