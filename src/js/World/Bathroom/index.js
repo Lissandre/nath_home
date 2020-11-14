@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 
-import RadiatorBathroom from './RadiatorBathroom.js'
+import BasicObjects from './BasicObjects.js'
 
 export default class Bathroom {
   constructor(options) {
@@ -12,14 +12,16 @@ export default class Bathroom {
     // Set up
     this.container = new THREE.Object3D()
 
-    this.setRadiatorBathroom()
+    this.setBasicObjects()
   }
-  setRadiatorBathroom() {
-    this.radiatorBathroom = new RadiatorBathroom({
+  setBasicObjects() {
+    this.basicObjects = new BasicObjects({
       models: this.models,
       time: this.time,
       physics: this.physics,
     })
-    this.container.add(this.radiatorBathroom.container)
+    this.basicObjects.objects.forEach(object => {
+      this.container.add(object.container)
+    })
   }
 }

@@ -10,18 +10,10 @@ export default class BasicObjects {
 
     // Set up
     this.objects = [
-      {src: this.models.computerSupport.scene, mass: 22, container: new THREE.Object3D()},
-      {src: this.models.desktop.scene, mass: 10, container: new THREE.Object3D()},
-      {src: this.models.desktopLeft.scene, mass: 10, container: new THREE.Object3D()},
-      {src: this.models.desktopRight.scene, mass: 10, container: new THREE.Object3D()},
-      {src: this.models.keyboard.scene, mass: 0.1, container: new THREE.Object3D()},
-      {src: this.models.mouse.scene, mass: 0.1, container: new THREE.Object3D()},
-      {src: this.models.mousePad.scene, mass: 0.15, container: new THREE.Object3D()},
-      {src: this.models.phoneSupport.scene, mass: 0.1, container: new THREE.Object3D()},
-      {src: this.models.rubiksCube.scene, mass: 0.1, container: new THREE.Object3D()},
-      {src: this.models.shelfDesktop.scene, mass: 0, container: new THREE.Object3D()},
-      {src: this.models.shelfWall.scene, mass: 0, container: new THREE.Object3D()},
-      {src: this.models.subwooferSpeaker.scene, mass: 3, container: new THREE.Object3D()},
+      {src: this.models.cuttingBoard.scene, mass: 0.2, container: new THREE.Object3D()},
+      {src: this.models.microwave.scene, mass: 6.5, container: new THREE.Object3D()},
+      {src: this.models.shelfKitchen.scene, mass: 0, container: new THREE.Object3D()},
+      {src: this.models.sink.scene, mass: 0, container: new THREE.Object3D()},
     ]
 
     this.createObjects()

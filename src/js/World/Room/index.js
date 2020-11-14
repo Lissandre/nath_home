@@ -1,12 +1,9 @@
 import * as THREE from 'three'
 
+import BasicObjects from './BasicObjects.js'
 import Bed from './Bed.js'
 import LightBed from './LightBed.js'
-import NightTable from './NightTable.js'
 import Paper from './Paper.js'
-import Radiator from './Radiator.js'
-import ShelfBed from './ShelfBed.js'
-import Table from './Table.js'
 
 export default class Room {
   constructor(options) {
@@ -18,13 +15,20 @@ export default class Room {
     // Set up
     this.container = new THREE.Object3D()
 
+    this.setBasicObjects()
     this.setBed()
     this.setLightBed()
-    this.setNightTable()
     this.setPaper()
-    this.setRadiator()
-    this.setShelfBed()
-    this.setTable()
+  }
+  setBasicObjects() {
+    this.basicObjects = new BasicObjects({
+      models: this.models,
+      time: this.time,
+      physics: this.physics,
+    })
+    this.basicObjects.objects.forEach(object => {
+      this.container.add(object.container)
+    })
   }
   setBed() {
     this.bed = new Bed({
@@ -42,14 +46,6 @@ export default class Room {
     })
     this.container.add(this.lightBed.container)
   }
-  setNightTable() {
-    this.nightTable = new NightTable({
-      models: this.models,
-      time: this.time,
-      physics: this.physics,
-    })
-    this.container.add(this.nightTable.container)
-  }
   setPaper() {
     this.paper = new Paper({
       models: this.models,
@@ -57,29 +53,5 @@ export default class Room {
       physics: this.physics,
     })
     this.container.add(this.paper.container)
-  }
-  setRadiator() {
-    this.radiator = new Radiator({
-      models: this.models,
-      time: this.time,
-      physics: this.physics,
-    })
-    this.container.add(this.radiator.container)
-  }
-  setShelfBed() {
-    this.shelfBed = new ShelfBed({
-      models: this.models,
-      time: this.time,
-      physics: this.physics,
-    })
-    this.container.add(this.shelfBed.container)
-  }
-  setTable() {
-    this.table = new Table({
-      models: this.models,
-      time: this.time,
-      physics: this.physics,
-    })
-    this.container.add(this.table.container)
   }
 }
