@@ -29,27 +29,25 @@ export default class Walls {
     this.container.add(this.walls)
   }
   setPhysics() {
-    this.walls.children.forEach( (wall, index) => {
-      if(index != 0){
-        this.size = new THREE.Vector3()
-        this.center = new THREE.Vector3()
-        this.calcBox = new THREE.Box3().setFromObject( wall )
+    this.walls.children.forEach( (wall) => {
+      this.size = new THREE.Vector3()
+      this.center = new THREE.Vector3()
+      this.calcBox = new THREE.Box3().setFromObject( wall )
 
-        this.calcBox.getSize(this.size)
-        this.size.x *= 0.5
-        this.size.y *= 0.5
-        this.size.z *= 0.5
-        this.calcBox.getCenter(this.center)
+      this.calcBox.getSize(this.size)
+      this.size.x *= 0.5
+      this.size.y *= 0.5
+      this.size.z *= 0.5
+      this.calcBox.getCenter(this.center)
 
-        this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
-        wall.body = new CANNON.Body({
-          mass: 0,
-          // position: this.center
-        })
+      this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
+      wall.body = new CANNON.Body({
+        mass: 0,
+        // position: this.center
+      })
 
-        wall.body.addShape(this.box, new CANNON.Vec3(this.center.x, this.center.y, this.center.z))
-        this.physics.world.addBody(wall.body)
-      }
+      wall.body.addShape(this.box, new CANNON.Vec3(this.center.x, this.center.y, this.center.z))
+      this.physics.world.addBody(wall.body)
     })
   }
 }

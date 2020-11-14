@@ -30,7 +30,6 @@ export default class App {
     this.setPhysics()
     this.setWorld()
     this.setControls()
-    this.setCDebug()
   }
   setRenderer() {
     // Set scene
@@ -107,6 +106,9 @@ export default class App {
   setConfig() {
     if (window.location.hash === '#debug') {
       this.debug = new dat.GUI({ width: 420 })
+    }
+    if (window.location.hash === '#physic') {
+      this.setCDebug()
     }
   }
   setCDebug(){
