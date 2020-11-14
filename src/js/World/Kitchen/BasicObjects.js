@@ -14,7 +14,6 @@ export default class BasicObjects {
       {src: this.models.cuttingBoard.scene, mass: 0.2, container: new THREE.Object3D()},
       {src: this.models.microwave.scene, mass: 6.5, container: new THREE.Object3D()},
       {src: this.models.shelfKitchen.scene, mass: 0, container: new THREE.Object3D()},
-      {src: this.models.sink.scene, mass: 0, container: new THREE.Object3D()},
     ]
 
     this.createObjects()
