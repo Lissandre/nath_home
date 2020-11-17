@@ -11,8 +11,12 @@ export default class Controls {
     this.camera = options.camera
     this.debug = options.debug
     this.world = options.world
+    this.physics = options.physics
+    this.objects = options.objects
 
     // Set up
+    this.raycaster = new THREE.Raycaster()
+    this.direction = new THREE.Vector3()
     this.controls = new PointerLockControls(
       this.camera.camera,
       this.renderer.domElement
@@ -23,12 +27,6 @@ export default class Controls {
     this.moveRight = false
     this.canJump = false
     this.canMove = false
-    this.raycaster = new THREE.Raycaster(
-      new THREE.Vector3(),
-      new THREE.Vector3(0, -1, 0),
-      0,
-      10
-    )
     this.frontSpeed = 0.06
     this.sideSpeed = 0.04
 
@@ -36,6 +34,7 @@ export default class Controls {
       this.init()
       this.setListener()
       this.setMovement()
+      this.mouseMove()
     }
   }
   init() {
@@ -73,7 +72,6 @@ export default class Controls {
     document.addEventListener(
       'keydown',
       (event) => {
-        console.log(event.code);
         switch (event.code) {
           case 'ArrowUp': // up
           case 'KeyW': // w
@@ -133,11 +131,6 @@ export default class Controls {
   setMovement() {
     this.time.on('tick', () => {
       if (this.canMove === true) {
-        // this.raycaster.ray.origin.copy( this.camera.mesh.position )
-        // this.intersections = this.raycaster.intersectObjects( this.objects )
-        // if(this.intersections.length > 0){
-        //   this.canJump = true
-        // }
         if (this.moveForward) {
           this.controls.moveForward(this.frontSpeed)
         }
@@ -153,17 +146,50 @@ export default class Controls {
         if (this.shift) {
           TweenMax.to(this.camera.camera.position, {
             duration: 0.3,
-            y: 1.3,
+            y: 1.35,
           })
           this.sideSpeed = 0.02
           this.frontSpeed = 0.03
         } else {
           TweenMax.to(this.camera.camera.position, {
             duration: 0.3,
-            y: 1.5,
+            y: 1.55,
           })
           this.sideSpeed = 0.04
           this.frontSpeed = 0.06
+        }
+      }
+    })
+  }
+  mouseMove(){
+    document.addEventListener('mousemove', ()=>{
+      this.direction = this.controls.getDirection( this.direction )
+      this.raycaster.set(this.camera.camera.position, this.direction)
+
+      this.objectList = []
+      this.objects.forEach(object => {
+        if(object.container.body.mass != 0){
+          object.container.traverse( child => {
+            if(child.isMesh){
+              this.objectList.push(child)
+              if(child.material.emissiveIntensity === 0.01){
+                child.material.emissiveIntensity = 0
+              }
+            }
+          })
+        }
+      })
+
+      this.intersects = this.raycaster.intersectObjects(this.objectList)
+
+      if(this.intersects.length > 0) {
+        if(this.intersects[0].distance <= 1.35){
+          this.intersects[0].object.parent.traverse( child => {
+            if(child.isMesh){
+              child.material.emissiveIntensity = 0.01
+              child.material.emissive = new THREE.Color(0xff0000)
+            }
+          })
         }
       }
     })

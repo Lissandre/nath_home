@@ -62,6 +62,7 @@ export default class BasicObjects {
       object.container.body.addShape(box)
       this.physics.world.addBody(object.container.body)
       this.pObjects.push({
+        name: object.src.children[0].name,
         container: object.container,
         center: center,
       })

@@ -6,16 +6,12 @@ export default class Physics{
     // Set options
     this.time = options.time
     this.objects = options.objects
-    this.camera = options.camera.camera
-    this.controls = options.controls.controls
+    this.camera = options.camera
 
     // Set up
-    this.raycaster = new THREE.Raycaster()
-    this.direction = new THREE.Vector3()
-
     this.setWorld()
+    // this.setPersoPhysics()
     this.setTime()
-    this.mouseMove()
   }
   setWorld() {
     this.world = new CANNON.World()
@@ -25,6 +21,26 @@ export default class Physics{
     this.world.allowSleep = true
     this.world.quatNormalizeFast = true
     this.world.bodies.forEach(body => {body.sleepSpeedLimit = .1})
+  }
+  setPersoPhysics(){
+    this.size = new THREE.Vector3()
+    this.center = new THREE.Vector3()
+    this.calcBox = new THREE.Box3().setFromObject( this.camera.head )
+
+    this.calcBox.getSize(this.size)
+    this.size.x *= 0.5
+    this.size.y *= 0.5
+    this.size.z *= 0.5
+    this.calcBox.getCenter(this.center)
+
+    this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
+    this.camera.head.body = new CANNON.Body({
+      mass: 0,
+      position: this.center
+    })
+
+    this.camera.head.body.addShape(this.box)
+    this.world.addBody(this.camera.head.body)
   }
   setTime() {
     this.time.on('tick', () => {
@@ -36,40 +52,13 @@ export default class Physics{
           object.container.body.position.z - object.center.z,
         )
       })
+      // this.camera.camera.quaternion.copy(this.camera.head.body.quaternion)
+      // this.camera.camera.position.set(
+      //   this.camera.head.body.position.x - this.center.x,
+      //   this.camera.head.body.position.y - this.center.y,
+      //   this.camera.head.body.position.z - this.center.z,
+      // )
       this.world.step(1 / 60, this.time.delta, 3)
-    })
-  }
-  mouseMove(){
-    document.addEventListener('mousemove', ()=>{
-      this.direction = this.controls.getDirection( this.direction )
-      this.raycaster.set(this.camera.position, this.direction)
-
-      this.objectList = []
-      this.objects.forEach(object => {
-        if(object.container.body.mass != 0){
-          object.container.traverse( child => {
-            if(child.isMesh){
-              this.objectList.push(child)
-              if(child.material.emissiveIntensity === 0.01){
-                child.material.emissiveIntensity = 0
-              }
-            }
-          })
-        }
-      })
-
-      this.intersects = this.raycaster.intersectObjects(this.objectList)
-
-      if(this.intersects.length > 0) {
-        if(this.intersects[0].distance <= 1.35){
-          this.intersects[0].object.parent.traverse( child => {
-            if(child.isMesh){
-              child.material.emissiveIntensity = 0.01
-              child.material.emissive = new THREE.Color(0xff0000)
-            }
-          })
-        }
-      }
     })
   }
 }

@@ -12,7 +12,6 @@ import Camera from './Camera.js'
 import Physics from './Physics.js'
 import Controls from './Controls.js'
 import World from '@world/index.js'
-import { doc } from 'prettier'
 
 export default class App {
   constructor(options) {
@@ -29,9 +28,9 @@ export default class App {
     this.setConfig()
     this.setRenderer()
     this.setCamera()
-    this.setControls()
     this.setPhysics()
     this.setWorld()
+    this.setControls()
   }
   setRenderer() {
     // Set scene
@@ -112,6 +111,8 @@ export default class App {
       camera: this.camera,
       debug: this.debug,
       world: this.world,
+      physics: this.physics,
+      objects: this.objects,
     })
   }
   setPhysics() {
