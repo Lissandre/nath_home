@@ -132,7 +132,7 @@ export default class Controls {
   }
   setMovement() {
     this.time.on('tick', () => {
-      if (this.canMove) {
+      if (this.canMove === true) {
         // this.raycaster.ray.origin.copy( this.camera.mesh.position )
         // this.intersections = this.raycaster.intersectObjects( this.objects )
         // if(this.intersections.length > 0){
