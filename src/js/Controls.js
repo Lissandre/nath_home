@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js'
+import { TweenMax } from 'gsap'
 
 export default class Controls {
   constructor(options) {
@@ -28,6 +29,8 @@ export default class Controls {
       0,
       10
     )
+    this.frontSpeed = 0.06
+    this.sideSpeed = 0.04
 
     if (!this.debug) {
       this.init()
@@ -45,7 +48,7 @@ export default class Controls {
     this.instructions.append(this.title)
 
     this.commands = document.createElement('p')
-    this.commands.innerHTML = 'L: Toggle lights'
+    this.commands.innerHTML = 'Shift : Crouch<br/>L : Toggle lights'
     this.instructions.append(this.commands)
 
     this.instructions.addEventListener(
@@ -70,6 +73,7 @@ export default class Controls {
     document.addEventListener(
       'keydown',
       (event) => {
+        console.log(event.code);
         switch (event.code) {
           case 'ArrowUp': // up
           case 'KeyW': // w
@@ -86,6 +90,9 @@ export default class Controls {
           case 'ArrowRight': // right
           case 'KeyD': // d
             this.moveRight = true
+            break
+          case 'ShiftLeft':
+            this.shift = true
             break
           // case 'Space': // space
           //   if ( this.canJump === true ) this.velocity.y += 2
@@ -115,6 +122,9 @@ export default class Controls {
           case 'KeyD': // d
             this.moveRight = false
             break
+          case 'ShiftLeft':
+            this.shift = false
+            break
         }
       },
       false
@@ -129,16 +139,31 @@ export default class Controls {
         //   this.canJump = true
         // }
         if (this.moveForward) {
-          this.controls.moveForward(0.06)
+          this.controls.moveForward(this.frontSpeed)
         }
         if (this.moveBackward) {
-          this.controls.moveForward(-0.06)
+          this.controls.moveForward(-this.frontSpeed)
         }
         if (this.moveLeft) {
-          this.controls.moveRight(-0.04)
+          this.controls.moveRight(-this.sideSpeed)
         }
         if (this.moveRight) {
-          this.controls.moveRight(0.04)
+          this.controls.moveRight(this.sideSpeed)
+        }
+        if (this.shift) {
+          TweenMax.to(this.camera.camera.position, {
+            duration: 0.3,
+            y: 1.3,
+          })
+          this.sideSpeed = 0.02
+          this.frontSpeed = 0.03
+        } else {
+          TweenMax.to(this.camera.camera.position, {
+            duration: 0.3,
+            y: 1.5,
+          })
+          this.sideSpeed = 0.04
+          this.frontSpeed = 0.06
         }
       }
     })
