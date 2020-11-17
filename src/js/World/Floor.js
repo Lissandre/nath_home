@@ -16,7 +16,6 @@ export default class Floor {
   }
   setFloor() {
     this.floor = this.models.models.floor.scene
-    // console.log(this.floor);
     this.floor.traverse((child) => {
       if (child.isMesh) {
         child.material.side = THREE.BackSide

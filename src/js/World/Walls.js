@@ -18,11 +18,18 @@ export default class Walls {
     this.walls = this.models.models.walls.scene
     this.walls.traverse((child) => {
       if (child.isMesh) {
-        child.material.side = THREE.FrontSide
         child.receiveShadow = true
         child.castShadow = true
-        if (child.name === 'Cube.002_1') {
-          child.material.visible = false
+        if(child.name === 'Cube.002_3' || child.name === 'Cube.002_2' || child.name === 'Cube002'){
+          child.material = child.material.clone()
+          child.material.name = `copy_${child.material.name}`
+          child.material.side = THREE.DoubleSide
+        }
+        else if(child.name === 'Cube.002_1'){
+          child.visible = false
+        }
+        else{
+          child.material.side = THREE.FrontSide
         }
       }
     })

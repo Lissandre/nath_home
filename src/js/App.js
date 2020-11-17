@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import {StereoEffect} from 'three/examples/jsm/effects/StereoEffect'
 import * as dat from 'dat.gui'
 import cannonDebugger from 'cannon-es-debugger'
 
@@ -23,6 +24,7 @@ export default class App {
     this.sizes = new Sizes()
     this.models = new Models()
     this.objects = []
+    this.isStereoEffect = false
 
     this.setConfig()
     this.setRenderer()
@@ -51,18 +53,32 @@ export default class App {
     this.renderer.shadowMapSoft = true
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
-    this.renderer.setSize(this.sizes.viewport.width, this.sizes.viewport.height)
-    // Resize renderer on resize event
-    this.sizes.on('resize', () => {
-      this.renderer.setSize(
+    if(this.isStereoEffect){
+      this.stereoEffect = new StereoEffect(this.renderer)
+      this.stereoEffect.eyeSeparation = 1
+      this.stereoEffect.setSize(
         this.sizes.viewport.width,
         this.sizes.viewport.height
       )
-    })
-    // Set RequestAnimationFrame with 60ips
-    this.time.on('tick', () => {
-      this.renderer.render(this.scene, this.camera.camera)
-    })
+      this.time.on('tick', () => {
+        this.stereoEffect.render(this.scene, this.camera.camera)
+      })
+    }
+    else{
+      this.renderer.setSize(this.sizes.viewport.width, this.sizes.viewport.height)
+
+      // Resize renderer on resize event
+      this.sizes.on('resize', () => {
+        this.renderer.setSize(
+          this.sizes.viewport.width,
+          this.sizes.viewport.height
+        )
+      })
+      // Set RequestAnimationFrame with 60ips
+      this.time.on('tick', () => {
+        this.renderer.render(this.scene, this.camera.camera)
+      })
+    }
   }
   setCamera() {
     // Create camera instance
@@ -110,6 +126,9 @@ export default class App {
     }
     if (window.location.hash === '#physic') {
       this.setCDebug()
+    }
+    if (window.location.hash === '#VR') {
+      this.isStereoEffect = true
     }
   }
   setCDebug(){
