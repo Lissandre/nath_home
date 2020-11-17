@@ -29,9 +29,9 @@ export default class App {
     this.setConfig()
     this.setRenderer()
     this.setCamera()
+    this.setControls()
     this.setPhysics()
     this.setWorld()
-    this.setControls()
   }
   setRenderer() {
     // Set scene
@@ -118,6 +118,8 @@ export default class App {
     this.physics = new Physics({
       time: this.time,
       objects: this.objects,
+      controls: this.fpscontrols,
+      camera: this.camera,
     })
   }
   setConfig() {

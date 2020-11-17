@@ -5,6 +5,24 @@
 @import './common.styl'
 @import './loading.styl'
 
+.pointerDiv
+  height 100%
+  width 100%
+  position absolute
+  top 0
+  left 0
+  display flex
+  justify-content center
+  align-items center
+  pointer-events none
+
+.pointer
+  height 3px
+  width 3px
+  border-radius 50%
+  border 1px solid black
+  pointer-events none
+
 .instructions
   position absolute
   top 0
