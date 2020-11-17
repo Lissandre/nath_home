@@ -47,7 +47,7 @@ export default class App {
     // Set background color
     this.renderer.setClearColor(0x000000, 1)
     // Set renderer pixel ratio & sizes
-    this.renderer.setPixelRatio(window.devicePixelRatio)
+    // this.renderer.setPixelRatio(window.devicePixelRatio)
     // Set shadow
     this.renderer.shadowMap.enabled = true
     this.renderer.shadowMapSoft = true

@@ -20,10 +20,11 @@ export default class Walls {
       if (child.isMesh) {
         child.receiveShadow = true
         child.castShadow = true
-        if(child.name === 'Cube.002_3' || child.name === 'Cube.002_2' || child.name === 'Cube002'){
+        if(child.name === 'Cube.002_3' || child.name === 'Cube.002_2'){
           child.material = child.material.clone()
           child.material.name = `copy_${child.material.name}`
           child.material.side = THREE.DoubleSide
+          child.receiveShadow = false
         }
         else if(child.name === 'Cube.002_1'){
           child.visible = false
