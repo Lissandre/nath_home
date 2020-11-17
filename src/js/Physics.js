@@ -60,7 +60,7 @@ export default class Physics{
       this.intersects = this.raycaster.intersectObjects(this.objectList)
 
       for ( let i = 0; i < this.intersects.length; i++ ) {
-        this.intersects[i].object.parent.traverse( child => {
+        this.intersects[0].object.parent.traverse( child => {
           if(child.isMesh){
             child.material.emissiveIntensity = 0.01
             child.material.emissive = new THREE.Color(0xff0000)
