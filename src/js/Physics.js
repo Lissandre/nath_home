@@ -9,7 +9,6 @@ export default class Physics{
     this.camera = options.camera.camera
     this.controls = options.controls.controls
 
-    console.log(this.objects);
     // Set up
     this.raycaster = new THREE.Raycaster()
     this.direction = new THREE.Vector3()
@@ -47,20 +46,22 @@ export default class Physics{
 
       this.objectList = []
       this.objects.forEach(object => {
-        object.container.traverse( child => {
-          if(child.isMesh){
-            this.objectList.push(child)
-            if(child.material.emissiveIntensity === 0.01){
-              child.material.emissiveIntensity = 0
+        if(object.container.body.mass != 0){
+          object.container.traverse( child => {
+            if(child.isMesh){
+              this.objectList.push(child)
+              if(child.material.emissiveIntensity === 0.01){
+                child.material.emissiveIntensity = 0
+              }
             }
-          }
-        })
+          })
+        }
       })
 
       this.intersects = this.raycaster.intersectObjects(this.objectList)
 
       if(this.intersects.length > 0) {
-        if(this.intersects[0].distance <= 1.2){
+        if(this.intersects[0].distance <= 1.35){
           this.intersects[0].object.parent.traverse( child => {
             if(child.isMesh){
               child.material.emissiveIntensity = 0.01
