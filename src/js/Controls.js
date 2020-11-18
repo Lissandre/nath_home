@@ -132,16 +132,21 @@ export default class Controls {
     this.time.on('tick', () => {
       if (this.canMove === true) {
         if (this.moveForward) {
-          this.controls.moveForward(this.frontSpeed)
+          // this.controls.moveForward(this.frontSpeed)
+          this.camera.head.body.position.z -= this.frontSpeed
+          this.camera.head.body.velocity.z = -this.frontSpeed
         }
         if (this.moveBackward) {
-          this.controls.moveForward(-this.frontSpeed)
+          this.camera.head.body.position.z += this.frontSpeed
+          this.camera.head.body.velocity.z = this.frontSpeed
         }
         if (this.moveLeft) {
-          this.controls.moveRight(-this.sideSpeed)
+          this.camera.head.body.position.x -= this.sideSpeed
+          this.camera.head.body.velocity.x = -this.sideSpeed
         }
         if (this.moveRight) {
-          this.controls.moveRight(this.sideSpeed)
+          this.camera.head.body.position.x += this.sideSpeed
+          this.camera.head.body.velocity.x = this.sideSpeed
         }
         if (this.shift) {
           TweenMax.to(this.camera.camera.position, {

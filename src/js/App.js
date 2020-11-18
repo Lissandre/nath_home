@@ -114,6 +114,7 @@ export default class App {
       physics: this.physics,
       objects: this.objects,
     })
+    // this.scene.add(this.fpscontrols.controls.getObject())
   }
   setPhysics() {
     this.physics = new Physics({

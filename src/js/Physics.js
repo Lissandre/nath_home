@@ -10,7 +10,7 @@ export default class Physics{
 
     // Set up
     this.setWorld()
-    // this.setPersoPhysics()
+    this.setPersoPhysics()
     this.setTime()
   }
   setWorld() {
@@ -35,7 +35,7 @@ export default class Physics{
 
     this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
     this.camera.head.body = new CANNON.Body({
-      mass: 0,
+      mass: 0.0000001,
       position: this.center
     })
 
