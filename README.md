@@ -6,12 +6,12 @@ First "big" project with Three and first experience with Cannon.
 
 ## TO DO
 
-[ ] Add camera collision
-[ ] Grab objects
-[ ] Add all models
-[ ] Loading for songs
-[ ] Phone compatibility
-[ ] Add VR support
+[] Add camera collision
+[] Grab objects
+[] Add all models
+[] Loading for songs
+[] Phone compatibility
+[] Add VR support
 
 ## Template link
 [https://github.com/Lissandre/three_template](https://github.com/Lissandre/three_template)
