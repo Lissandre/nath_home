@@ -48,6 +48,15 @@ export default class Walls {
 
       if (wall.name === 'Wall_Left_Bathroom') {
         console.log('bathroom wall : to do')
+        this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
+        wall.body = new CANNON.Body({
+          mass: 0,
+          // position: this.center
+        })
+        wall.body.addShape(
+          this.box,
+          new CANNON.Vec3(this.center.x, this.center.y, this.center.z)
+        )
       } else {
         this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
         wall.body = new CANNON.Body({

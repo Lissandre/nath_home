@@ -36,12 +36,13 @@ export default class Camera {
   }
   setPerso() {
     this.head = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.1, 0.1, 1.6, 10, 10, false),
+      new THREE.CylinderGeometry(0.2, 0.1, 1.5, 10, 10, false),
       new THREE.MeshBasicMaterial({
         color: 0xffffff,
       })
     )
-    this.head.position.set(0, 0.8, 1.7)
+    this.head.visible = false
+    this.head.position.set(0, 0.75, 1.7)
     this.container.add(this.head)
   }
   setPosition() {
