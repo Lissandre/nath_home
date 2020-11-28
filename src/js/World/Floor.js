@@ -28,7 +28,8 @@ export default class Floor {
     this.ground = new CANNON.Body({
       mass: 0,
       shape: new CANNON.Plane(),
-      position: new CANNON.Vec3(0, 0, 0)
+      position: new CANNON.Vec3(0, 0, 0),
+      material: this.physics.groundMaterial
     })
     this.ground.quaternion.setFromAxisAngle(new CANNON.Vec3(1,0,0), -Math.PI/2)
 

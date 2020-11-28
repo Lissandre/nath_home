@@ -36,10 +36,10 @@ export default class World {
     this.setFloor()
     this.setWalls()
     this.setOutside()
-    this.setBathroom()
+    // this.setBathroom()
     this.setDesktopPlace()
-    this.setKitchen()
-    this.setRoom()
+    // this.setKitchen()
+    // this.setRoom()
   }
   getLoaders() {
     if (this.models.modelsList.length != 0) {

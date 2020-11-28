@@ -129,24 +129,30 @@ export default class Controls {
     )
   }
   setMovement() {
+    let vec = new THREE.Vector3()
     this.time.on('tick', () => {
       if (this.canMove === true) {
         if (this.moveForward) {
-          // this.controls.moveForward(this.frontSpeed)
-          this.camera.head.body.position.z -= this.frontSpeed
-          this.camera.head.body.velocity.z = -this.frontSpeed
+          vec.setFromMatrixColumn( this.camera.camera.matrix, 0 )
+          vec.crossVectors( this.camera.camera.up, vec )
+          let oldp = new THREE.Vector3().copy(this.camera.head.body.position)
+          oldp.addScaledVector( vec, this.frontSpeed )
+          this.camera.head.body.position.copy(oldp)
         }
         if (this.moveBackward) {
-          this.camera.head.body.position.z += this.frontSpeed
-          this.camera.head.body.velocity.z = this.frontSpeed
+          vec.setFromMatrixColumn( this.camera.camera.matrix, 0 )
+          vec.crossVectors( this.camera.camera.up, vec )
+          let oldp = new THREE.Vector3().copy(this.camera.head.body.position)
+          oldp.addScaledVector( vec, -this.frontSpeed )
+          this.camera.head.body.position.copy(oldp)
         }
         if (this.moveLeft) {
           this.camera.head.body.position.x -= this.sideSpeed
-          this.camera.head.body.velocity.x = -this.sideSpeed
+          // this.camera.head.body.velocity.x = -this.sideSpeed
         }
         if (this.moveRight) {
           this.camera.head.body.position.x += this.sideSpeed
-          this.camera.head.body.velocity.x = this.sideSpeed
+          // this.camera.head.body.velocity.x = this.sideSpeed
         }
         if (this.shift) {
           TweenMax.to(this.camera.camera.position, {
@@ -163,6 +169,12 @@ export default class Controls {
           this.sideSpeed = 0.04
           this.frontSpeed = 0.06
         }
+        this.camera.camera.position.set(
+          this.camera.head.body.position.x,
+          this.camera.camera.position.y,
+          this.camera.head.body.position.z
+        )
+        this.camera.head.position.copy(this.camera.head.body.position)
       }
     })
   }

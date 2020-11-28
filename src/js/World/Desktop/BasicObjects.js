@@ -45,7 +45,7 @@ export default class BasicObjects {
     this.objects.forEach((object) => {
       const size = new THREE.Vector3()
       const center = new THREE.Vector3()
-      const calcBox = new THREE.Box3().setFromObject( object.src )
+      const calcBox = new THREE.Box3().setFromObject( object.container )
 
       calcBox.getSize(size)
       size.x *= 0.5
