@@ -40,7 +40,7 @@ export default class LightBed {
   setPhysics() {
     this.size = new THREE.Vector3()
     this.center = new THREE.Vector3()
-    this.calcBox = new THREE.Box3().setFromObject( this.lightBed )
+    this.calcBox = new THREE.Box3().setFromObject(this.lightBed)
 
     this.calcBox.getSize(this.size)
     this.size.x *= 0.5
@@ -48,12 +48,12 @@ export default class LightBed {
     this.size.z *= 0.5
     this.calcBox.getCenter(this.center)
 
-    this.shape = threeToCannon(this.lightBed, {type: threeToCannon.Type.HULL})
+    this.shape = threeToCannon(this.lightBed, { type: threeToCannon.Type.HULL })
 
     this.lightBed.body = new CANNON.Body({
       mass: 3,
       shape: this.shape,
-      position: this.center
+      position: this.center,
     })
 
     this.physics.world.addBody(this.lightBed.body)

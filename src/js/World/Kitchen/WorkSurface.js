@@ -28,7 +28,7 @@ export default class WorkSurface {
   setPhysics() {
     this.size = new THREE.Vector3()
     this.center = new THREE.Vector3()
-    this.calcBox = new THREE.Box3().setFromObject( this.container )
+    this.calcBox = new THREE.Box3().setFromObject(this.container)
 
     this.calcBox.getSize(this.size)
     this.size.x *= 0.5
@@ -39,7 +39,7 @@ export default class WorkSurface {
     this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
     this.container.body = new CANNON.Body({
       mass: 0,
-      position: this.center
+      position: this.center,
     })
 
     this.container.body.addShape(this.box)

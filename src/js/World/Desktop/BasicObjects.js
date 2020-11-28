@@ -11,18 +11,66 @@ export default class BasicObjects {
 
     // Set up
     this.objects = [
-      {src: this.models.computerSupport.scene, mass: 22, container: new THREE.Object3D()},
-      {src: this.models.desktop.scene, mass: 10, container: new THREE.Object3D()},
-      {src: this.models.desktopLeft.scene, mass: 10, container: new THREE.Object3D()},
-      {src: this.models.desktopRight.scene, mass: 10, container: new THREE.Object3D()},
-      {src: this.models.keyboard.scene, mass: 0.1, container: new THREE.Object3D()},
-      {src: this.models.mouse.scene, mass: 0.1, container: new THREE.Object3D()},
-      {src: this.models.mousePad.scene, mass: 0.15, container: new THREE.Object3D()},
-      {src: this.models.phoneSupport.scene, mass: 0.1, container: new THREE.Object3D()},
-      {src: this.models.rubiksCube.scene, mass: 0.1, container: new THREE.Object3D()},
-      {src: this.models.shelfDesktop.scene, mass: 0, container: new THREE.Object3D()},
-      {src: this.models.shelfWall.scene, mass: 0, container: new THREE.Object3D()},
-      {src: this.models.subwooferSpeaker.scene, mass: 3, container: new THREE.Object3D()},
+      {
+        src: this.models.computerSupport.scene,
+        mass: 22,
+        container: new THREE.Object3D(),
+      },
+      {
+        src: this.models.desktop.scene,
+        mass: 10,
+        container: new THREE.Object3D(),
+      },
+      {
+        src: this.models.desktopLeft.scene,
+        mass: 10,
+        container: new THREE.Object3D(),
+      },
+      {
+        src: this.models.desktopRight.scene,
+        mass: 10,
+        container: new THREE.Object3D(),
+      },
+      {
+        src: this.models.keyboard.scene,
+        mass: 0.1,
+        container: new THREE.Object3D(),
+      },
+      {
+        src: this.models.mouse.scene,
+        mass: 0.1,
+        container: new THREE.Object3D(),
+      },
+      {
+        src: this.models.mousePad.scene,
+        mass: 0.15,
+        container: new THREE.Object3D(),
+      },
+      {
+        src: this.models.phoneSupport.scene,
+        mass: 0.1,
+        container: new THREE.Object3D(),
+      },
+      {
+        src: this.models.rubiksCube.scene,
+        mass: 0.1,
+        container: new THREE.Object3D(),
+      },
+      {
+        src: this.models.shelfDesktop.scene,
+        mass: 0,
+        container: new THREE.Object3D(),
+      },
+      {
+        src: this.models.shelfWall.scene,
+        mass: 0,
+        container: new THREE.Object3D(),
+      },
+      {
+        src: this.models.subwooferSpeaker.scene,
+        mass: 3,
+        container: new THREE.Object3D(),
+      },
     ]
 
     this.createObjects()
@@ -45,7 +93,7 @@ export default class BasicObjects {
     this.objects.forEach((object) => {
       const size = new THREE.Vector3()
       const center = new THREE.Vector3()
-      const calcBox = new THREE.Box3().setFromObject( object.container )
+      const calcBox = new THREE.Box3().setFromObject(object.container)
 
       calcBox.getSize(size)
       size.x *= 0.5
@@ -56,7 +104,7 @@ export default class BasicObjects {
       const box = new CANNON.Box(new CANNON.Vec3().copy(size))
       object.container.body = new CANNON.Body({
         mass: object.mass,
-        position: center
+        position: center,
       })
 
       object.container.body.addShape(box)

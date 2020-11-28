@@ -20,9 +20,9 @@ export default class Bathroom {
       models: this.models,
       time: this.time,
       physics: this.physics,
-      objects: this.objects
+      objects: this.objects,
     })
-    this.basicObjects.objects.forEach(object => {
+    this.basicObjects.objects.forEach((object) => {
       this.container.add(object.container)
     })
   }

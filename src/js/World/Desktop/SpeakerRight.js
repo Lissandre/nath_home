@@ -25,7 +25,7 @@ export default class SpeakerRight {
         child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
-        if(child.name === 'Cylinder.005_1'){
+        if (child.name === 'Cylinder.005_1') {
           this.colorSpeaker = child.material
           this.colorSpeaker.emissive = this.colorSpeaker.color
           this.colorSpeaker.emissiveIntensity = 0.2
@@ -48,7 +48,7 @@ export default class SpeakerRight {
   setPhysics() {
     this.size = new THREE.Vector3()
     this.center = new THREE.Vector3()
-    this.calcBox = new THREE.Box3().setFromObject( this.container )
+    this.calcBox = new THREE.Box3().setFromObject(this.container)
 
     this.calcBox.getSize(this.size)
     this.size.x *= 0.5
@@ -59,7 +59,7 @@ export default class SpeakerRight {
     this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
     this.container.body = new CANNON.Body({
       mass: 2,
-      position: this.center
+      position: this.center,
     })
 
     this.container.body.addShape(this.box)
