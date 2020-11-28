@@ -22,7 +22,7 @@ export default class Sink {
         child.material.side = THREE.FrontSide
         child.castShadow = true
         child.receiveShadow = true
-        if(child.material.name === 'Glass') {
+        if (child.material.name === 'Glass') {
           child.material.emissive = new THREE.Color(0xffffff)
           child.material.emissiveIntensity = 1
         }
@@ -40,7 +40,7 @@ export default class Sink {
   setPhysics() {
     this.size = new THREE.Vector3()
     this.center = new THREE.Vector3()
-    this.calcBox = new THREE.Box3().setFromObject( this.sink )
+    this.calcBox = new THREE.Box3().setFromObject(this.sink)
 
     this.calcBox.getSize(this.size)
     this.size.x *= 0.5
@@ -51,7 +51,7 @@ export default class Sink {
     this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
     this.sink.body = new CANNON.Body({
       mass: 0,
-      position: this.center
+      position: this.center,
     })
 
     this.sink.body.addShape(this.box)
@@ -62,8 +62,8 @@ export default class Sink {
       this.sink.position.set(
         this.sink.body.position.x - this.center.x,
         this.sink.body.position.y - this.center.y,
-        this.sink.body.position.z - this.center.z,
-        )
+        this.sink.body.position.z - this.center.z
+      )
     })
   }
 }

@@ -37,14 +37,13 @@ export default class PointLight {
     this.container.add(this.light)
   }
   createControl() {
-    document.addEventListener(
-      'keypress',
-      (event) => {
-        if (event.code === 'KeyL') {
-          this.light.intensity === 5 ? this.light.intensity = 0 : this.light.intensity = 5
-        }
+    document.addEventListener('keypress', (event) => {
+      if (event.code === 'KeyL') {
+        this.light.intensity === 5
+          ? (this.light.intensity = 0)
+          : (this.light.intensity = 5)
       }
-    )
+    })
   }
   setDebug() {
     // Color debug

@@ -1,8 +1,7 @@
 import * as THREE from 'three'
-import {StereoEffect} from 'three/examples/jsm/effects/StereoEffect'
+import { StereoEffect } from 'three/examples/jsm/effects/StereoEffect'
 import * as dat from 'dat.gui'
 import cannonDebugger from 'cannon-es-debugger'
-
 
 import Sizes from '@tools/Sizes.js'
 import Time from '@tools/Time.js'
@@ -52,7 +51,7 @@ export default class App {
     this.renderer.shadowMapSoft = true
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
 
-    if(this.isStereoEffect){
+    if (this.isStereoEffect) {
       this.stereoEffect = new StereoEffect(this.renderer)
       this.stereoEffect.eyeSeparation = 1
       this.stereoEffect.setSize(
@@ -62,9 +61,11 @@ export default class App {
       this.time.on('tick', () => {
         this.stereoEffect.render(this.scene, this.camera.camera)
       })
-    }
-    else{
-      this.renderer.setSize(this.sizes.viewport.width, this.sizes.viewport.height)
+    } else {
+      this.renderer.setSize(
+        this.sizes.viewport.width,
+        this.sizes.viewport.height
+      )
 
       // Resize renderer on resize event
       this.sizes.on('resize', () => {
@@ -114,6 +115,7 @@ export default class App {
       physics: this.physics,
       objects: this.objects,
     })
+    // this.scene.add(this.fpscontrols.controls.getObject())
   }
   setPhysics() {
     this.physics = new Physics({
@@ -134,8 +136,8 @@ export default class App {
       this.isStereoEffect = true
     }
   }
-  setCDebug(){
-    document.addEventListener('click', ()=>{
+  setCDebug() {
+    document.addEventListener('click', () => {
       cannonDebugger(this.scene, this.world.physics.world.bodies)
     })
   }

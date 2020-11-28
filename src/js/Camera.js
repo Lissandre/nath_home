@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import * as CANNON from 'cannon-es'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 export default class Camera {
@@ -37,25 +36,18 @@ export default class Camera {
   }
   setPerso() {
     this.head = new THREE.Mesh(
-      new THREE.SphereGeometry(0.1, 10, 10, 0, Math.PI*2),
+      new THREE.CylinderGeometry(0.2, 0.1, 1.5, 10, 10, false),
       new THREE.MeshBasicMaterial({
         color: 0xffffff,
       })
     )
-    this.head.position.set(
-      0,
-      1.5,
-      1.7
-    )
+    this.head.visible = false
+    this.head.position.set(0, 0.75, 1.7)
     this.container.add(this.head)
   }
   setPosition() {
     // Set camera position
-    this.camera.position.set(
-      0,
-      1.55,
-      1.7
-    )
+    this.camera.position.set(0, 1.55, 1.7)
   }
   setOrbitControls() {
     if (this.debug) {

@@ -28,7 +28,7 @@ export default class Phone {
   setPhysics() {
     this.size = new THREE.Vector3()
     this.center = new THREE.Vector3()
-    this.calcBox = new THREE.Box3().setFromObject( this.phone )
+    this.calcBox = new THREE.Box3().setFromObject(this.phone)
 
     this.calcBox.getSize(this.size)
     this.size.x *= 0.5
@@ -39,7 +39,7 @@ export default class Phone {
     this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
     this.phone.body = new CANNON.Body({
       mass: 0.1,
-      position: this.center
+      position: this.center,
     })
 
     this.phone.body.addShape(this.box)
@@ -50,8 +50,8 @@ export default class Phone {
       this.phone.position.set(
         this.phone.body.position.x - this.center.x,
         this.phone.body.position.y - this.center.y,
-        this.phone.body.position.z - this.center.z,
-        )
+        this.phone.body.position.z - this.center.z
+      )
     })
   }
 }

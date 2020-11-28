@@ -129,19 +129,30 @@ export default class Controls {
     )
   }
   setMovement() {
+    let vec = new THREE.Vector3()
     this.time.on('tick', () => {
       if (this.canMove === true) {
         if (this.moveForward) {
-          this.controls.moveForward(this.frontSpeed)
+          vec.setFromMatrixColumn(this.camera.camera.matrix, 0)
+          vec.crossVectors(this.camera.camera.up, vec)
+          let oldp = new THREE.Vector3().copy(this.camera.head.body.position)
+          oldp.addScaledVector(vec, this.frontSpeed)
+          this.camera.head.body.position.copy(oldp)
         }
         if (this.moveBackward) {
-          this.controls.moveForward(-this.frontSpeed)
+          vec.setFromMatrixColumn(this.camera.camera.matrix, 0)
+          vec.crossVectors(this.camera.camera.up, vec)
+          let oldp = new THREE.Vector3().copy(this.camera.head.body.position)
+          oldp.addScaledVector(vec, -this.frontSpeed)
+          this.camera.head.body.position.copy(oldp)
         }
         if (this.moveLeft) {
-          this.controls.moveRight(-this.sideSpeed)
+          this.camera.head.body.position.x -= this.sideSpeed
+          // this.camera.head.body.velocity.x = -this.sideSpeed
         }
         if (this.moveRight) {
-          this.controls.moveRight(this.sideSpeed)
+          this.camera.head.body.position.x += this.sideSpeed
+          // this.camera.head.body.velocity.x = this.sideSpeed
         }
         if (this.shift) {
           TweenMax.to(this.camera.camera.position, {
@@ -158,21 +169,27 @@ export default class Controls {
           this.sideSpeed = 0.04
           this.frontSpeed = 0.06
         }
+        this.camera.camera.position.set(
+          this.camera.head.body.position.x,
+          this.camera.camera.position.y,
+          this.camera.head.body.position.z
+        )
+        this.camera.head.position.copy(this.camera.head.body.position)
       }
     })
   }
-  mouseMove(){
-    document.addEventListener('mousemove', ()=>{
-      this.direction = this.controls.getDirection( this.direction )
+  mouseMove() {
+    document.addEventListener('mousemove', () => {
+      this.direction = this.controls.getDirection(this.direction)
       this.raycaster.set(this.camera.camera.position, this.direction)
 
       this.objectList = []
-      this.objects.forEach(object => {
-        if(object.container.body.mass != 0){
-          object.container.traverse( child => {
-            if(child.isMesh){
+      this.objects.forEach((object) => {
+        if (object.container.body.mass != 0) {
+          object.container.traverse((child) => {
+            if (child.isMesh) {
               this.objectList.push(child)
-              if(child.material.emissiveIntensity === 0.01){
+              if (child.material.emissiveIntensity === 0.01) {
                 child.material.emissiveIntensity = 0
               }
             }
@@ -182,10 +199,10 @@ export default class Controls {
 
       this.intersects = this.raycaster.intersectObjects(this.objectList)
 
-      if(this.intersects.length > 0) {
-        if(this.intersects[0].distance <= 1.35){
-          this.intersects[0].object.parent.traverse( child => {
-            if(child.isMesh){
+      if (this.intersects.length > 0) {
+        if (this.intersects[0].distance <= 1.35) {
+          this.intersects[0].object.parent.traverse((child) => {
+            if (child.isMesh) {
               child.material.emissiveIntensity = 0.01
               child.material.emissive = new THREE.Color(0xff0000)
             }

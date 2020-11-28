@@ -3,8 +3,8 @@ import { TweenMax } from 'gsap'
 
 import music from '@sounds/music.mp3'
 
-export default class Music{
-  constructor(options){
+export default class Music {
+  constructor(options) {
     // Set options
     this.time = options.time
     this.camera = options.camera
@@ -12,43 +12,51 @@ export default class Music{
     this.speakerLeft = options.speakerLeft
 
     // Set up
-    this.colors = ['#8B58FF', '#FE3ACC', '#FF5392', '#FF8E63', '#FFC751', '#F9F871']
+    this.colors = [
+      '#8B58FF',
+      '#FE3ACC',
+      '#FF5392',
+      '#FF8E63',
+      '#FFC751',
+      '#F9F871',
+    ]
 
     this.setMusic()
   }
   setMusic() {
     this.playing = false
     document.addEventListener('click', () => {
-      if(this.playing === false){
+      if (this.playing === false) {
         this.sound.play()
         this.playing = true
       }
     })
     this.listener = new THREE.AudioListener()
-    this.camera.camera.add( this.listener )
+    this.camera.camera.add(this.listener)
 
-    this.sound = new THREE.PositionalAudio( this.listener )
+    this.sound = new THREE.PositionalAudio(this.listener)
     this.audioLoader = new THREE.AudioLoader()
-    this.audioLoader.load( music, (buffer) => {
-      this.sound.setBuffer( buffer )
-      this.sound.setRefDistance( 0.25 )
+    this.audioLoader.load(music, (buffer) => {
+      this.sound.setBuffer(buffer)
+      this.sound.setRefDistance(0.25)
     })
     this.analyser = new THREE.AudioAnalyser(this.sound, 128)
     this.canChange = true
     this.time.on('tick', () => {
       this.freq = this.analyser.getAverageFrequency()
-      if ( this.freq === 0 ) {
+      if (this.freq === 0) {
         this.speakerLeft.leftLight.intensity = 0.3
         this.speakerRight.rightLight.intensity = 0.3
-      }
-      else {
+      } else {
         this.speakerLeft.leftLight.intensity = this.freq / 180
         this.speakerRight.rightLight.intensity = this.freq / 180
       }
 
-      if ( this.freq > 50 && this.canChange === true) {
+      if (this.freq > 50 && this.canChange === true) {
         this.canChange = false
-        this.hexToRGB(this.colors[Math.floor(Math.random()*(this.colors.length-1))])
+        this.hexToRGB(
+          this.colors[Math.floor(Math.random() * (this.colors.length - 1))]
+        )
 
         TweenMax.to(this.speakerLeft.leftLight.color, {
           duration: 0.2,

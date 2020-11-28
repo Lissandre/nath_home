@@ -28,7 +28,7 @@ export default class Room {
       physics: this.physics,
       objects: this.objects,
     })
-    this.basicObjects.objects.forEach(object => {
+    this.basicObjects.objects.forEach((object) => {
       this.container.add(object.container)
     })
   }

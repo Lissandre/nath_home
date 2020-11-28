@@ -11,10 +11,26 @@ export default class BasicObjects {
 
     // Set up
     this.objects = [
-      {src: this.models.nightTable.scene, mass: 4, container: new THREE.Object3D()},
-      {src: this.models.radiator.scene, mass: 0, container: new THREE.Object3D()},
-      {src: this.models.shelfBed.scene, mass: 0, container: new THREE.Object3D()},
-      {src: this.models.table.scene, mass: 2, container: new THREE.Object3D()},
+      {
+        src: this.models.nightTable.scene,
+        mass: 4,
+        container: new THREE.Object3D(),
+      },
+      {
+        src: this.models.radiator.scene,
+        mass: 0,
+        container: new THREE.Object3D(),
+      },
+      {
+        src: this.models.shelfBed.scene,
+        mass: 0,
+        container: new THREE.Object3D(),
+      },
+      {
+        src: this.models.table.scene,
+        mass: 2,
+        container: new THREE.Object3D(),
+      },
     ]
 
     this.createObjects()
@@ -37,7 +53,7 @@ export default class BasicObjects {
     this.objects.forEach((object) => {
       const size = new THREE.Vector3()
       const center = new THREE.Vector3()
-      const calcBox = new THREE.Box3().setFromObject( object.container )
+      const calcBox = new THREE.Box3().setFromObject(object.container)
 
       calcBox.getSize(size)
       size.x *= 0.5
@@ -48,7 +64,7 @@ export default class BasicObjects {
       const box = new CANNON.Box(new CANNON.Vec3().copy(size))
       object.container.body = new CANNON.Body({
         mass: object.mass,
-        position: center
+        position: center,
       })
 
       object.container.body.addShape(box)

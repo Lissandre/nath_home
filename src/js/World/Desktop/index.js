@@ -4,7 +4,7 @@ import Computer from './Computer.js'
 import BasicObjects from './BasicObjects.js'
 import Headset from './Headset.js'
 import Music from './SetMusic.js'
-// import Phone from './Phone.js'
+import Phone from './Phone.js'
 import ScreenLeft from './ScreenLeft.js'
 import ScreenRight from './ScreenRight.js'
 import ScreenSupport from './ScreenSupport.js'
@@ -26,7 +26,7 @@ export default class DesktopPlace {
     this.setComputer()
     this.setBasicObjects()
     this.setHeadset()
-    // this.setPhone()
+    this.setPhone()
     this.setScreenLeft()
     this.setScreenRight()
     this.setScreenSupport()
@@ -39,7 +39,7 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
-      objects: this.objects
+      objects: this.objects,
     })
     this.container.add(this.computer.container)
   }
@@ -48,9 +48,9 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
-      objects: this.objects
+      objects: this.objects,
     })
-    this.basicObjects.objects.forEach(object => {
+    this.basicObjects.objects.forEach((object) => {
       this.container.add(object.container)
     })
   }
@@ -59,7 +59,7 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
-      objects: this.objects
+      objects: this.objects,
     })
     this.container.add(this.headset.container)
   }
@@ -68,16 +68,16 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
-      objects: this.objects
+      objects: this.objects,
     })
-    this.container.add(this.phone.container)
+    // this.container.add(this.phone.container)
   }
   setScreenLeft() {
     this.screenLeft = new ScreenLeft({
       models: this.models,
       time: this.time,
       physics: this.physics,
-      objects: this.objects
+      objects: this.objects,
     })
     this.container.add(this.screenLeft.container)
   }
@@ -86,7 +86,7 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
-      objects: this.objects
+      objects: this.objects,
     })
     this.container.add(this.screenRight.container)
   }
@@ -95,7 +95,7 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
-      objects: this.objects
+      objects: this.objects,
     })
     this.container.add(this.screenSupport.container)
   }
@@ -104,7 +104,7 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
-      objects: this.objects
+      objects: this.objects,
     })
     this.container.add(this.speakerLeft.container)
   }
@@ -113,16 +113,16 @@ export default class DesktopPlace {
       models: this.models,
       time: this.time,
       physics: this.physics,
-      objects: this.objects
+      objects: this.objects,
     })
     this.container.add(this.speakerRight.container)
   }
-  setMusic() {
+  setMusic() {
     this.music = new Music({
       time: this.time,
       camera: this.camera,
       speakerRight: this.speakerRight,
-      speakerLeft: this.speakerLeft
+      speakerLeft: this.speakerLeft,
     })
   }
 }
