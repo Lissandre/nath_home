@@ -6,7 +6,8 @@ First "big" project with Three and first experience with Cannon.
 
 ## TO DO
 
-- [ ] Add camera collision
+- [x] Add camera collision
+- [ ] Fix controls
 - [ ] Grab objects
 - [ ] Add all models
 - [ ] Loading for songs
