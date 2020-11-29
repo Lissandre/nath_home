@@ -147,12 +147,16 @@ export default class Controls {
           this.camera.head.body.position.copy(oldp)
         }
         if (this.moveLeft) {
-          this.camera.head.body.position.x -= this.sideSpeed
-          // this.camera.head.body.velocity.x = -this.sideSpeed
+          vec.setFromMatrixColumn( this.camera.camera.matrix, 0 )
+          let oldp = new THREE.Vector3().copy(this.camera.head.body.position)
+          oldp.addScaledVector( vec, -this.sideSpeed )
+          this.camera.head.body.position.copy(oldp)
         }
         if (this.moveRight) {
-          this.camera.head.body.position.x += this.sideSpeed
-          // this.camera.head.body.velocity.x = this.sideSpeed
+          vec.setFromMatrixColumn( this.camera.camera.matrix, 0 )
+          let oldp = new THREE.Vector3().copy(this.camera.head.body.position)
+          oldp.addScaledVector( vec, this.sideSpeed )
+          this.camera.head.body.position.copy(oldp)
         }
         if (this.shift) {
           TweenMax.to(this.camera.camera.position, {
