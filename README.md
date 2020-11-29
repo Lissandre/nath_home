@@ -10,7 +10,7 @@ First "big" project with Three and first experience with Cannon.
 - [x] Fix controls
 - [ ] Grab objects
 - [ ] Add all models
-- [ ] Loading for songs
+- [ ] Loading for songs (or add Spotify)
 - [ ] Phone compatibility
 - [ ] Add VR support
 
