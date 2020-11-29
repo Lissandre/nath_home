@@ -76,6 +76,7 @@ export default class Controls {
       this.instructions.style.display = ''
       this.canMove = false
       this.world.desktopPlace.music.sound.pause()
+      this.world.desktopPlace.music.copysound.pause()
       this.world.desktopPlace.music.playing = false
     })
   }

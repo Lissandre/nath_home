@@ -28,6 +28,7 @@ export default class Music {
     document.addEventListener('click', () => {
       if (this.playing === false) {
         this.sound.play()
+        this.copysound.play()
         this.playing = true
       }
     })
@@ -35,13 +36,20 @@ export default class Music {
     this.camera.camera.add(this.listener)
 
     this.sound = new THREE.PositionalAudio(this.listener)
+    this.copysound = new THREE.PositionalAudio(this.listener)
+
     this.audioLoader = new THREE.AudioLoader()
     this.audioLoader.load(music, (buffer) => {
       this.sound.setBuffer(buffer)
       this.sound.setRefDistance(0.25)
+      this.copysound.setBuffer(buffer)
+      this.copysound.setRefDistance(0.25)
     })
     this.analyser = new THREE.AudioAnalyser(this.sound, 128)
+
     this.canChange = true
+    window.navigator.userAgent.includes('Windows') ? this.maxFreq = 31 : this.maxFreq = 50
+
     this.time.on('tick', () => {
       this.freq = this.analyser.getAverageFrequency()
       if (this.freq === 0) {
@@ -51,8 +59,7 @@ export default class Music {
         this.speakerLeft.leftLight.intensity = this.freq / 180
         this.speakerRight.rightLight.intensity = this.freq / 180
       }
-
-      if (this.freq > 50 && this.canChange === true) {
+      if (this.freq > this.maxFreq && this.canChange === true) {
         this.canChange = false
         this.hexToRGB(
           this.colors[Math.floor(Math.random() * (this.colors.length - 1))]
@@ -112,7 +119,7 @@ export default class Music {
     })
     this.speakerRight.container.traverse((child) => {
       if (child.isMesh) {
-        child.add(this.sound)
+        child.add(this.copysound)
       }
     })
   }
