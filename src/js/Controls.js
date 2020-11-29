@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import * as CANNON from 'cannon-es'
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js'
 import { TweenMax } from 'gsap'
 
@@ -29,6 +30,15 @@ export default class Controls {
     this.canMove = false
     this.frontSpeed = 0.06
     this.sideSpeed = 0.04
+    this.constraintDown = false
+    this.gplane = false
+
+    this.shape = new CANNON.Sphere(0.01)
+    this.jointBody = new CANNON.Body({ mass: 0 })
+    this.jointBody.addShape(this.shape)
+    this.jointBody.collisionFilterGroup = 0
+    this.jointBody.collisionFilterMask = 0
+    this.physics.world.addBody(this.jointBody)
 
     if (!this.debug) {
       this.init()
@@ -54,6 +64,7 @@ export default class Controls {
       'click',
       () => {
         this.controls.lock()
+        // this.mouseDown()
       },
       false
     )
@@ -204,7 +215,7 @@ export default class Controls {
       this.intersects = this.raycaster.intersectObjects(this.objectList)
 
       if (this.intersects.length > 0) {
-        if (this.intersects[0].distance <= 1.35) {
+        if (this.intersects[0].distance <= 1.5) {
           this.intersects[0].object.parent.traverse((child) => {
             if (child.isMesh) {
               child.material.emissiveIntensity = 0.01
@@ -213,6 +224,53 @@ export default class Controls {
           })
         }
       }
+
+      if (this.gplane && this.mouseConstraint) {
+        if(this.intersects[0]) {
+          this.moveJointToPoint(this.intersects[0].point.x, this.intersects[0].point.y, this.intersects[0].point.z)
+        }
+      }
     })
+  }
+  mouseDown() {
+    document.addEventListener('mousedown', () => {
+      if(this.intersects[0]) {
+        this.crossPosition = this.intersects[0].point
+        var idx = this.objectList.indexOf(this.intersects[0].object)
+        this.constraintDown = true
+        this.setScreenPerpCenter(this.crossPosition, this.camera.camera)
+        this.addMouseConstraint(
+          this.crossPosition.x,
+          this.crossPosition.y,
+          this.crossPosition.z,
+          this.objectList[idx].parent.parent.parent.body
+        )
+      }
+    })
+  }
+  setScreenPerpCenter(point, camera) {
+    if(!this.gplane) {
+      var planeGeo = new THREE.PlaneGeometry(100,100)
+      var plane = this.gplane = new THREE.Mesh(planeGeo, new THREE.MeshStandardMaterial())
+      plane.visible = false
+      this.world.container.add(this.gplane)
+    }
+    this.gplane.position.copy(point);
+    this.gplane.quaternion.copy(camera.quaternion);
+  }
+  addMouseConstraint(x, y, z, body) {
+    this.constrainedBody = body
+    var v1 = new CANNON.Vec3(x,y,z).vsub(this.constrainedBody.position)
+    var antiRot = this.constrainedBody.quaternion.inverse()
+    this.pivot = antiRot.vmult(v1)
+
+    this.jointBody.position.set(x,y,z)
+
+    this.mouseConstraint = new CANNON.PointToPointConstraint(this.constrainedBody, v1, this.jointBody, new CANNON.Vec3(0,0,0))
+    this.physics.world.addConstraint(this.mouseConstraint)
+  }
+  moveJointToPoint(x,y,z) {
+    this.jointBody.position.set(x,y,z)
+    this.mouseConstraint.update()
   }
 }

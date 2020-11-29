@@ -83,11 +83,6 @@ export default class Physics {
       this.camera.head.quaternion.y = this.camera.camera.quaternion.y
       this.camera.head.quaternion.w = this.camera.camera.quaternion.w
 
-      // this.camera.camera.position.set(
-      //   this.camera.head.body.position.x - this.center.x,
-      //   this.camera.head.body.position.y - this.center.y,
-      //   this.camera.head.body.position.z - this.center.z,
-      // )
       this.world.step(1 / 60, this.time.delta, 3)
     })
   }
