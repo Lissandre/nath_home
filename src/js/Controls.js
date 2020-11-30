@@ -57,7 +57,7 @@ export default class Controls {
     this.instructions.append(this.title)
 
     this.commands = document.createElement('p')
-    this.commands.innerHTML = 'Shift : Crouch<br/>L : Toggle lights'
+    this.commands.innerHTML = 'Shift : Run<br/>Alt : Crouch<br/>L : Toggle lights'
     this.instructions.append(this.commands)
 
     this.instructions.addEventListener(
@@ -84,6 +84,7 @@ export default class Controls {
     document.addEventListener(
       'keydown',
       (event) => {
+        console.log(event.code)
         switch (event.code) {
           case 'ArrowUp': // up
           case 'KeyW': // w
@@ -101,8 +102,11 @@ export default class Controls {
           case 'KeyD': // d
             this.moveRight = true
             break
-          case 'ShiftLeft':
+          case 'AltLeft':
             this.shift = true
+            break
+          case 'ShiftLeft':
+            this.run = true
             break
           // case 'Space': // space
           //   if ( this.canJump === true ) this.velocity.y += 2
@@ -132,8 +136,11 @@ export default class Controls {
           case 'KeyD': // d
             this.moveRight = false
             break
-          case 'ShiftLeft':
+          case 'AltLeft':
             this.shift = false
+            break
+          case 'ShiftLeft':
+            this.run = false
             break
         }
       },
@@ -183,6 +190,11 @@ export default class Controls {
             y: 1.55,
           })
           this.sideSpeed = 0.04
+          this.frontSpeed = 0.06
+        }
+        if (this.run) {
+          this.frontSpeed = 0.1
+        } else {
           this.frontSpeed = 0.06
         }
         this.camera.camera.position.set(
