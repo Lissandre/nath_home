@@ -57,7 +57,7 @@ export default class Controls {
     this.instructions.append(this.title)
 
     this.commands = document.createElement('p')
-    this.commands.innerHTML = 'Shift : Run<br/>Alt : Crouch<br/>L : Toggle lights'
+    this.commands.innerHTML = 'Shift : Run<br/>C : Crouch<br/>L : Toggle lights'
     this.instructions.append(this.commands)
 
     this.instructions.addEventListener(
@@ -84,7 +84,6 @@ export default class Controls {
     document.addEventListener(
       'keydown',
       (event) => {
-        console.log(event.code)
         switch (event.code) {
           case 'ArrowUp': // up
           case 'KeyW': // w
@@ -102,7 +101,7 @@ export default class Controls {
           case 'KeyD': // d
             this.moveRight = true
             break
-          case 'AltLeft':
+          case 'KeyC':
             this.shift = true
             break
           case 'ShiftLeft':
@@ -136,7 +135,7 @@ export default class Controls {
           case 'KeyD': // d
             this.moveRight = false
             break
-          case 'AltLeft':
+          case 'KeyC':
             this.shift = false
             break
           case 'ShiftLeft':
