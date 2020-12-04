@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { Object3D, FrontSide } from 'three'
 
 export default class ScreenLeft {
   constructor(options) {
@@ -6,7 +6,7 @@ export default class ScreenLeft {
     this.models = options.models
 
     // Set up
-    this.container = new THREE.Object3D()
+    this.container = new Object3D()
 
     this.setScreenLeft()
   }
@@ -14,7 +14,7 @@ export default class ScreenLeft {
     this.screenLeft = this.models.models.screenLeft.scene
     this.screenLeft.traverse((child) => {
       if (child.isMesh) {
-        child.material.side = THREE.FrontSide
+        child.material.side = FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

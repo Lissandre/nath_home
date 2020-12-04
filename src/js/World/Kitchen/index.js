@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { Object3D } from 'three'
 
 import BasicObjects from './BasicObjects.js'
 import Sink from './Sink.js'
@@ -14,7 +14,7 @@ export default class Kitchen {
     this.objects = options.objects
 
     // Set up
-    this.container = new THREE.Object3D()
+    this.container = new Object3D()
 
     this.setBasicObjects()
     this.setSink()

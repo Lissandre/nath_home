@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { Object3D, FrontSide } from 'three'
 
 export default class SoHetic {
   constructor(options) {
@@ -7,7 +7,7 @@ export default class SoHetic {
     this.models = options.models
 
     // Set up
-    this.container = new THREE.Object3D()
+    this.container = new Object3D()
 
     this.createSoHetic()
   }
@@ -15,7 +15,7 @@ export default class SoHetic {
     this.soHetic = this.models.models.soHetic.scene
     this.soHetic.traverse((child) => {
       if (child.isMesh) {
-        child.material.side = THREE.FrontSide
+        child.material.side = FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }

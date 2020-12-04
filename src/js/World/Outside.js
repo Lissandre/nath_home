@@ -1,19 +1,19 @@
-import * as THREE from 'three'
+import { Object3D, TextureLoader, Mesh, PlaneBufferGeometry, MeshBasicMaterial } from 'three'
 import texture from '@textures/landscape.png'
 
 export default class Outside {
   constructor() {
     // Set options
     // Set up
-    this.container = new THREE.Object3D()
+    this.container = new Object3D()
 
     this.setOutside()
   }
   setOutside() {
-    const loader = new THREE.TextureLoader()
-    this.out = new THREE.Mesh(
-      new THREE.PlaneBufferGeometry(38, 20),
-      new THREE.MeshBasicMaterial({
+    const loader = new TextureLoader()
+    this.out = new Mesh(
+      new PlaneBufferGeometry(38, 20),
+      new MeshBasicMaterial({
         map: loader.load(texture),
       })
     )

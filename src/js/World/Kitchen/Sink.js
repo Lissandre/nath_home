@@ -1,5 +1,5 @@
-import * as THREE from 'three'
-import * as CANNON from 'cannon-es'
+import { Object3D, FrontSide, Color, PointLight, Vector3, Box3 } from 'three'
+import { Body, Box, Vec3 } from 'cannon-es'
 
 export default class Sink {
   constructor(options) {
@@ -9,7 +9,7 @@ export default class Sink {
     this.physics = options.physics
 
     // Set up
-    this.container = new THREE.Object3D()
+    this.container = new Object3D()
 
     this.createSink()
     this.addLight()
@@ -19,11 +19,11 @@ export default class Sink {
     this.sink = this.models.models.sink.scene
     this.sink.traverse((child) => {
       if (child.isMesh) {
-        child.material.side = THREE.FrontSide
+        child.material.side = FrontSide
         child.castShadow = true
         child.receiveShadow = true
         if (child.material.name === 'Glass') {
-          child.material.emissive = new THREE.Color(0xffffff)
+          child.material.emissive = new Color(0xffffff)
           child.material.emissiveIntensity = 1
         }
       }
@@ -31,16 +31,16 @@ export default class Sink {
     this.container.add(this.sink)
   }
   addLight() {
-    this.light = new THREE.PointLight(0xffffff, 0.2, 0, 2)
+    this.light = new PointLight(0xffffff, 0.2, 0, 2)
     this.light.castShadow = true
     this.light.shadow.camera.near = 0.1
     this.light.position.set(-2.7, 1.41, 2.2)
     this.container.add(this.light)
   }
   setPhysics() {
-    this.size = new THREE.Vector3()
-    this.center = new THREE.Vector3()
-    this.calcBox = new THREE.Box3().setFromObject(this.sink)
+    this.size = new Vector3()
+    this.center = new Vector3()
+    this.calcBox = new Box3().setFromObject(this.sink)
 
     this.calcBox.getSize(this.size)
     this.size.x *= 0.5
@@ -48,8 +48,8 @@ export default class Sink {
     this.size.z *= 0.5
     this.calcBox.getCenter(this.center)
 
-    this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
-    this.sink.body = new CANNON.Body({
+    this.box = new Box(new Vec3().copy(this.size))
+    this.sink.body = new Body({
       mass: 0,
       position: this.center,
     })

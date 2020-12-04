@@ -1,5 +1,5 @@
-import * as CANNON from 'cannon-es'
-import * as THREE from 'three'
+import { World, SAPBroadphase, Body, Material, ContactMaterial } from 'cannon-es'
+import { Vector3, Box3 } from 'three'
 import { threeToCannon } from 'three-to-cannon'
 
 export default class Physics {
@@ -15,9 +15,9 @@ export default class Physics {
     this.setTime()
   }
   setWorld() {
-    this.world = new CANNON.World()
+    this.world = new World()
     this.world.gravity.set(0, -9.82, 0)
-    this.world.broadphase = new CANNON.SAPBroadphase(this.world)
+    this.world.broadphase = new SAPBroadphase(this.world)
     this.world.solver.iterations = 20
     this.world.allowSleep = true
     this.world.quatNormalizeFast = true
@@ -25,9 +25,9 @@ export default class Physics {
       body.sleepSpeedLimit = 0.01
     })
 
-    this.groundMaterial = new CANNON.Material('groundMaterial')
+    this.groundMaterial = new Material('groundMaterial')
     // Adjust constraint equation parameters for ground/ground contact
-    this.ground_ground_cm = new CANNON.ContactMaterial(
+    this.ground_ground_cm = new ContactMaterial(
       this.groundMaterial,
       this.groundMaterial,
       {
@@ -40,9 +40,9 @@ export default class Physics {
     this.world.addContactMaterial(this.ground_ground_cm)
   }
   setPersoPhysics() {
-    this.size = new THREE.Vector3()
-    this.center = new THREE.Vector3()
-    this.calcBox = new THREE.Box3().setFromObject(this.camera.head)
+    this.size = new Vector3()
+    this.center = new Vector3()
+    this.calcBox = new Box3().setFromObject(this.camera.head)
 
     this.calcBox.getSize(this.size)
     this.size.x *= 0.5
@@ -53,7 +53,7 @@ export default class Physics {
     this.shape = threeToCannon(this.camera.head, {
       type: threeToCannon.Type.CYLINDER,
     })
-    this.camera.head.body = new CANNON.Body({
+    this.camera.head.body = new Body({
       mass: 1,
       shape: this.shape,
       position: this.center,

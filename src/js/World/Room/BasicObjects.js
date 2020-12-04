@@ -1,5 +1,5 @@
-import * as THREE from 'three'
-import * as CANNON from 'cannon-es'
+import { Object3D, FrontSide, Box3, Vector3 } from 'three'
+import { Body, Box, Vec3 } from 'cannon-es'
 
 export default class BasicObjects {
   constructor(options) {
@@ -14,22 +14,22 @@ export default class BasicObjects {
       {
         src: this.models.nightTable.scene,
         mass: 4,
-        container: new THREE.Object3D(),
+        container: new Object3D(),
       },
       {
         src: this.models.radiator.scene,
         mass: 0,
-        container: new THREE.Object3D(),
+        container: new Object3D(),
       },
       {
         src: this.models.shelfBed.scene,
         mass: 0,
-        container: new THREE.Object3D(),
+        container: new Object3D(),
       },
       {
         src: this.models.table.scene,
         mass: 2,
-        container: new THREE.Object3D(),
+        container: new Object3D(),
       },
     ]
 
@@ -41,7 +41,7 @@ export default class BasicObjects {
       const obj = object.src
       obj.traverse((child) => {
         if (child.isMesh) {
-          child.material.side = THREE.FrontSide
+          child.material.side = FrontSide
           child.castShadow = true
           child.receiveShadow = true
         }
@@ -51,9 +51,9 @@ export default class BasicObjects {
   }
   setPhysics() {
     this.objects.forEach((object) => {
-      const size = new THREE.Vector3()
-      const center = new THREE.Vector3()
-      const calcBox = new THREE.Box3().setFromObject(object.container)
+      const size = new Vector3()
+      const center = new Vector3()
+      const calcBox = new Box3().setFromObject(object.container)
 
       calcBox.getSize(size)
       size.x *= 0.5
@@ -61,8 +61,8 @@ export default class BasicObjects {
       size.z *= 0.5
       calcBox.getCenter(center)
 
-      const box = new CANNON.Box(new CANNON.Vec3().copy(size))
-      object.container.body = new CANNON.Body({
+      const box = new Box(new Vec3().copy(size))
+      object.container.body = new Body({
         mass: object.mass,
         position: center,
       })

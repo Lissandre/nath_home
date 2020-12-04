@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { Object3D } from 'three'
 
 import Computer from './Computer.js'
 import BasicObjects from './BasicObjects.js'
@@ -21,7 +21,7 @@ export default class DesktopPlace {
     this.objects = options.objects
 
     // Set up
-    this.container = new THREE.Object3D()
+    this.container = new Object3D()
 
     this.setComputer()
     this.setBasicObjects()

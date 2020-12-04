@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { AudioListener, PositionalAudio, AudioLoader, AudioAnalyser } from 'three'
 import { TweenMax } from 'gsap'
 
 import music from '@sounds/music.mp3'
@@ -32,20 +32,20 @@ export default class Music {
         this.playing = true
       }
     })
-    this.listener = new THREE.AudioListener()
+    this.listener = new AudioListener()
     this.camera.camera.add(this.listener)
 
-    this.sound = new THREE.PositionalAudio(this.listener)
-    this.copysound = new THREE.PositionalAudio(this.listener)
+    this.sound = new PositionalAudio(this.listener)
+    this.copysound = new PositionalAudio(this.listener)
 
-    this.audioLoader = new THREE.AudioLoader()
+    this.audioLoader = new AudioLoader()
     this.audioLoader.load(music, (buffer) => {
       this.sound.setBuffer(buffer)
       this.sound.setRefDistance(0.25)
       this.copysound.setBuffer(buffer)
       this.copysound.setRefDistance(0.25)
     })
-    this.analyser = new THREE.AudioAnalyser(this.sound, 128)
+    this.analyser = new AudioAnalyser(this.sound, 128)
 
     this.canChange = true
     window.navigator.userAgent.includes('Windows') ? this.maxFreq = 31 : this.maxFreq = 50

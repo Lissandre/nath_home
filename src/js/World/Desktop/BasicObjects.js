@@ -1,5 +1,5 @@
-import * as THREE from 'three'
-import * as CANNON from 'cannon-es'
+import { Object3D, FrontSide, Vector3, Box3 } from 'three'
+import { Body, Box, Vec3 } from 'cannon-es'
 
 export default class BasicObjects {
   constructor(options) {
@@ -14,62 +14,62 @@ export default class BasicObjects {
       {
         src: this.models.computerSupport.scene,
         mass: 22,
-        container: new THREE.Object3D(),
+        container: new Object3D(),
       },
       {
         src: this.models.desktop.scene,
         mass: 10,
-        container: new THREE.Object3D(),
+        container: new Object3D(),
       },
       {
         src: this.models.desktopLeft.scene,
         mass: 10,
-        container: new THREE.Object3D(),
+        container: new Object3D(),
       },
       {
         src: this.models.desktopRight.scene,
         mass: 10,
-        container: new THREE.Object3D(),
+        container: new Object3D(),
       },
       {
         src: this.models.keyboard.scene,
         mass: 0.1,
-        container: new THREE.Object3D(),
+        container: new Object3D(),
       },
       {
         src: this.models.mouse.scene,
         mass: 0.1,
-        container: new THREE.Object3D(),
+        container: new Object3D(),
       },
       {
         src: this.models.mousePad.scene,
         mass: 0.15,
-        container: new THREE.Object3D(),
+        container: new Object3D(),
       },
       {
         src: this.models.phoneSupport.scene,
         mass: 0.1,
-        container: new THREE.Object3D(),
+        container: new Object3D(),
       },
       {
         src: this.models.rubiksCube.scene,
         mass: 0.1,
-        container: new THREE.Object3D(),
+        container: new Object3D(),
       },
       {
         src: this.models.shelfDesktop.scene,
         mass: 0,
-        container: new THREE.Object3D(),
+        container: new Object3D(),
       },
       {
         src: this.models.shelfWall.scene,
         mass: 0,
-        container: new THREE.Object3D(),
+        container: new Object3D(),
       },
       {
         src: this.models.subwooferSpeaker.scene,
         mass: 3,
-        container: new THREE.Object3D(),
+        container: new Object3D(),
       },
     ]
 
@@ -81,7 +81,7 @@ export default class BasicObjects {
       const obj = object.src
       obj.traverse((child) => {
         if (child.isMesh) {
-          child.material.side = THREE.FrontSide
+          child.material.side = FrontSide
           child.castShadow = true
           child.receiveShadow = true
         }
@@ -91,9 +91,9 @@ export default class BasicObjects {
   }
   setPhysics() {
     this.objects.forEach((object) => {
-      const size = new THREE.Vector3()
-      const center = new THREE.Vector3()
-      const calcBox = new THREE.Box3().setFromObject(object.container)
+      const size = new Vector3()
+      const center = new Vector3()
+      const calcBox = new Box3().setFromObject(object.container)
 
       calcBox.getSize(size)
       size.x *= 0.5
@@ -101,8 +101,8 @@ export default class BasicObjects {
       size.z *= 0.5
       calcBox.getCenter(center)
 
-      const box = new CANNON.Box(new CANNON.Vec3().copy(size))
-      object.container.body = new CANNON.Body({
+      const box = new Box(new Vec3().copy(size))
+      object.container.body = new Body({
         mass: object.mass,
         position: center,
       })

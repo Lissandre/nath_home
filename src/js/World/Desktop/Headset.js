@@ -1,5 +1,5 @@
-import * as THREE from 'three'
-import * as CANNON from 'cannon-es'
+import { Object3D, FrontSide, Vector3, Box3 } from 'three'
+import { Body } from 'cannon-es'
 import { threeToCannon } from 'three-to-cannon'
 
 export default class Headset {
@@ -11,7 +11,7 @@ export default class Headset {
     this.pObjects = options.objects
 
     // Set up
-    this.container = new THREE.Object3D()
+    this.container = new Object3D()
 
     this.createHeadset()
     this.setPhysics()
@@ -20,7 +20,7 @@ export default class Headset {
     this.headset = this.models.models.headset.scene
     this.headset.traverse((child) => {
       if (child.isMesh) {
-        child.material.side = THREE.FrontSide
+        child.material.side = FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }
@@ -28,9 +28,9 @@ export default class Headset {
     this.container.add(this.headset)
   }
   setPhysics() {
-    this.size = new THREE.Vector3()
-    this.center = new THREE.Vector3()
-    this.calcBox = new THREE.Box3().setFromObject(this.container)
+    this.size = new Vector3()
+    this.center = new Vector3()
+    this.calcBox = new Box3().setFromObject(this.container)
 
     this.calcBox.getSize(this.size)
     this.size.x *= 0.5
@@ -43,7 +43,7 @@ export default class Headset {
     })
 
     // this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
-    this.container.body = new CANNON.Body({
+    this.container.body = new Body({
       mass: 0.3,
       shape: this.shape,
       position: this.center,

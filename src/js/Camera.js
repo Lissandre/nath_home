@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { Object3D, PerspectiveCamera, Mesh, CylinderGeometry, MeshBasicMaterial } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 export default class Camera {
@@ -10,7 +10,7 @@ export default class Camera {
     this.time = options.time
 
     // Set up
-    this.container = new THREE.Object3D()
+    this.container = new Object3D()
 
     this.setCamera()
     this.setPerso()
@@ -19,7 +19,7 @@ export default class Camera {
   }
   setCamera() {
     // Create camera
-    this.camera = new THREE.PerspectiveCamera(
+    this.camera = new PerspectiveCamera(
       58,
       this.sizes.viewport.width / this.sizes.viewport.height,
       0.1,
@@ -35,9 +35,9 @@ export default class Camera {
     })
   }
   setPerso() {
-    this.head = new THREE.Mesh(
-      new THREE.CylinderGeometry(0.2, 0.1, 1.5, 10, 10, false),
-      new THREE.MeshBasicMaterial({
+    this.head = new Mesh(
+      new CylinderGeometry(0.2, 0.1, 1.5, 10, 10, false),
+      new MeshBasicMaterial({
         color: 0xffffff,
       })
     )

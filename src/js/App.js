@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { Scene, WebGLRenderer, sRGBEncoding, PCFSoftShadowMap } from 'three'
 import { StereoEffect } from 'three/examples/jsm/effects/StereoEffect'
 import * as dat from 'dat.gui'
 import cannonDebugger from 'cannon-es-debugger'
@@ -33,15 +33,15 @@ export default class App {
   }
   setRenderer() {
     // Set scene
-    this.scene = new THREE.Scene()
+    this.scene = new Scene()
     // Set renderer
-    this.renderer = new THREE.WebGLRenderer({
+    this.renderer = new WebGLRenderer({
       canvas: this.canvas,
       alpha: true,
       antialias: true,
     })
     this.renderer.physicallyCorrectLights = true
-    this.renderer.outputEncoding = THREE.sRGBEncoding
+    this.renderer.outputEncoding = sRGBEncoding
     // Set background color
     this.renderer.setClearColor(0x000000, 1)
     // Set renderer pixel ratio & sizes
@@ -49,7 +49,7 @@ export default class App {
     // Set shadow
     this.renderer.shadowMap.enabled = true
     this.renderer.shadowMapSoft = true
-    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
+    this.renderer.shadowMap.type = PCFSoftShadowMap
 
     if (this.isStereoEffect) {
       this.stereoEffect = new StereoEffect(this.renderer)

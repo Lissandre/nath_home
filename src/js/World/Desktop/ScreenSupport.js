@@ -1,5 +1,5 @@
-import * as THREE from 'three'
-import * as CANNON from 'cannon-es'
+import { Object3D, FrontSide, Vector3, Box3 } from 'three'
+import { Body, Box, Vec3 } from 'cannon-es'
 
 export default class ScreenSupport {
   constructor(options) {
@@ -10,7 +10,7 @@ export default class ScreenSupport {
     this.pObjects = options.objects
 
     // Set up
-    this.container = new THREE.Object3D()
+    this.container = new Object3D()
 
     this.setScreenSupport()
     // this.setPhysics()
@@ -19,7 +19,7 @@ export default class ScreenSupport {
     this.screenSupport = this.models.models.screenSupport.scene
     this.screenSupport.traverse((child) => {
       if (child.isMesh) {
-        child.material.side = THREE.FrontSide
+        child.material.side = FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }
@@ -27,9 +27,9 @@ export default class ScreenSupport {
     this.container.add(this.screenSupport)
   }
   setPhysics() {
-    this.size = new THREE.Vector3()
-    this.center = new THREE.Vector3()
-    this.calcBox = new THREE.Box3().setFromObject(this.container)
+    this.size = new Vector3()
+    this.center = new Vector3()
+    this.calcBox = new Box3().setFromObject(this.container)
 
     this.calcBox.getSize(this.size)
     this.size.x *= 0.5
@@ -37,8 +37,8 @@ export default class ScreenSupport {
     this.size.z *= 0.5
     this.calcBox.getCenter(this.center)
 
-    this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
-    this.container.body = new CANNON.Body({
+    this.box = new Box(new Vec3().copy(this.size))
+    this.container.body = new Body({
       mass: 3,
       position: this.center,
     })
@@ -48,10 +48,10 @@ export default class ScreenSupport {
 
     // this.desktop = this.pObjects.find(element => element.name === 'Desktop')
 
-    // this.deskSize = new THREE.Vector3()
-    // this.deskCenter = new THREE.Vector3()
+    // this.deskSize = new Vector3()
+    // this.deskCenter = new Vector3()
 
-    // this.deskBox = new THREE.Box3().setFromObject( this.desktop.container )
+    // this.deskBox = new Box3().setFromObject( this.desktop.container )
 
     // this.deskBox.getSize(this.deskSize)
     // this.deskSize.x *= 0.5
@@ -59,11 +59,11 @@ export default class ScreenSupport {
     // this.deskSize.z *= 0.5
     // this.deskBox.getCenter(this.deskCenter)
 
-    // this.deskConstraint = new CANNON.PointToPointConstraint(
+    // this.deskConstraint = new PointToPointConstraint(
     //   this.container.body,
-    //   new CANNON.Vec3(this.center.x, 0, this.size.z),
+    //   new Vec3(this.center.x, 0, this.size.z),
     //   this.desktop.container.body,
-    //   new CANNON.Vec3(this.deskCenter.x, this.deskCenter.y, this.deskSize.z *2),
+    //   new Vec3(this.deskCenter.x, this.deskCenter.y, this.deskSize.z *2),
     // )
     // this.physics.world.addConstraint(this.deskConstraint)
 

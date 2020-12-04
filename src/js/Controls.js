@@ -1,5 +1,5 @@
-import * as THREE from 'three'
-import * as CANNON from 'cannon-es'
+import { Raycaster, Vector3, Color, Mesh, PlaneGeometry, MeshStandardMaterial } from 'three'
+import { Body, Sphere, Vec3, PointToPointConstraint } from 'cannon-es'
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js'
 import { TweenMax } from 'gsap'
 
@@ -16,8 +16,8 @@ export default class Controls {
     this.objects = options.objects
 
     // Set up
-    this.raycaster = new THREE.Raycaster()
-    this.direction = new THREE.Vector3()
+    this.raycaster = new Raycaster()
+    this.direction = new Vector3()
     this.controls = new PointerLockControls(
       this.camera.camera,
       this.renderer.domElement
@@ -33,8 +33,8 @@ export default class Controls {
     this.constraintDown = false
     this.gplane = false
 
-    this.shape = new CANNON.Sphere(0.01)
-    this.jointBody = new CANNON.Body({ mass: 0 })
+    this.shape = new Sphere(0.01)
+    this.jointBody = new Body({ mass: 0 })
     this.jointBody.addShape(this.shape)
     this.jointBody.collisionFilterGroup = 0
     this.jointBody.collisionFilterMask = 0
@@ -147,32 +147,32 @@ export default class Controls {
     )
   }
   setMovement() {
-    let vec = new THREE.Vector3()
+    let vec = new Vector3()
     this.time.on('tick', () => {
       if (this.canMove === true) {
         if (this.moveForward) {
           vec.setFromMatrixColumn(this.camera.camera.matrix, 0)
           vec.crossVectors(this.camera.camera.up, vec)
-          let oldp = new THREE.Vector3().copy(this.camera.head.body.position)
+          let oldp = new Vector3().copy(this.camera.head.body.position)
           oldp.addScaledVector(vec, this.frontSpeed)
           this.camera.head.body.position.copy(oldp)
         }
         if (this.moveBackward) {
           vec.setFromMatrixColumn(this.camera.camera.matrix, 0)
           vec.crossVectors(this.camera.camera.up, vec)
-          let oldp = new THREE.Vector3().copy(this.camera.head.body.position)
+          let oldp = new Vector3().copy(this.camera.head.body.position)
           oldp.addScaledVector(vec, -this.frontSpeed)
           this.camera.head.body.position.copy(oldp)
         }
         if (this.moveLeft) {
           vec.setFromMatrixColumn( this.camera.camera.matrix, 0 )
-          let oldp = new THREE.Vector3().copy(this.camera.head.body.position)
+          let oldp = new Vector3().copy(this.camera.head.body.position)
           oldp.addScaledVector( vec, -this.sideSpeed )
           this.camera.head.body.position.copy(oldp)
         }
         if (this.moveRight) {
           vec.setFromMatrixColumn( this.camera.camera.matrix, 0 )
-          let oldp = new THREE.Vector3().copy(this.camera.head.body.position)
+          let oldp = new Vector3().copy(this.camera.head.body.position)
           oldp.addScaledVector( vec, this.sideSpeed )
           this.camera.head.body.position.copy(oldp)
         }
@@ -231,7 +231,7 @@ export default class Controls {
           this.intersects[0].object.parent.traverse((child) => {
             if (child.isMesh) {
               child.material.emissiveIntensity = 0.01
-              child.material.emissive = new THREE.Color(0xff0000)
+              child.material.emissive = new Color(0xff0000)
             }
           })
         }
@@ -262,8 +262,8 @@ export default class Controls {
   }
   setScreenPerpCenter(point, camera) {
     if(!this.gplane) {
-      var planeGeo = new THREE.PlaneGeometry(100,100)
-      var plane = this.gplane = new THREE.Mesh(planeGeo, new THREE.MeshStandardMaterial())
+      var planeGeo = new PlaneGeometry(100,100)
+      var plane = this.gplane = new Mesh(planeGeo, new MeshStandardMaterial())
       plane.visible = false
       this.world.container.add(this.gplane)
     }
@@ -272,13 +272,13 @@ export default class Controls {
   }
   addMouseConstraint(x, y, z, body) {
     this.constrainedBody = body
-    var v1 = new CANNON.Vec3(x,y,z).vsub(this.constrainedBody.position)
+    var v1 = new Vec3(x,y,z).vsub(this.constrainedBody.position)
     var antiRot = this.constrainedBody.quaternion.inverse()
     this.pivot = antiRot.vmult(v1)
 
     this.jointBody.position.set(x,y,z)
 
-    this.mouseConstraint = new CANNON.PointToPointConstraint(this.constrainedBody, v1, this.jointBody, new CANNON.Vec3(0,0,0))
+    this.mouseConstraint = new PointToPointConstraint(this.constrainedBody, v1, this.jointBody, new Vec3(0,0,0))
     this.physics.world.addConstraint(this.mouseConstraint)
   }
   moveJointToPoint(x,y,z) {

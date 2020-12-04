@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { Object3D } from 'three'
 
 import AmbientLight from './AmbientLight.js'
 import PointLight from './PointLight.js'
@@ -21,7 +21,7 @@ export default class World {
     this.physics = options.physics
 
     // Set up
-    this.container = new THREE.Object3D()
+    this.container = new Object3D()
 
     if (this.debug) {
       this.debugFolder = this.debug.addFolder('World')

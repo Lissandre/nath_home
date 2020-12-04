@@ -1,5 +1,5 @@
-import * as THREE from 'three'
-import * as CANNON from 'cannon-es'
+import { Object3D, FrontSide, Vector3, Box3 } from 'three'
+import { Body, Box, Vec3 } from 'cannon-es'
 
 export default class Phone {
   constructor(options) {
@@ -9,7 +9,7 @@ export default class Phone {
     this.physics = options.physics
 
     // Set up
-    this.container = new THREE.Object3D()
+    this.container = new Object3D()
 
     this.setPhone()
     this.setPhysics()
@@ -18,7 +18,7 @@ export default class Phone {
     this.phone = this.models.models.phone.scene
     this.phone.traverse((child) => {
       if (child.isMesh) {
-        child.material.side = THREE.FrontSide
+        child.material.side = FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }
@@ -26,9 +26,9 @@ export default class Phone {
     this.container.add(this.phone)
   }
   setPhysics() {
-    this.size = new THREE.Vector3()
-    this.center = new THREE.Vector3()
-    this.calcBox = new THREE.Box3().setFromObject(this.phone)
+    this.size = new Vector3()
+    this.center = new Vector3()
+    this.calcBox = new Box3().setFromObject(this.phone)
 
     this.calcBox.getSize(this.size)
     this.size.x *= 0.5
@@ -36,8 +36,8 @@ export default class Phone {
     this.size.z *= 0.5
     this.calcBox.getCenter(this.center)
 
-    this.box = new CANNON.Box(new CANNON.Vec3().copy(this.size))
-    this.phone.body = new CANNON.Body({
+    this.box = new Box(new Vec3().copy(this.size))
+    this.phone.body = new Body({
       mass: 0.1,
       position: this.center,
     })
@@ -45,13 +45,13 @@ export default class Phone {
     this.phone.body.addShape(this.box)
     this.physics.world.addBody(this.phone.body)
 
-    this.time.on('tick', () => {
-      this.phone.quaternion.copy(this.phone.body.quaternion)
-      this.phone.position.set(
-        this.phone.body.position.x - this.center.x,
-        this.phone.body.position.y - this.center.y,
-        this.phone.body.position.z - this.center.z
-      )
-    })
+    // this.time.on('tick', () => {
+    //   this.phone.quaternion.copy(this.phone.body.quaternion)
+    //   this.phone.position.set(
+    //     this.phone.body.position.x - this.center.x,
+    //     this.phone.body.position.y - this.center.y,
+    //     this.phone.body.position.z - this.center.z
+    //   )
+    // })
   }
 }

@@ -1,4 +1,4 @@
-import * as THREE from 'three'
+import { Object3D, FrontSide } from 'three'
 
 export default class Bed {
   constructor(options) {
@@ -7,7 +7,7 @@ export default class Bed {
     this.models = options.models
 
     // Set up
-    this.container = new THREE.Object3D()
+    this.container = new Object3D()
 
     this.createBed()
   }
@@ -15,7 +15,7 @@ export default class Bed {
     this.bed = this.models.models.bed.scene
     this.bed.traverse((child) => {
       if (child.isMesh) {
-        child.material.side = THREE.FrontSide
+        child.material.side = FrontSide
         child.castShadow = true
         child.receiveShadow = true
       }
