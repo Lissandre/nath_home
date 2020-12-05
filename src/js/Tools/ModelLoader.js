@@ -4,14 +4,28 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
 
-import modelsList from '@models/index.js'
 export default class ModelLoader extends EventEmitter {
   constructor() {
     // Get parent methods
     super()
 
     // Set up
-    this.modelsList = modelsList
+    this.modelsList = []
+
+    // eslint-disable-next-line
+    const context = require.context('@models', true, /\.(glb|gltf|fbx)$/)
+    context.keys().forEach((key) => {
+      const newKey = `${key}`.substring(2)
+      // eslint-disable-next-line
+      const modelSrc = require('../../models/' + newKey)
+      this.modelsList.push({
+        name: key.substring(
+          2,
+          key.length - (key.length - newKey.lastIndexOf('.') - 2)
+        ),
+        src: modelSrc.default,
+      })
+    })
 
     this.remaining = this.modelsList.length
     this.done = 0
