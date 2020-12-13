@@ -199,9 +199,27 @@ export default class Controls {
           this.frontSpeed = 0.06
         }
         if (this.run) {
-          this.frontSpeed = 0.1
+          if(this.moveForward) {
+            this.frontSpeed = 0.1
+            TweenMax.to(this.camera.camera, {
+              duration: 0.3,
+              fov: 75
+            })
+            this.camera.camera.updateProjectionMatrix()
+          } else {
+            TweenMax.to(this.camera.camera, {
+              duration: 0.3,
+              fov: 58
+            })
+            this.camera.camera.updateProjectionMatrix()
+          }
         } else {
           this.frontSpeed = 0.06
+          TweenMax.to(this.camera.camera, {
+            duration: 0.3,
+            fov: 58
+          })
+          this.camera.camera.updateProjectionMatrix()
         }
         this.camera.camera.position.set(
           this.camera.head.body.position.x,

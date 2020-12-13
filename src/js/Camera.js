@@ -42,7 +42,7 @@ export default class Camera {
   }
   setPerso() {
     this.head = new Mesh(
-      new CylinderGeometry(0.2, 0.1, 1.5, 10, 10, false),
+      new CylinderGeometry(0.25, 0.1, 1.5, 10, 10, false),
       new MeshBasicMaterial({
         color: 0xffffff,
       })
