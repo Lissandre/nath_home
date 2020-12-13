@@ -8,6 +8,7 @@ export default class Physics {
     this.time = options.time
     this.objects = options.objects
     this.camera = options.camera
+    this.assets = options.assets
 
     // Set up
     this.setWorld()
@@ -40,30 +41,32 @@ export default class Physics {
     this.world.addContactMaterial(this.ground_ground_cm)
   }
   setPersoPhysics() {
-    this.size = new Vector3()
-    this.center = new Vector3()
-    this.calcBox = new Box3().setFromObject(this.camera.head)
+    this.assets.on('ressourcesReady', () => {
+      this.size = new Vector3()
+      this.center = new Vector3()
+      this.calcBox = new Box3().setFromObject(this.camera.head)
 
-    this.calcBox.getSize(this.size)
-    this.size.x *= 0.5
-    this.size.y *= 0.5
-    this.size.z *= 0.5
-    this.calcBox.getCenter(this.center)
+      this.calcBox.getSize(this.size)
+      this.size.x *= 0.5
+      this.size.y *= 0.5
+      this.size.z *= 0.5
+      this.calcBox.getCenter(this.center)
 
-    this.shape = threeToCannon(this.camera.head, {
-      type: threeToCannon.Type.CYLINDER,
+      this.shape = threeToCannon(this.camera.head, {
+        type: threeToCannon.Type.CYLINDER,
+      })
+      this.camera.head.body = new Body({
+        mass: 1,
+        shape: this.shape,
+        position: this.center,
+        material: this.groundMaterial,
+      })
+
+      this.camera.head.body.angularDamping = 1
+      this.camera.head.body.allowSleep = false
+
+      this.world.addBody(this.camera.head.body)
     })
-    this.camera.head.body = new Body({
-      mass: 1,
-      shape: this.shape,
-      position: this.center,
-      material: this.groundMaterial,
-    })
-
-    this.camera.head.body.angularDamping = 1
-    this.camera.head.body.allowSleep = false
-
-    this.world.addBody(this.camera.head.body)
   }
   setTime() {
     this.time.on('tick', () => {
