@@ -96,7 +96,8 @@ export default class World {
   }
   setOutside() {
     this.outside = new Outside({
-      textures: this.assets.textures,
+      debug: this.debug,
+      time: this.time,
     })
     this.container.add(this.outside.container)
   }

@@ -1,4 +1,10 @@
-import { Scene, WebGLRenderer, sRGBEncoding, PCFSoftShadowMap } from 'three'
+import {
+  Scene,
+  WebGLRenderer,
+  sRGBEncoding,
+  PCFSoftShadowMap,
+  ACESFilmicToneMapping,
+} from 'three'
 import { StereoEffect } from 'three/examples/jsm/effects/StereoEffect'
 import * as dat from 'dat.gui'
 import cannonDebugger from 'cannon-es-debugger'
@@ -42,10 +48,11 @@ export default class App {
     })
     this.renderer.physicallyCorrectLights = true
     this.renderer.outputEncoding = sRGBEncoding
+    this.renderer.toneMapping = ACESFilmicToneMapping
     // Set background color
     this.renderer.setClearColor(0x000000, 1)
     // Set renderer pixel ratio & sizes
-    // this.renderer.setPixelRatio(window.devicePixelRatio)
+    this.renderer.setPixelRatio(window.devicePixelRatio)
     // Set shadow
     this.renderer.shadowMap.enabled = true
     this.renderer.shadowMapSoft = true
@@ -103,6 +110,7 @@ export default class App {
     })
     // Add world to scene
     this.scene.add(this.world.container)
+    this.scene.rotateY(-Math.PI / 2)
   }
   setControls() {
     this.fpscontrols = new Controls({

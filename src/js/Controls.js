@@ -1,4 +1,11 @@
-import { Raycaster, Vector3, Color, Mesh, PlaneGeometry, MeshStandardMaterial } from 'three'
+import {
+  Raycaster,
+  Vector3,
+  Color,
+  Mesh,
+  PlaneGeometry,
+  MeshStandardMaterial,
+} from 'three'
 import { Body, Sphere, Vec3, PointToPointConstraint } from 'cannon-es'
 import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls.js'
 import { TweenMax } from 'gsap'
@@ -165,15 +172,15 @@ export default class Controls {
           this.camera.head.body.position.copy(oldp)
         }
         if (this.moveLeft) {
-          vec.setFromMatrixColumn( this.camera.camera.matrix, 0 )
+          vec.setFromMatrixColumn(this.camera.camera.matrix, 0)
           let oldp = new Vector3().copy(this.camera.head.body.position)
-          oldp.addScaledVector( vec, -this.sideSpeed )
+          oldp.addScaledVector(vec, -this.sideSpeed)
           this.camera.head.body.position.copy(oldp)
         }
         if (this.moveRight) {
-          vec.setFromMatrixColumn( this.camera.camera.matrix, 0 )
+          vec.setFromMatrixColumn(this.camera.camera.matrix, 0)
           let oldp = new Vector3().copy(this.camera.head.body.position)
-          oldp.addScaledVector( vec, this.sideSpeed )
+          oldp.addScaledVector(vec, this.sideSpeed)
           this.camera.head.body.position.copy(oldp)
         }
         if (this.shift) {
@@ -238,15 +245,19 @@ export default class Controls {
       }
 
       if (this.gplane && this.mouseConstraint) {
-        if(this.intersects[0]) {
-          this.moveJointToPoint(this.intersects[0].point.x, this.intersects[0].point.y, this.intersects[0].point.z)
+        if (this.intersects[0]) {
+          this.moveJointToPoint(
+            this.intersects[0].point.x,
+            this.intersects[0].point.y,
+            this.intersects[0].point.z
+          )
         }
       }
     })
   }
   mouseDown() {
     document.addEventListener('mousedown', () => {
-      if(this.intersects[0]) {
+      if (this.intersects[0]) {
         this.crossPosition = this.intersects[0].point
         var idx = this.objectList.indexOf(this.intersects[0].object)
         this.constraintDown = true
@@ -261,28 +272,33 @@ export default class Controls {
     })
   }
   setScreenPerpCenter(point, camera) {
-    if(!this.gplane) {
-      var planeGeo = new PlaneGeometry(100,100)
-      var plane = this.gplane = new Mesh(planeGeo, new MeshStandardMaterial())
+    if (!this.gplane) {
+      var planeGeo = new PlaneGeometry(100, 100)
+      var plane = (this.gplane = new Mesh(planeGeo, new MeshStandardMaterial()))
       plane.visible = false
       this.world.container.add(this.gplane)
     }
-    this.gplane.position.copy(point);
-    this.gplane.quaternion.copy(camera.quaternion);
+    this.gplane.position.copy(point)
+    this.gplane.quaternion.copy(camera.quaternion)
   }
   addMouseConstraint(x, y, z, body) {
     this.constrainedBody = body
-    var v1 = new Vec3(x,y,z).vsub(this.constrainedBody.position)
+    var v1 = new Vec3(x, y, z).vsub(this.constrainedBody.position)
     var antiRot = this.constrainedBody.quaternion.inverse()
     this.pivot = antiRot.vmult(v1)
 
-    this.jointBody.position.set(x,y,z)
+    this.jointBody.position.set(x, y, z)
 
-    this.mouseConstraint = new PointToPointConstraint(this.constrainedBody, v1, this.jointBody, new Vec3(0,0,0))
+    this.mouseConstraint = new PointToPointConstraint(
+      this.constrainedBody,
+      v1,
+      this.jointBody,
+      new Vec3(0, 0, 0)
+    )
     this.physics.world.addConstraint(this.mouseConstraint)
   }
-  moveJointToPoint(x,y,z) {
-    this.jointBody.position.set(x,y,z)
+  moveJointToPoint(x, y, z) {
+    this.jointBody.position.set(x, y, z)
     this.mouseConstraint.update()
   }
 }

@@ -1,4 +1,10 @@
-import { World, SAPBroadphase, Body, Material, ContactMaterial } from 'cannon-es'
+import {
+  World,
+  SAPBroadphase,
+  Body,
+  Material,
+  ContactMaterial,
+} from 'cannon-es'
 import { Vector3, Box3 } from 'three'
 import { threeToCannon } from 'three-to-cannon'
 

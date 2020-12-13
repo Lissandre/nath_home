@@ -1,4 +1,4 @@
-import { Object3D, BackSide }from 'three'
+import { Object3D, BackSide } from 'three'
 import { Body, Plane, Vec3 } from 'cannon-es'
 
 export default class Floor {
@@ -31,10 +31,7 @@ export default class Floor {
       position: new Vec3(0, 0, 0),
       material: this.physics.groundMaterial,
     })
-    this.ground.quaternion.setFromAxisAngle(
-      new Vec3(1, 0, 0),
-      -Math.PI / 2
-    )
+    this.ground.quaternion.setFromAxisAngle(new Vec3(1, 0, 0), -Math.PI / 2)
 
     this.physics.world.addBody(this.ground)
   }

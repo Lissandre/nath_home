@@ -1,4 +1,4 @@
-import { Object3D, DoubleSide, Vector3, Box3} from 'three'
+import { Object3D, DoubleSide, Vector3, Box3 } from 'three'
 import { Body, Box, Vec3 } from 'cannon-es'
 
 export default class Paper {

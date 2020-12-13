@@ -44,7 +44,9 @@ export default class Music {
     this.analyser = new AudioAnalyser(this.sound, 128)
 
     this.canChange = true
-    window.navigator.userAgent.includes('Windows') ? this.maxFreq = 31 : this.maxFreq = 50
+    window.navigator.userAgent.includes('Windows')
+      ? (this.maxFreq = 31)
+      : (this.maxFreq = 50)
 
     this.time.on('tick', () => {
       this.freq = this.analyser.getAverageFrequency()
