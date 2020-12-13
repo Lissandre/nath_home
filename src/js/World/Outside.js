@@ -53,7 +53,7 @@ export default class Outside {
   }
   createSunLight() {
     this.light = new DirectionalLight(0xffffff, 1.5)
-    this.light.castShadow = true
+    this.light.castShadow = false
     this.light.shadow.mapSize.width = 1920
     this.light.shadow.mapSize.height = 1920
     this.light.position.copy(this.sun)

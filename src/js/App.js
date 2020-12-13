@@ -54,7 +54,7 @@ export default class App {
     // Set renderer pixel ratio & sizes
     this.renderer.setPixelRatio(window.devicePixelRatio)
     // Set shadow
-    this.renderer.shadowMap.enabled = true
+    this.renderer.shadowMap.enabled = false
     this.renderer.shadowMapSoft = true
     this.renderer.shadowMap.type = PCFSoftShadowMap
 
