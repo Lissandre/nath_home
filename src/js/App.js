@@ -110,7 +110,6 @@ export default class App {
     })
     // Add world to scene
     this.scene.add(this.world.container)
-    this.scene.rotateY(-Math.PI / 2)
   }
   setControls() {
     this.fpscontrols = new Controls({
