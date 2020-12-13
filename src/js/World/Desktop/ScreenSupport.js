@@ -16,7 +16,7 @@ export default class ScreenSupport {
     // this.setPhysics()
   }
   setScreenSupport() {
-    this.screenSupport = this.models.models.screenSupport.scene
+    this.screenSupport = this.models.screenSupport.scene
     this.screenSupport.traverse((child) => {
       if (child.isMesh) {
         child.material.side = FrontSide

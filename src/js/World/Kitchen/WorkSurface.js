@@ -15,7 +15,7 @@ export default class WorkSurface {
     this.setPhysics()
   }
   createWorkSurface() {
-    this.workSurface = this.models.models.workSurface.scene
+    this.workSurface = this.models.workSurface.scene
     this.workSurface.traverse((child) => {
       if (child.isMesh) {
         child.material.side = FrontSide

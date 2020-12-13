@@ -12,7 +12,7 @@ export default class SoHetic {
     this.createSoHetic()
   }
   createSoHetic() {
-    this.soHetic = this.models.models.soHetic.scene
+    this.soHetic = this.models.soHetic.scene
     this.soHetic.traverse((child) => {
       if (child.isMesh) {
         child.material.side = FrontSide

@@ -5,7 +5,7 @@ export default class BasicObjects {
   constructor(options) {
     // Options
     this.time = options.time
-    this.models = options.models.models
+    this.models = options.models
     this.physics = options.physics
     this.pObjects = options.objects
 

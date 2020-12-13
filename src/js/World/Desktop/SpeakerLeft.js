@@ -18,7 +18,7 @@ export default class SpeakerLeft {
     this.setPhysics()
   }
   setSpeakerLeft() {
-    this.speakerLeft = this.models.models.speakerLeft.scene
+    this.speakerLeft = this.models.speakerLeft.scene
     this.speakerLeft.traverse((child) => {
       if (child.isMesh) {
         child.material.side = FrontSide

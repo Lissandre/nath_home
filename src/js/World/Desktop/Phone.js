@@ -15,7 +15,7 @@ export default class Phone {
     this.setPhysics()
   }
   setPhone() {
-    this.phone = this.models.models.phone.scene
+    this.phone = this.models.phone.scene
     this.phone.traverse((child) => {
       if (child.isMesh) {
         child.material.side = FrontSide

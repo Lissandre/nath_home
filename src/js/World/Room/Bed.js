@@ -12,7 +12,7 @@ export default class Bed {
     this.createBed()
   }
   createBed() {
-    this.bed = this.models.models.bed.scene
+    this.bed = this.models.bed.scene
     this.bed.traverse((child) => {
       if (child.isMesh) {
         child.material.side = FrontSide

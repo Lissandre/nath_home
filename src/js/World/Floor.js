@@ -15,7 +15,7 @@ export default class Floor {
     this.setPhysics()
   }
   setFloor() {
-    this.floor = this.models.models.floor.scene
+    this.floor = this.models.floor.scene
     this.floor.traverse((child) => {
       if (child.isMesh) {
         child.material.side = BackSide

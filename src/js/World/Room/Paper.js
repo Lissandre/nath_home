@@ -16,7 +16,7 @@ export default class Paper {
     this.setPhysics()
   }
   createPaper() {
-    this.paper = this.models.models.paper.scene
+    this.paper = this.models.paper.scene
     this.paper.traverse((child) => {
       if (child.isMesh) {
         child.material.side = DoubleSide

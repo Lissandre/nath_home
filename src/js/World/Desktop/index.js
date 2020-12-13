@@ -15,6 +15,7 @@ export default class DesktopPlace {
   constructor(options) {
     // Set options
     this.models = options.models
+    this.sounds = options.sounds
     this.camera = options.camera
     this.time = options.time
     this.physics = options.physics
@@ -123,6 +124,7 @@ export default class DesktopPlace {
       camera: this.camera,
       speakerRight: this.speakerRight,
       speakerLeft: this.speakerLeft,
+      sounds: this.sounds,
     })
   }
 }

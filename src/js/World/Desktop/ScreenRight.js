@@ -11,7 +11,7 @@ export default class ScreenRight {
     this.setScreenRight()
   }
   setScreenRight() {
-    this.screenRight = this.models.models.screenRight.scene
+    this.screenRight = this.models.screenRight.scene
     this.screenRight.traverse((child) => {
       if (child.isMesh) {
         child.material.side = FrontSide

@@ -17,7 +17,7 @@ export default class Computer {
     this.setPhysics()
   }
   createComputer() {
-    this.computer = this.models.models.computer.scene
+    this.computer = this.models.computer.scene
     this.computer.traverse((child) => {
       if (child.isMesh) {
         child.material.side = FrontSide

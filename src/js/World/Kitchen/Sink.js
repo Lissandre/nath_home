@@ -16,7 +16,7 @@ export default class Sink {
     this.setPhysics()
   }
   createSink() {
-    this.sink = this.models.models.sink.scene
+    this.sink = this.models.sink.scene
     this.sink.traverse((child) => {
       if (child.isMesh) {
         child.material.side = FrontSide

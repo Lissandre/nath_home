@@ -1,7 +1,5 @@
-import { AudioListener, PositionalAudio, AudioLoader, AudioAnalyser } from 'three'
+import { AudioListener, PositionalAudio, AudioAnalyser } from 'three'
 import { TweenMax } from 'gsap'
-
-import music from '@sounds/music.mp3'
 
 export default class Music {
   constructor(options) {
@@ -10,6 +8,7 @@ export default class Music {
     this.camera = options.camera
     this.speakerRight = options.speakerRight
     this.speakerLeft = options.speakerLeft
+    this.sounds = options.sounds
 
     // Set up
     this.colors = [
@@ -38,13 +37,10 @@ export default class Music {
     this.sound = new PositionalAudio(this.listener)
     this.copysound = new PositionalAudio(this.listener)
 
-    this.audioLoader = new AudioLoader()
-    this.audioLoader.load(music, (buffer) => {
-      this.sound.setBuffer(buffer)
-      this.sound.setRefDistance(0.25)
-      this.copysound.setBuffer(buffer)
-      this.copysound.setRefDistance(0.25)
-    })
+    this.sound.setBuffer(this.sounds.music)
+    this.sound.setRefDistance(0.25)
+    this.copysound.setBuffer(this.sounds.music)
+    this.copysound.setRefDistance(0.25)
     this.analyser = new AudioAnalyser(this.sound, 128)
 
     this.canChange = true

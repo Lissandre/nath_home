@@ -15,7 +15,7 @@ export default class Walls {
     this.setPhysics()
   }
   createWalls() {
-    this.walls = this.models.models.walls.scene
+    this.walls = this.models.walls.scene
     this.walls.traverse((child) => {
       if (child.isMesh) {
         child.receiveShadow = true

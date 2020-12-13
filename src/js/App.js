@@ -5,7 +5,7 @@ import cannonDebugger from 'cannon-es-debugger'
 
 import Sizes from '@tools/Sizes.js'
 import Time from '@tools/Time.js'
-import Models from '@tools/ModelLoader.js'
+import Assets from '@tools/Loader'
 
 import Camera from './Camera.js'
 import Physics from './Physics.js'
@@ -20,7 +20,7 @@ export default class App {
     // Set up
     this.time = new Time()
     this.sizes = new Sizes()
-    this.models = new Models()
+    this.assets = new Assets()
     this.objects = []
     this.isStereoEffect = false
 
@@ -96,7 +96,7 @@ export default class App {
     this.world = new World({
       time: this.time,
       debug: this.debug,
-      models: this.models,
+      assets: this.assets,
       objects: this.objects,
       camera: this.camera,
       physics: this.physics,

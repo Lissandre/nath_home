@@ -17,7 +17,7 @@ export default class Headset {
     this.setPhysics()
   }
   createHeadset() {
-    this.headset = this.models.models.headset.scene
+    this.headset = this.models.headset.scene
     this.headset.traverse((child) => {
       if (child.isMesh) {
         child.material.side = FrontSide

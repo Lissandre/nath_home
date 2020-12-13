@@ -15,7 +15,7 @@ export default class World {
     // Set options
     this.time = options.time
     this.debug = options.debug
-    this.models = options.models
+    this.assets = options.assets
     this.objects = options.objects
     this.camera = options.camera
     this.physics = options.physics
@@ -42,22 +42,29 @@ export default class World {
     this.setRoom()
   }
   getLoaders() {
-    if (this.models.modelsList.length != 0) {
-      this.loadDiv = document.createElement('div')
-      this.loadDiv.classList.add('loadScreen')
-      document.body.append(this.loadDiv)
+    this.loadDiv = document.querySelector('.loadScreen')
+    this.loadModels = this.loadDiv.querySelector('.load')
+    this.progress = this.loadDiv.querySelector('.progress')
 
-      this.loadTitle = document.createElement('h1')
-      this.loadTitle.innerHTML = 'Loading models...'
-      this.loadTitle.classList.add('loadModels')
-      this.loadDiv.append(this.loadTitle)
+    if (this.assets.total === 0) {
+      this.init()
+      this.loadDiv.remove()
+    } else {
+      this.assets.on('ressourceLoad', () => {
+        this.progress.style.width = this.loadModels.innerHTML = `${
+          Math.floor((this.assets.done / this.assets.total) * 100) +
+          Math.floor((1 / this.assets.total) * this.assets.currentPercent)
+        }%`
+      })
 
-      this.models.on('modelsReady', () => {
-        this.loadDiv.style.opacity = 0
-        this.init()
+      this.assets.on('ressourcesReady', () => {
         setTimeout(() => {
-          this.loadDiv.remove()
-        }, 320)
+          this.init()
+          this.loadDiv.style.opacity = 0
+          setTimeout(() => {
+            this.loadDiv.remove()
+          }, 550)
+        }, 1000)
       })
     }
   }
@@ -75,25 +82,27 @@ export default class World {
   }
   setFloor() {
     this.floor = new Floor({
-      models: this.models,
+      models: this.assets.models,
       physics: this.physics,
     })
     this.container.add(this.floor.container)
   }
   setWalls() {
     this.walls = new Walls({
-      models: this.models,
+      models: this.assets.models,
       physics: this.physics,
     })
     this.container.add(this.walls.container)
   }
   setOutside() {
-    this.outside = new Outside()
+    this.outside = new Outside({
+      textures: this.assets.textures,
+    })
     this.container.add(this.outside.container)
   }
   setBathroom() {
     this.bathroom = new Bathroom({
-      models: this.models,
+      models: this.assets.models,
       time: this.time,
       physics: this.physics,
       objects: this.objects,
@@ -102,7 +111,8 @@ export default class World {
   }
   setDesktopPlace() {
     this.desktopPlace = new DesktopPlace({
-      models: this.models,
+      models: this.assets.models,
+      sounds: this.assets.sounds,
       camera: this.camera,
       time: this.time,
       physics: this.physics,
@@ -112,7 +122,7 @@ export default class World {
   }
   setKitchen() {
     this.kitchen = new Kitchen({
-      models: this.models,
+      models: this.assets.models,
       time: this.time,
       physics: this.physics,
       objects: this.objects,
@@ -121,7 +131,7 @@ export default class World {
   }
   setRoom() {
     this.room = new Room({
-      models: this.models,
+      models: this.assets.models,
       time: this.time,
       physics: this.physics,
       objects: this.objects,
