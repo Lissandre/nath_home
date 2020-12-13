@@ -118,11 +118,15 @@ export default class App {
     // this.scene.add(this.fpscontrols.controls.getObject())
   }
   setPhysics() {
-    this.physics = new Physics({
-      time: this.time,
-      objects: this.objects,
-      controls: this.fpscontrols,
-      camera: this.camera,
+    this.assets.on('ressourcesReady', () => {
+      setTimeout(() => {
+        this.physics = new Physics({
+          time: this.time,
+          objects: this.objects,
+          controls: this.fpscontrols,
+          camera: this.camera,
+        })
+      }, 500)
     })
   }
   setConfig() {
