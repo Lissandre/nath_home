@@ -35,7 +35,7 @@ export default class World {
     this.setPointLight()
     this.setFloor()
     this.setWalls()
-    this.setOutside()
+    // this.setOutside()
     this.setBathroom()
     this.setDesktopPlace()
     this.setKitchen()
