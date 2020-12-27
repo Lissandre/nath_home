@@ -48,23 +48,25 @@ export default class App {
       canvas: this.canvas,
       alpha: true,
       antialias: true,
+      logarithmicDepthBuffer: false
     })
     this.renderer.setClearColor(0x000000, 1)
     this.renderer.physicallyCorrectLights = true
     this.renderer.outputEncoding = sRGBEncoding
     // this.renderer.toneMapping = ACESFilmicToneMapping
     // Set renderer pixel ratio & sizes
-    this.renderer.setPixelRatio(2)
+    this.renderer.setPixelRatio(window.devicePixelRatio)
     // Set shadow
     this.renderer.shadowMap.enabled = false
     // this.renderer.shadowMapSoft = true
     // this.renderer.shadowMap.type = PCFSoftShadowMap
-    this.renderer.gamma = 2.2
+    this.renderer.gammaFactor = 2.2
     this.renderer.gammaOutPut = true
     this.renderer.autoClear = true
     if (this.isStereoEffect) {
       document.body.appendChild(VRButton.createButton(this.renderer))
-      this.renderer.xr.setReferenceSpaceType('local')
+      this.renderer.xr.enabled = true
+      // this.renderer.xr.setReferenceSpaceType('local')
       this.renderer.setAnimationLoop(() => {
         this.renderer.render(this.scene, this.camera.camera)
       })
@@ -97,7 +99,7 @@ export default class App {
     if(this.isStereoEffect){
       this.controllerModelFactory = new XRControllerModelFactory()
       this.handModelFactory = new XRHandModelFactory().setPath('./fbx/')
-      this.renderer.xr.enabled = true
+
       this.controller = this.renderer.xr.getController(0)
       this.camera.container.add(this.controller)
 
