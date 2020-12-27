@@ -132,6 +132,7 @@ export default class App {
       objects: this.objects,
       camera: this.camera,
       physics: this.physics,
+      vr: this.isStereoEffect,
     })
     // Add world to scene
     this.scene.add(this.world.container)

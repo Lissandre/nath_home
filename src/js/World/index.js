@@ -19,6 +19,7 @@ export default class World {
     this.objects = options.objects
     this.camera = options.camera
     this.physics = options.physics
+    this.vr = options.vr
 
     // Set up
     this.container = new Object3D()
@@ -35,7 +36,7 @@ export default class World {
     this.setPointLight()
     this.setFloor()
     this.setWalls()
-    // this.setOutside()
+    this.setOutside()
     this.setBathroom()
     this.setDesktopPlace()
     this.setKitchen()
