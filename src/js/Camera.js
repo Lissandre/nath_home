@@ -68,7 +68,9 @@ export default class Camera {
       15
     )
     this.container.add(this.camera)
-    this.camera.matrixAutoUpdate = false
+    if(this.vr) {
+      this.camera.matrixAutoUpdate = false
+    }
     // Change camera aspect on resize
     this.sizes.on('resize', () => {
       this.camera.aspect =

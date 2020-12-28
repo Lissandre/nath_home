@@ -33,10 +33,11 @@ export default class SpeakerRight {
         child.material = new MeshLambertMaterial()
         child.material.copy(prevMaterial)
 
+
         child.material.side = FrontSide
         child.castShadow = true
         child.receiveShadow = true
-        if (child.name === 'Cylinder.005_1') {
+        if (child.name === 'Cylinder005_1') {
           this.colorSpeaker = child.material
           this.colorSpeaker.emissive = this.colorSpeaker.color
           this.colorSpeaker.emissiveIntensity = 0.2

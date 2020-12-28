@@ -35,7 +35,7 @@ export default class SpeakerLeft {
         child.material.side = FrontSide
         child.castShadow = true
         child.receiveShadow = true
-        if (child.name === 'Cylinder.002_1') {
+        if (child.name === 'Cylinder002_1') {
           this.colorSpeaker = child.material
           this.colorSpeaker.emissive = this.colorSpeaker.color
           this.colorSpeaker.emissiveIntensity = 0.2

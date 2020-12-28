@@ -60,7 +60,7 @@ export default class App {
     this.renderer.gammaFactor = 2.2
     this.renderer.gammaOutPut = true
     this.renderer.toneMappingExposure = 0.1
-    this.renderer.autoClear = true
+    // this.renderer.autoClear = true
 
     if (this.isStereoEffect) {
       document.body.appendChild(VRButton.createButton(this.renderer))
