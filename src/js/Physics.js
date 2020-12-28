@@ -15,6 +15,7 @@ export default class Physics {
     this.objects = options.objects
     this.camera = options.camera
     this.assets = options.assets
+    this.vr = options.vr
 
     // Set up
     this.setWorld()

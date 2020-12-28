@@ -6,6 +6,8 @@ import {
   MeshBasicMaterial,
 } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory'
+import { XRHandModelFactory } from 'three/examples/jsm/webxr/XRHandModelFactory'
 
 export default class Camera {
   constructor(options) {
@@ -14,14 +16,48 @@ export default class Camera {
     this.renderer = options.renderer
     this.debug = options.debug
     this.time = options.time
+    this.vr = options.vr
 
     // Set up
     this.container = new Object3D()
 
     this.setCamera()
     this.setPerso()
+    this.setControllers()
     this.setPosition()
     this.setOrbitControls()
+  }
+  setControllers() {
+    if (this.vr) {
+      this.controllerModelFactory = new XRControllerModelFactory()
+      this.handModelFactory = new XRHandModelFactory().setPath('./fbx/')
+
+      this.controller = this.renderer.xr.getController(0)
+      this.container.add(this.controller)
+
+      this.controllerGrip0 = this.renderer.xr.getControllerGrip(0)
+      this.model0 = this.controllerModelFactory.createControllerModel(
+        this.controllerGrip0
+      )
+      this.controllerGrip0.add(this.model0)
+      this.container.add(this.controllerGrip0)
+
+      this.controllerGrip1 = this.renderer.xr.getControllerGrip(1)
+      this.model1 = this.controllerModelFactory.createControllerModel(
+        this.controllerGrip1
+      )
+      this.controllerGrip1.add(this.model1)
+      this.container.add(this.controllerGrip1)
+
+      this.hand0 = this.renderer.xr.getHand(0)
+      this.hand0.add(this.handModelFactory.createHandModel(this.hand0))
+      this.container.add(this.hand0)
+
+      this.hand1 = this.renderer.xr.getHand(1)
+      this.hand1.add(this.handModelFactory.createHandModel(this.hand1))
+      this.container.add(this.hand1)
+      this.container.position.z = 1.7
+    }
   }
   setCamera() {
     // Create camera

@@ -1,4 +1,4 @@
-import { Object3D, FrontSide, Vector3, Box3 } from 'three'
+import { Object3D, FrontSide, Vector3, Box3, MeshLambertMaterial } from 'three'
 import { Body, Box, Vec3 } from 'cannon-es'
 
 export default class Phone {
@@ -18,6 +18,10 @@ export default class Phone {
     this.phone = this.models.phone.scene
     this.phone.traverse((child) => {
       if (child.isMesh) {
+        const prevMaterial = child.material
+        child.material = new MeshLambertMaterial()
+        child.material.copy(prevMaterial)
+
         child.material.side = FrontSide
         child.castShadow = true
         child.receiveShadow = true

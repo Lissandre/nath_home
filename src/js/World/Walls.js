@@ -1,4 +1,11 @@
-import { Object3D, Vector3, Box3, DoubleSide, FrontSide } from 'three'
+import {
+  Object3D,
+  Vector3,
+  Box3,
+  DoubleSide,
+  FrontSide,
+  MeshLambertMaterial,
+} from 'three'
 import { Body, Box, Vec3 } from 'cannon-es'
 
 export default class Walls {
@@ -18,6 +25,10 @@ export default class Walls {
     this.walls = this.models.walls.scene
     this.walls.traverse((child) => {
       if (child.isMesh) {
+        const prevMaterial = child.material
+        child.material = new MeshLambertMaterial()
+        child.material.copy(prevMaterial)
+
         child.receiveShadow = true
         child.castShadow = true
         if (child.name === 'Cube.002_3' || child.name === 'Cube.002_2') {

@@ -1,4 +1,4 @@
-import { Object3D, FrontSide } from 'three'
+import { Object3D, FrontSide, MeshLambertMaterial } from 'three'
 
 export default class SoHetic {
   constructor(options) {
@@ -15,6 +15,10 @@ export default class SoHetic {
     this.soHetic = this.models.soHetic.scene
     this.soHetic.traverse((child) => {
       if (child.isMesh) {
+        const prevMaterial = child.material
+        child.material = new MeshLambertMaterial()
+        child.material.copy(prevMaterial)
+
         child.material.side = FrontSide
         child.castShadow = true
         child.receiveShadow = true

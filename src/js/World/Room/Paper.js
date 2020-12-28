@@ -1,4 +1,4 @@
-import { Object3D, DoubleSide, Vector3, Box3 } from 'three'
+import { Object3D, DoubleSide, Vector3, Box3, MeshLambertMaterial } from 'three'
 import { Body, Box, Vec3 } from 'cannon-es'
 
 export default class Paper {
@@ -19,6 +19,10 @@ export default class Paper {
     this.paper = this.models.paper.scene
     this.paper.traverse((child) => {
       if (child.isMesh) {
+        const prevMaterial = child.material
+        child.material = new MeshLambertMaterial()
+        child.material.copy(prevMaterial)
+
         child.material.side = DoubleSide
         child.castShadow = true
         child.receiveShadow = true

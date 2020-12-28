@@ -24,15 +24,15 @@ export default class PointLightSrc {
   }
   createPointLight() {
     this.light = new PointLight(this.params.color, 5, 0, 2)
-    this.light.castShadow = true
+    // this.light.castShadow = true
     this.light.position.set(
       this.params.positionX,
       this.params.positionY,
       this.params.positionZ
     )
-    this.light.shadow.bias -= 0.000005
-    this.light.shadow.mapSize.width = 1024
-    this.light.shadow.mapSize.height = 1024
+    // this.light.shadow.bias -= 0.000005
+    // this.light.shadow.mapSize.width = 1024
+    // this.light.shadow.mapSize.height = 1024
 
     this.container.add(this.light)
   }

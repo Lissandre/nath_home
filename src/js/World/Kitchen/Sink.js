@@ -1,4 +1,12 @@
-import { Object3D, FrontSide, Color, PointLight, Vector3, Box3 } from 'three'
+import {
+  Object3D,
+  FrontSide,
+  Color,
+  PointLight,
+  Vector3,
+  Box3,
+  MeshLambertMaterial,
+} from 'three'
 import { Body, Box, Vec3 } from 'cannon-es'
 
 export default class Sink {
@@ -19,6 +27,10 @@ export default class Sink {
     this.sink = this.models.sink.scene
     this.sink.traverse((child) => {
       if (child.isMesh) {
+        const prevMaterial = child.material
+        child.material = new MeshLambertMaterial()
+        child.material.copy(prevMaterial)
+
         child.material.side = FrontSide
         child.castShadow = true
         child.receiveShadow = true

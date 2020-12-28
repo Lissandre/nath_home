@@ -1,4 +1,4 @@
-import { Object3D, FrontSide, Box3, Vector3 } from 'three'
+import { Object3D, FrontSide, Box3, Vector3, MeshLambertMaterial } from 'three'
 import { Body, Box, Vec3 } from 'cannon-es'
 
 export default class BasicObjects {
@@ -41,6 +41,10 @@ export default class BasicObjects {
       const obj = object.src
       obj.traverse((child) => {
         if (child.isMesh) {
+          const prevMaterial = child.material
+          child.material = new MeshLambertMaterial()
+          child.material.copy(prevMaterial)
+
           child.material.side = FrontSide
           child.castShadow = true
           child.receiveShadow = true

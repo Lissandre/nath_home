@@ -1,4 +1,4 @@
-import { Object3D, BackSide } from 'three'
+import { Object3D, BackSide, MeshLambertMaterial } from 'three'
 import { Body, Plane, Vec3 } from 'cannon-es'
 
 export default class Floor {
@@ -18,6 +18,10 @@ export default class Floor {
     this.floor = this.models.floor.scene
     this.floor.traverse((child) => {
       if (child.isMesh) {
+        const prevMaterial = child.material
+        child.material = new MeshLambertMaterial()
+        child.material.copy(prevMaterial)
+
         child.material.side = BackSide
         child.receiveShadow = true
       }

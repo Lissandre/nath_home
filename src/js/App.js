@@ -2,13 +2,10 @@ import {
   Scene,
   WebGLRenderer,
   sRGBEncoding,
-  PCFSoftShadowMap,
   ACESFilmicToneMapping,
 } from 'three'
 
 import { VRButton } from 'three/examples/jsm/webxr/VRButton'
-import { XRControllerModelFactory } from 'three/examples/jsm/webxr/XRControllerModelFactory'
-import { XRHandModelFactory } from 'three/examples/jsm/webxr/XRHandModelFactory'
 import * as dat from 'dat.gui'
 import cannonDebugger from 'cannon-es-debugger'
 
@@ -46,14 +43,14 @@ export default class App {
     // Set renderer
     this.renderer = new WebGLRenderer({
       canvas: this.canvas,
-      alpha: true,
+      alpha: false,
       antialias: true,
-      logarithmicDepthBuffer: false
+      powerPreference: 'high-performance',
     })
-    this.renderer.setClearColor(0x000000, 1)
+    // this.renderer.setClearColor(0x000000, 1)
     this.renderer.physicallyCorrectLights = true
     this.renderer.outputEncoding = sRGBEncoding
-    // this.renderer.toneMapping = ACESFilmicToneMapping
+    this.renderer.toneMapping = ACESFilmicToneMapping
     // Set renderer pixel ratio & sizes
     this.renderer.setPixelRatio(window.devicePixelRatio)
     // Set shadow
@@ -62,7 +59,9 @@ export default class App {
     // this.renderer.shadowMap.type = PCFSoftShadowMap
     this.renderer.gammaFactor = 2.2
     this.renderer.gammaOutPut = true
+    this.renderer.toneMappingExposure = 0.1
     this.renderer.autoClear = true
+
     if (this.isStereoEffect) {
       document.body.appendChild(VRButton.createButton(this.renderer))
       this.renderer.xr.enabled = true
@@ -71,15 +70,12 @@ export default class App {
         this.renderer.render(this.scene, this.camera.camera)
       })
     } else {
-      // Set RequestAnimationFrame with 60ips
       this.time.on('tick', () => {
         this.renderer.render(this.scene, this.camera.camera)
       })
     }
-    this.renderer.setSize(
-      this.sizes.viewport.width,
-      this.sizes.viewport.height
-    )
+
+    this.renderer.setSize(this.sizes.viewport.width, this.sizes.viewport.height)
     // Resize renderer on resize event
     this.sizes.on('resize', () => {
       this.renderer.setSize(
@@ -95,33 +91,8 @@ export default class App {
       renderer: this.renderer,
       debug: this.debug,
       time: this.time,
+      vr: this.isStereoEffect,
     })
-    if(this.isStereoEffect){
-      this.controllerModelFactory = new XRControllerModelFactory()
-      this.handModelFactory = new XRHandModelFactory().setPath('./fbx/')
-
-      this.controller = this.renderer.xr.getController(0)
-      this.camera.container.add(this.controller)
-
-      this.controllerGrip0 = this.renderer.xr.getControllerGrip(0)
-      this.model0 = this.controllerModelFactory.createControllerModel(this.controllerGrip0)
-      this.controllerGrip0.add(this.model0)
-      this.camera.container.add(this.controllerGrip0)
-
-      this.controllerGrip1 = this.renderer.xr.getControllerGrip(1)
-      this.model1 = this.controllerModelFactory.createControllerModel(this.controllerGrip1)
-      this.controllerGrip1.add(this.model1)
-      this.camera.container.add(this.controllerGrip1)
-
-      this.hand0 = this.renderer.xr.getHand(0)
-      this.hand0.add(this.handModelFactory.createHandModel(this.hand0))
-      this.camera.container.add(this.hand0)
-
-      this.hand1 = this.renderer.xr.getHand(1)
-      this.hand1.add(this.handModelFactory.createHandModel(this.hand1))
-      this.camera.container.add(this.hand1)
-      this.camera.container.position.z = 1.7
-    }
     // Add camera to scene
     this.scene.add(this.camera.container)
   }
@@ -140,7 +111,7 @@ export default class App {
     this.scene.add(this.world.container)
   }
   setControls() {
-    if(!this.isStereoEffect){
+    if (!this.isStereoEffect) {
       this.fpscontrols = new Controls({
         sizes: this.sizes,
         renderer: this.renderer,
@@ -161,6 +132,7 @@ export default class App {
       controls: this.fpscontrols,
       camera: this.camera,
       assets: this.assets,
+      vr: this.isStereoEffect,
     })
   }
   setConfig() {

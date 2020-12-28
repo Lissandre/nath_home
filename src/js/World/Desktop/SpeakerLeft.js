@@ -1,4 +1,11 @@
-import { Object3D, FrontSide, SpotLight, Vector3, Box3 } from 'three'
+import {
+  Object3D,
+  FrontSide,
+  SpotLight,
+  Vector3,
+  Box3,
+  MeshLambertMaterial,
+} from 'three'
 import { Body, Box, Vec3 } from 'cannon-es'
 
 export default class SpeakerLeft {
@@ -21,6 +28,10 @@ export default class SpeakerLeft {
     this.speakerLeft = this.models.speakerLeft.scene
     this.speakerLeft.traverse((child) => {
       if (child.isMesh) {
+        const prevMaterial = child.material
+        child.material = new MeshLambertMaterial()
+        child.material.copy(prevMaterial)
+
         child.material.side = FrontSide
         child.castShadow = true
         child.receiveShadow = true
